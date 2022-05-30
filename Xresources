@@ -1,0 +1,128 @@
+Xcursor.size:       44
+
+#define bg #1e2127
+#define fg #efeeee
+#define cc #56b6c2
+
+#define c00 #2e3137
+#define c01 #e06c75
+#define c02 #98c379
+#define c03 #d19a66
+#define c04 #61afef
+#define c05 #c678dd
+#define c06 #56b6c2
+#define c07 #abb2bf
+
+#define c08 #5c6379
+#define c09 #f07c85
+#define c10 #a8d389
+#define c11 #e1aa76
+#define c12 #71bfff
+#define c13 #d688ed
+#define c14 #66c6d2
+#define c15 #fffefe
+
+#define c16 #550033
+#define c17 #770055
+
+#define white #ffffff
+#define black #000000
+#define yellow #eeff00
+#define red #ff0055
+
+*background:    bg
+*foreground:    fg
+*cursorColor:   cc
+
+*color0:    c00
+*color8:    c08
+
+*color1:    c01
+*color9:    c09
+
+*color2:    c02
+*color10:   c10
+
+*color3:    c03
+*color11:   c11
+
+*color4:    c04
+*color12:   c12
+
+*color5:    c05
+*color13:   c13
+
+*color6:    c06
+*color14:   c14
+
+*color7:    c07
+*color15:   c15
+
+st.font:        JetBrainsMono Nerd Font:pixelsize=22
+st.borderpx:    15
+st.alpha:       0.75
+
+dwm.normfgcolor:            fg 
+dwm.normbgcolor:            bg
+dwm.normbordercolor:        c08
+dwm.normfloatcolor:         c08
+
+dwm.selfgcolor:             white
+dwm.selbgcolor:             bg
+dwm.selbordercolor:         c04
+dwm.selfloatcolor:          c05
+
+dwm.titlenormfgcolor:       fg
+dwm.titlenormbgcolor:       c16
+dwm.titlenormbordercolor:   black
+dwm.titlenormfloatcolor:    black
+                      
+dwm.titleselfgcolor:        white
+dwm.titleselbgcolor:        c17
+dwm.titleselbordercolor:    black
+dwm.titleselfloatcolor:     black
+                      
+dwm.tagsnormfgcolor:        c12
+dwm.tagsnormbgcolor:        bg
+dwm.tagsnormbordercolor:    black
+dwm.tagsnormfloatcolor:     black
+                      
+dwm.tagsselfgcolor:         white
+dwm.tagsselbgcolor:         c17
+dwm.tagsselbordercolor:     black
+dwm.tagsselfloatcolor:      black
+                      
+dwm.hidnormfgcolor:         fg
+dwm.hidselfgcolor:          fg
+dwm.hidnormbgcolor:         black
+dwm.hidselbgcolor:          black
+
+dwm.urgfgcolor:             white
+dwm.urgbgcolor:             bg
+dwm.urgbordercolor:         c01
+dwm.urgfloatcolor:          c01
+
+dwm.scratchnormfgcolor:       fg
+dwm.scratchnormbgcolor:       bg
+dwm.scratchnormbordercolor:   c08
+dwm.scratchnormfloatcolor:    c08
+                      
+dwm.scratchselfgcolor:        white
+dwm.scratchselbgcolor:        bg
+dwm.scratchselbordercolor:    c01
+dwm.scratchselfloatcolor:     c01
+
+dwm.stickyfgcolor:            fg 
+dwm.stickybgcolor:            bg
+dwm.stickybordercolor:        c03
+dwm.stickyfloatcolor:         c03
+
+dwm.ltsymbolfgcolor:            yellow
+dwm.ltsymbolbgcolor:            bg
+dwm.ltsymbolbordercolor:        black
+dwm.ltsymbolfloatcolor:         black
+
+dwm.stbuttonfgcolor:            yellow
+dwm.stbuttonbgcolor:            red
+dwm.stbuttonbordercolor:        black
+dwm.stbuttonfloatcolor:         black
