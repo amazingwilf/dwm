@@ -1,0 +1,13 @@
+Xcursor.theme:  Bibata-Modern-Ice
+Xcursor.size:   36
+
+dwm.normfgcolor:    #abb2bf
+dwm.normbgcolor:    #000000
+dwm.normbordercolor:    #414141
+dwm.normfloatcolor:     #414141
+
+dwm.selfgcolor:         #dedede
+dwm.selbgcolor:         #000000
+dwm.selbordercolor:     #61afef
+dwm.selfloatcolor:      #c678dd
+
