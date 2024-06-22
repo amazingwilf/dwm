@@ -1,0 +1,16 @@
+DWM
+
+My dwm build, patched with a minimal set of modifications to provide a
+more 'sane' starting point for further experiments.
+
+- movemouse, resizemouse and togglefloating taken from dwm-flexipatch
+- restartsig
+- restoreafterrestart
+- viewontag
+- viewonrulestag
+- savefloats
+- floatpos
+- resizecorners
+- functionality to set initial float geometry
+
+It's essentially what I regard as the bare minimum for my workflow.
