@@ -5,15 +5,19 @@
 /* appearance */
 static const unsigned int borderpx	= 3;
 static const unsigned int snap		= 32;
+
 static const unsigned int gappih	= 20;       
 static const unsigned int gappiv	= 10;      
 static const unsigned int gappoh	= 10;     
 static const unsigned int gappov	= 30;    
-static int smartgaps				= 0;    
-static const int showbar			= 1;
+static int smartgaps				= 0;
+
+static const int showbar			= 0;
 static const int topbar				= 1;
+static const int user_bh            = 0;
 #define ICONSIZE (bh - 10)
 #define ICONSPACING 10
+
 static const char *fonts[]			= { "JetBrainsMono Nerd Font:style=ExtraBold:size=22",
 										"NotoSans Nerd Font:size=22",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=18"
@@ -45,12 +49,12 @@ static const char *colors[][3]		= {
 static const int tagschemes[] 	= { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, 
 									SchemeTag5, SchemeTag6, SchemeTag7, SchemeTag8 };
 
-static const unsigned int baralpha		= 0xb0;
+static const unsigned int baralpha		= 0x10;
 static const unsigned int borderalpha	= OPAQUE;
 
 static const unsigned int alphas[][3]      = {
     /*						fg		bg			border*/
-    [SchemeNorm]		= { OPAQUE,	baralpha,	borderalpha },
+	[SchemeNorm]		= { OPAQUE,	baralpha,	borderalpha },
 	[SchemeSel]			= { OPAQUE,	baralpha,	borderalpha },
 	[SchemeFloat]		= { OPAQUE,	baralpha,	borderalpha },
 	[SchemeScratchpad]	= { OPAQUE,	baralpha,	borderalpha },
@@ -73,6 +77,7 @@ static const char *const autostart[] = {
 	"/usr/libexec/polkit-gnome-authentication-agent-1", NULL,
 	"feh", "--bg-fill", "/usr/share/backgrounds/void2.png", NULL,
 	"picom", "-b", NULL,
+	"slstatus", NULL,
 	NULL /* terminate */
 };
 
@@ -83,7 +88,7 @@ static char *tags[] = {"", "", "", "", "", "", "", ""};
 static const unsigned int ulinepad		= 5;
 static const unsigned int ulinestroke	= 1;
 static const unsigned int ulinevoffset	= 0;
-static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
+static const int ulineall 				= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1h -1w" },
@@ -144,8 +149,16 @@ static const char *termcmd[]	= { "alacritty", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *ffcmd[]		= { "firefox", NULL };
 
+static const char *mutevol[] 			= { "volume", "--toggle",  NULL };
+static const char *mutemic[] 			= { "volume", "--toggle-mic",  NULL };
+static const char *upvol[]   			= { "volume", "--inc", NULL };
+static const char *downvol[] 			= { "volume", "--dec", NULL };
+static const char *upbl[] 				= { "brightness", "--inc", NULL };
+static const char *downbl[] 			= { "brightness", "--dec", NULL };
+
 static const char *sptermcmd[] 	= { "t", "alacritty", "--class", "spterm,spterm", NULL};
 
+#include <X11/XF86keysym.h>
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
@@ -189,6 +202,12 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Right,  tagandviewtoright,  {0} }, 
 	{ MODKEY|ControlMask,           XK_Left,   tagtoleft,          {0} }, 
 	{ MODKEY|ControlMask,           XK_Right,  tagtoright,         {0} }, 
+	{ 0, 						XF86XK_AudioMute, 			spawn, {.v = mutevol } },
+	{ 0, 						XF86XK_AudioMicMute, 		spawn, {.v = mutemic } },
+	{ 0, 						XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },
+	{ 0, 						XF86XK_AudioRaiseVolume, 	spawn, {.v = upvol   } },
+	{ 0, 						XF86XK_MonBrightnessUp, 	spawn, {.v = upbl   } },
+	{ 0, 						XF86XK_MonBrightnessDown, 	spawn, {.v = downbl   } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
