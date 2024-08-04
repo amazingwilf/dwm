@@ -1,0 +1,47 @@
+Xcursor.theme:	Bibata-Modern-Ice
+Xcursor.size:	36
+
+dwm.normfgcolor:            #cdcdcd
+dwm.normbgcolor:            #222222
+dwm.normbordercolor:        #414141
+dwm.normfloatcolor:         #414141
+
+dwm.selfgcolor:             #efefef
+dwm.selbgcolor:             #222222
+dwm.selbordercolor:         #61afef
+dwm.selfloatcolor:          #ff55ff
+
+dwm.tagsnormfgcolor:        #81afef
+dwm.tagsnormbgcolor:        #222222
+dwm.tagsnormbordercolor:    #000000
+dwm.tagsnormfloatcolor:     #000000
+
+dwm.tagsselfgcolor:         #efefef
+dwm.tagsselbgcolor:         #0101b1
+dwm.tagsselbordercolor:     #000000
+dwm.tagsselfloatcolor:      #000000
+
+dwm.titlenormfgcolor:       #81afef
+dwm.titlenormbgcolor:       #222222
+dwm.titlenormbordercolor:   #000000
+dwm.titlenormfloatcolor:    #000000
+
+dwm.titleselfgcolor:        #efefef
+dwm.titleselbgcolor:        #222222
+dwm.titleselbordercolor:    #000000
+dwm.titleselfloatcolor:     #000000
+
+dwm.hidnormfgcolor:         #ffff00
+dwm.hidnormbgcolor:         #222222
+dwm.hidselfgcolor:          #61afef
+dwm.hidselbgcolor:          #000000
+
+dwm.scratchnormfgcolor:     #cdcdcd
+dwm.scratchnormbgcolor:     #222222
+dwm.scratchnormbordercolor: #414141
+dwm.scratchnormfloatcolor:  #414141
+
+dwm.scratchselfgcolor:      #efefef
+dwm.scratchselbgcolor:      #222222
+dwm.scratchselbordercolor:  #00ff44
+dwm.scratchselfloatcolor:   #00ff44
