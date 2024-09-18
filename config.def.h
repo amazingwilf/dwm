@@ -23,6 +23,7 @@ static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_red[]         = "#f36868";
+static const char col_yellow[]		= "#e9bf57";
 static const char col_blue[]        = "#61afef";
 static const char col_magenta[]     = "#c678dd";
 static const char col_dblue[]       = "#0101a1";
@@ -31,6 +32,7 @@ static const char *colors[][4]      = {
 	/*               		fg           bg         border     float   */
 	[SchemeNorm] 		= { col_gray3,   col_gray1, col_gray2, col_gray2   },
 	[SchemeSel]  		= { col_gray4,   col_gray1, col_blue,  col_magenta },
+	[SchemeSticky] 		= { col_gray3,   col_gray1, col_yellow, col_yellow },
 	[SchemeScratchNorm]	= { col_gray3,   col_gray1, col_gray2, col_gray2   },
 	[SchemeScratchSel]	= { col_gray4,   col_gray1, col_red,   col_red     },
 	[SchemeStButton]	= { col_blue,    col_dred,  col_black, col_black   },
@@ -46,6 +48,7 @@ static const unsigned int alphas[][4]   = {
     /*               		fg      bg        border       float*/
     [SchemeNorm] 		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSel]  		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSticky] 		= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeStButton]	= { OPAQUE, baralpha, borderalpha, borderalpha },
@@ -147,6 +150,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_Right,  viewnext,       {0} },
