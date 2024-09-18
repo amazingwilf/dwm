@@ -2532,17 +2532,13 @@ togglesticky(const Arg *arg)
 {
 	if (!selmon->sel)
 		return;
-	if (selmon->sel->scratchkey != 0 && selmon->sel->isfloating)
-		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColFloat].pixel);
-    else if (selmon->sel->scratchkey != 0)
-		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColBorder].pixel);
-	else if (selmon->sel->issticky)
+    setsticky(selmon->sel, !selmon->sel->issticky);
+	if (selmon->sel->issticky)
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSticky][ColBorder].pixel);
 	else if (selmon->sel->isfloating)
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColFloat].pixel);
 	else
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
-    setsticky(selmon->sel, !selmon->sel->issticky);
 	arrange(selmon);
 }
 
