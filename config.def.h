@@ -11,6 +11,8 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 8;        /* 2 is the default spacing around the bar's font */
+#define ICONSIZE 					(bh - 12)   /* icon size */
+#define ICONSPACING 				10 /* space between icon and title */
 static const char *fonts[]          = { "Noto Sans:style=Medium:size=12",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
 static const char col_black[]       = "#000000";
