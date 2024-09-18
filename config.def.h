@@ -22,6 +22,7 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
+static const char col_red[]         = "#f36868";
 static const char col_blue[]        = "#61afef";
 static const char col_magenta[]     = "#c678dd";
 static const char col_dblue[]       = "#0101a1";
@@ -30,6 +31,8 @@ static const char *colors[][4]      = {
 	/*               		fg           bg         border     float   */
 	[SchemeNorm] 		= { col_gray3,   col_gray1, col_gray2, col_gray2   },
 	[SchemeSel]  		= { col_gray4,   col_gray1, col_blue,  col_magenta },
+	[SchemeScratchNorm]	= { col_gray3,   col_gray1, col_gray2, col_gray2   },
+	[SchemeScratchSel]	= { col_gray4,   col_gray1, col_red,   col_red     },
 	[SchemeStButton]	= { col_blue,    col_dred,  col_black, col_black   },
 	[SchemeLtSymbol]	= { col_magenta, col_gray1, col_black, col_black   },
 	[SchemeTagsEmpty] 	= { col_gray2,   col_gray1, col_black, col_black   },
@@ -43,6 +46,8 @@ static const unsigned int alphas[][4]   = {
     /*               		fg      bg        border       float*/
     [SchemeNorm] 		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSel]  		= { OPAQUE, baralpha, borderalpha, borderalpha },
+    [SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+    [SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeStButton]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsEmpty] 	= { OPAQUE, baralpha, borderalpha, borderalpha },
@@ -63,6 +68,7 @@ static const Rule rules[] = {
 	{ .class = "Alacritty", .tags = 1 << 0 },
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
+	{ .class = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -110,12 +116,15 @@ static const char *roficmd[]  	= { "rofi", "-show", "drun", NULL };
 static const char *webcmd[]		= { "firefox", NULL };
 static const char *fmcmd[]		= { "thunar", NULL };
 
+static const char *spterm[]		= { "t", "alacritty", "--class", "spterm,spterm", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = webcmd } },
 	{ MODKEY,                       XK_e,      spawn,          {.v = fmcmd } },
+	{ MODKEY,						XK_grave,  togglescratch,  {.v = spterm } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
