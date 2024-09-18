@@ -11,9 +11,11 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 8;        /* 2 is the default spacing around the bar's font */
-#define ICONSIZE 					(bh - 12)   /* icon size */
+static const char buttonbar[]       = " ";
+#define ICONSIZE 					(bh - 16)   /* icon size */
 #define ICONSPACING 				10 /* space between icon and title */
 static const char *fonts[]          = { "Noto Sans:style=Medium:size=12",
+										"JetBrainsMono Nerd Font:size=16",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
 static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
@@ -22,15 +24,17 @@ static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_blue[]        = "#61afef";
 static const char col_magenta[]     = "#c678dd";
-static const char col_cyan[]        = "#0101a1";
+static const char col_dblue[]       = "#0101a1";
+static const char col_dred[]		= "#aa0101";
 static const char *colors[][4]      = {
 	/*               		fg           bg         border     float   */
 	[SchemeNorm] 		= { col_gray3,   col_gray1, col_gray2, col_gray2   },
 	[SchemeSel]  		= { col_gray4,   col_gray1, col_blue,  col_magenta },
+	[SchemeStButton]	= { col_blue,    col_dred,  col_black, col_black   },
 	[SchemeLtSymbol]	= { col_magenta, col_gray1, col_black, col_black   },
 	[SchemeTagsEmpty] 	= { col_gray2,   col_gray1, col_black, col_black   },
 	[SchemeTagsOcc] 	= { col_gray3,   col_gray1, col_black, col_black   },
-	[SchemeTagsSel] 	= { col_gray4,   col_cyan,  col_black, col_black   },
+	[SchemeTagsSel] 	= { col_gray4,   col_dblue, col_black, col_black   },
 };
 
 static const unsigned int baralpha		= 0xb0;
@@ -39,6 +43,7 @@ static const unsigned int alphas[][4]   = {
     /*               		fg      bg        border       float*/
     [SchemeNorm] 		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSel]  		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeStButton]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsEmpty] 	= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsOcc] 	= { OPAQUE, baralpha, borderalpha, borderalpha },
@@ -153,6 +158,7 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
+	{ ClkButton,			0,				Button1,		spawn,			{.v = roficmd } },
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
