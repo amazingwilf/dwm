@@ -14,9 +14,9 @@ static const int user_bh            = 8;        /* 2 is the default spacing arou
 static const char buttonbar[]       = " ";
 #define ICONSIZE 					(bh - 16)   /* icon size */
 #define ICONSPACING 				10 /* space between icon and title */
-static const char *fonts[]          = { "Noto Sans:style=Medium:size=12",
-										"JetBrainsMono Nerd Font:size=16",
-										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
+static const char *fonts[]          = { "Noto Sans:style=Medium:size=14",
+										"JetBrainsMono Nerd Font:size=18",
+										"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
 static const char col_black[]       = "#000000";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -69,7 +69,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1w -1h" },
 	{ .class = "Alacritty", .tags = 1 << 0 },
-	{ .class = "firefox", .tags = 1 << 1 },
+	{ .class = "Firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
 	{ .class = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
