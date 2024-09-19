@@ -68,9 +68,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1w -1h" },
-	{ .class = "Alacritty", .tags = 1 << 0 },
+	{ .class = "Alacritty", .tags = 1 << 0, .isterminal = 1 },
 	{ .class = "Firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
+	{ .title = "Event Tester", .noswallow = 1 },
 	{ .class = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
@@ -81,6 +82,7 @@ static const int resizehints 		= 0;    /* 1 means respect size hints in tiled re
 static const int lockfullscreen 	= 1; /* 1 will force focus on the fullscreen window */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const char *toggle_float_pos	= "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
