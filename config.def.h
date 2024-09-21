@@ -11,17 +11,22 @@ static int smartgaps				= 0;
 static const int showbar			= 1;
 static const int topbar				= 1;
 static const int user_bh			= 8;
-static const char buttonbar[]		= " ";
+static const char buttonbar[]		= "  ";
 #define ICONSIZE 					(bh - 16)
 #define ICONSPACING 				10
 static const char *fonts[]			= { "Noto Sans:style=Medium:size=14",
 										"JetBrainsMono Nerd Font:size=18",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
 
-#include "themes/monokai.h"
+#include "themes/onedark.h"
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
+
+static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -30,7 +35,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1w -1h" },
 	{ .class = "Alacritty", .tags = 1 << 0, .isterminal = 1 },
-	{ .class = "Firefox", .tags = 1 << 1 },
+	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
 	{ .title = "Event Tester", .noswallow = 1 },
 	{ .class = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
