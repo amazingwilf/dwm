@@ -18,7 +18,7 @@ static const char *fonts[]			= { "Noto Sans:style=Medium:size=14",
 										"JetBrainsMono Nerd Font:size=18",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
 
-#include "themes/onedark.h"
+#include "themes/monokai.h"
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
