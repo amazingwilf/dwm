@@ -166,6 +166,7 @@ static const char *termcmd[]		= { "alacritty", NULL };
 static const char *roficmd[]		= { "rofi", "-show", "drun", NULL };
 static const char *webcmd[]			= { "firefox", NULL };
 static const char *fmcmd[]			= { "thunar", NULL };
+static const char *rangercmd[]		= { "alacritty", "--class", "ranger,ranger", "-e", "ranger", NULL };
 
 static const char *blup[]			= { "brightness", "--inc", NULL };
 static const char *bldown[]			= { "brightness", "--dec", NULL };
@@ -180,9 +181,10 @@ static const char *spterm[]			= { "t", "alacritty", "--class", "spterm,spterm", 
 static const Key keys[] = {
 	/* modifier				key							function			argument */
 	{ MODKEY,				XK_Return, 					spawn,				{.v = termcmd } },
-	{ MODKEY,				XK_space,					spawn,				{.v = roficmd } },
+	{ Mod1Mask,				XK_F1,						spawn,				{.v = roficmd } },
 	{ MODKEY,				XK_w,						spawn,				{.v = webcmd } },
 	{ MODKEY,				XK_e,						spawn,				{.v = fmcmd } },
+	{ MODKEY|ShiftMask,		XK_e,						spawn,				{.v = rangercmd } },
 	{ 0, 					XF86XK_AudioMute, 			spawn, 				{.v = volmute } },
 	{ 0, 					XF86XK_AudioMicMute, 		spawn, 				{.v = micmute } },
 	{ 0, 					XF86XK_AudioLowerVolume, 	spawn, 				{.v = voldown} },
