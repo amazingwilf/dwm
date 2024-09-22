@@ -11,11 +11,11 @@ static int smartgaps				= 0;
 static const int showbar			= 1;
 static const int topbar				= 1;
 static const int user_bh			= 8;
-static const char buttonbar[]		= "  ";
+static const char buttonbar[]		= " ";
 #define ICONSIZE 					(bh - 16)
 #define ICONSPACING 				10
 static const char *fonts[]			= { "Noto Sans:style=Medium:size=14",
-										"JetBrainsMono Nerd Font:size=18",
+										"JetBrainsMono Nerd Font:size=24",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
 
 #include "themes/onedark.h"
