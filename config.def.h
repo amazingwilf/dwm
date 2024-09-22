@@ -18,18 +18,6 @@ static const char *fonts[]			= { "Noto Sans:style=Medium:size=14",
 										"JetBrainsMono Nerd Font:size=24",
 										"JetBrainsMono Nerd font:style=ExtraBold:size=12" };
 
-static const char col_black[]			= "#000000";
-static const char col_gray1[]			= "#1e2127";
-static const char col_gray2[]			= "#5c6370";
-static const char col_gray3[]			= "#cdcdcd";
-static const char col_gray4[]			= "#ffffff";
-static const char col_red[]				= "#e06c75";
-static const char col_green[]			= "#98c379";
-static const char col_yellow[]			= "#d19a55";
-static const char col_blue[]			= "#61afef";
-static const char col_magenta[]			= "#c678dd";
-static const char col_cyan[]			= "#56b6c2";
-
 static char normfgcolor[]				= "#cdcdcd";
 static char normbgcolor[]				= "#1e2127";
 static char normbordercolor[]			= "#5c6370";
@@ -79,6 +67,8 @@ static char tagsselfgcolor[]			= "#ffffff";
 static char tagsselbgcolor[]			= "#1e2127";
 static char tagsselbordercolor[]		= "#000000";
 static char tagsselfloatcolor[]			= "#000000";
+
+#include "termcolors.h"
 
 static char *colors[][4]			= {
 	/*						fg					bg					border					float		*/
