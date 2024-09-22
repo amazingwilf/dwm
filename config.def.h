@@ -11,14 +11,104 @@ static int smartgaps				= 0;
 static const int showbar			= 1;
 static const int topbar				= 1;
 static const int user_bh			= 8;
-static const char buttonbar[]		= " ";
+static const char buttonbar[]		= "  ";
 #define ICONSIZE 					(bh - 16)
 #define ICONSPACING 				10
 static const char *fonts[]			= { "Noto Sans:style=Medium:size=14",
 										"JetBrainsMono Nerd Font:size=24",
-										"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
+										"JetBrainsMono Nerd font:style=ExtraBold:size=12" };
 
-#include "themes/onedark.h"
+static const char col_black[]			= "#000000";
+static const char col_gray1[]			= "#1e2127";
+static const char col_gray2[]			= "#5c6370";
+static const char col_gray3[]			= "#cdcdcd";
+static const char col_gray4[]			= "#ffffff";
+static const char col_red[]				= "#e06c75";
+static const char col_green[]			= "#98c379";
+static const char col_yellow[]			= "#d19a55";
+static const char col_blue[]			= "#61afef";
+static const char col_magenta[]			= "#c678dd";
+static const char col_cyan[]			= "#56b6c2";
+
+static char normfgcolor[]				= "#cdcdcd";
+static char normbgcolor[]				= "#1e2127";
+static char normbordercolor[]			= "#5c6370";
+static char normfloatcolor[]			= "#5c6370";
+
+static char selfgcolor[]				= "#ffffff";
+static char selbgcolor[]				= "#1e2127";
+static char selbordercolor[]			= "#61afef";
+static char selfloatcolor[]				= "#c678dd";
+
+static char stickyfgcolor[]				= "#cdcdcd";
+static char stickybgcolor[]				= "#1e2127";
+static char stickybordercolor[]			= "#d19a55";
+static char stickyfloatcolor[]			= "#d19a55";
+
+static char scratchnormfgcolor[]		= "#cdcdcd";
+static char scratchnormbgcolor[]		= "#1e2127";
+static char scratchnormbordercolor[]	= "#5c6370";
+static char scratchnormfloatcolor[]		= "#5c6370";
+
+static char scratchselfgcolor[]			= "#ffffff";
+static char scratchselbgcolor[]			= "#1e2127";
+static char scratchselbordercolor[]		= "#56b6c2";
+static char scratchselfloatcolor[]		= "#56b6c2";
+	
+static char stbuttonfgcolor[]			= "#98c379";
+static char stbuttonbgcolor[]			= "#1e2127";
+static char stbuttonbordercolor[]		= "#000000";
+static char stbuttonfloatcolor[]		= "#000000";
+
+static char ltsymbolfgcolor[]			= "#d19a55";
+static char ltsymbolbgcolor[]			= "#1e2127";
+static char ltsymbolbordercolor[]		= "#000000";
+static char ltsymbolfloatcolor[]		= "#000000";
+
+static char tagsemptyfgcolor[]			= "#5c6370";
+static char tagsemptybgcolor[]			= "#1e2127";
+static char tagsemptybordercolor[]		= "#000000";
+static char tagsemptyfloatcolor[]		= "#000000";
+
+static char tagsoccfgcolor[]			= "#cdcdcd";
+static char tagsoccbgcolor[]			= "#1e2127";
+static char tagsoccbordercolor[]		= "#000000";
+static char tagsoccfloatcolor[]			= "#000000";
+
+static char tagsselfgcolor[]			= "#ffffff";
+static char tagsselbgcolor[]			= "#1e2127";
+static char tagsselbordercolor[]		= "#000000";
+static char tagsselfloatcolor[]			= "#000000";
+
+static char *colors[][4]			= {
+	/*						fg					bg					border					float		*/
+	[SchemeNorm] 		= { normfgcolor,		normbgcolor, 		normbordercolor, 		normfloatcolor	},
+	[SchemeSel]			= { selfgcolor,			selbgcolor, 		selbordercolor, 		selfloatcolor	},
+	[SchemeSticky] 		= { stickyfgcolor,		stickybgcolor, 		stickybordercolor, 		stickyfloatcolor	},
+	[SchemeScratchNorm]	= { scratchnormfgcolor,	scratchnormbgcolor,	scratchnormbordercolor, scratchnormfloatcolor	},
+	[SchemeScratchSel]	= { scratchselfgcolor,	scratchselbgcolor, 	scratchselbordercolor, 	scratchselfloatcolor	},
+	[SchemeStButton]	= { stbuttonfgcolor,	stbuttonbgcolor, 	stbuttonbordercolor, 	stbuttonfloatcolor	},
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor, 	ltsymbolbordercolor, 	ltsymbolfloatcolor	},
+	[SchemeTagsEmpty] 	= { tagsemptyfgcolor,	tagsemptybgcolor, 	tagsemptybordercolor, 	tagsemptyfloatcolor	},
+	[SchemeTagsOcc] 	= { tagsoccfgcolor,		tagsoccbgcolor, 	tagsoccbordercolor, 	tagsoccfloatcolor	},
+	[SchemeTagsSel] 	= { tagsselfgcolor,		tagsselbgcolor, 	tagsselbordercolor, 	tagsselfloatcolor	},
+};
+
+static const unsigned int baralpha		= 0xb2;
+static const unsigned int borderalpha 	= OPAQUE;
+static const unsigned int alphas[][4]	= {
+	/*			fg	bg	border	float*/
+	[SchemeNorm] 		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSticky] 		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeStButton]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsEmpty] 	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsOcc] 	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsSel] 	= { OPAQUE, baralpha, borderalpha, borderalpha },
+};
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };

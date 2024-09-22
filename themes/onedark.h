@@ -23,7 +23,7 @@ static const char *colors[][4]			= {
 	[SchemeTagsSel] 	= { col_gray4,		col_gray1,	col_black, 	col_black	},
 };
 
-static const unsigned int baralpha		= 0xf0;
+static const unsigned int baralpha		= 0xb2;
 static const unsigned int borderalpha 	= OPAQUE;
 static const unsigned int alphas[][4]	= {
 	/*			fg	bg	border	float*/
