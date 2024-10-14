@@ -21,7 +21,7 @@ static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
 static const int vertpad                 = 20;  /* vertical padding of bar */
 static const int sidepad                 = 20;  /* horizontal padding of bar */
-#define ICONSIZE (bh - 15)    /* icon size */
+#define ICONSIZE (bh - 18)    /* icon size */
 #define ICONSPACING 10  /* space between icon and title */
 static const int focusonwheel            = 0;
 static int floatposgrid_x                = 5;  /* float grid columns */
@@ -229,20 +229,6 @@ static const Key keys[] = {
 	{ 0,							XF86XK_AudioRaiseVolume,	spawn,			{.v = volup } },
 	{ 0,							XF86XK_MonBrightnessUp,		spawn,			{.v = blup } },
 	{ 0,							XF86XK_MonBrightnessDown,	spawn,			{.v = bldown } },
-
-	{ MODKEY|ShiftMask,             XK_b,          togglebar,              {0} },
-	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
-	{ MODKEY,                       XK_k,          focusstack,             {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_j,          rotatestack,            {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_k,          rotatestack,            {.i = -1 } },
-	{ MODKEY,                       XK_i,          incnmaster,             {.i = +1 } },
-
-	{ MODKEY,						XF86XK_MonBrightnessUp, },
-	{ MODKEY,						XF86XK_MonBrightnessDown, },
-	{ MODKEY,						XF86XK_AudioMute, },
-	{ MODKEY,						XF86XK_AudioMicMute, },
-	{ MODKEY,						XF86XK_AudioLowerVolume, },
-	{ MODKEY,						XF86XK_AudioRaiseVolume, },
 
 	{ MODKEY|ShiftMask,             XK_b,          togglebar,              {0} },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
