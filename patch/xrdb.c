@@ -36,6 +36,10 @@ loadxrdb()
 				XRDB_LOAD_COLOR("dwm.tagsnormbgcolor", tagsnormbgcolor);
 				XRDB_LOAD_COLOR("dwm.tagsnormbordercolor", tagsnormbordercolor);
 				XRDB_LOAD_COLOR("dwm.tagsnormfloatcolor", tagsnormfloatcolor);
+				XRDB_LOAD_COLOR("dwm.tagsoccfgcolor", tagsoccfgcolor);
+				XRDB_LOAD_COLOR("dwm.tagsoccbgcolor", tagsoccbgcolor);
+				XRDB_LOAD_COLOR("dwm.tagsoccbordercolor", tagsoccbordercolor);
+				XRDB_LOAD_COLOR("dwm.tagsoccfloatcolor", tagsoccfloatcolor);
 				XRDB_LOAD_COLOR("dwm.tagsselfgcolor", tagsselfgcolor);
 				XRDB_LOAD_COLOR("dwm.tagsselbgcolor", tagsselbgcolor);
 				XRDB_LOAD_COLOR("dwm.tagsselbordercolor", tagsselbordercolor);
