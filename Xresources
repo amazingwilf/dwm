@@ -1,0 +1,64 @@
+#include ".Xresources.d/keyboards.xrdb"
+
+Xft.dpi:        144
+
+Xcursor.size:   44
+Xcursor.theme:  Bibata-Modern-Ice
+
+*.foreground:               fg
+*.background:               bg
+
+*.color0:                   c00
+*.color1:                   c01
+*.color2:                   c02
+*.color3:                   c03
+*.color4:                   c04
+*.color5:                   c05
+*.color6:                   c06
+*.color7:                   c07
+
+
+*.color8:                   c08
+*.color9:                   c09
+*.color10:                  c1B
+*.color11:                  c11
+*.color12:                  c12
+*.color13:                  c13
+*.color14:                  c14
+*.color15:                  c15
+
+dwm.normfgcolor:            fg
+dwm.normbgcolor:            bg
+dwm.normbordercolor:        c08
+dwm.normfloatcolor:         c08
+
+dwm.selfgcolor:             c15
+dwm.selbgcolor:             bg
+dwm.selbordercolor:         c04
+dwm.selfloatcolor:          c05
+
+dwm.tagsnormfgcolor:        c08
+dwm.tagsnormbgcolor:        bg
+
+dwm.tagsoccfgcolor:         fg
+dwm.tagsoccbgcolor:         bg
+
+dwm.tagsselfgcolor:         c15
+dwm.tagsselbgcolor:         accent
+
+dwm.titlenormfgcolor:       fg
+dwm.titlenormbgcolor:       bg
+
+dwm.titleselfgcolor:        c15
+dwm.titleselbgcolor:        bg
+
+dwm.scratchnormbordercolor: c08
+dwm.scratchnormfloatcolor:  c08
+dwm.scratchselbordercolor:  c01
+dwm.scratchselfloatcolor:   c01
+
+dwm.ltsymbolfgcolor:        c03
+dwm.ltsymbolbgcolor:        bg
+dwm.stbuttonfgcolor:        c04
+dwm.stbuttonbgcolor:        bg
+

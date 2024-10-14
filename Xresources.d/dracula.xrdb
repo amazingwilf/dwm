@@ -1,0 +1,22 @@
+#define bg      #282936
+#define fg      #e9e9f4
+
+#define c00     #282936
+#define c01     #ff5555
+#define c02     #50fa7b
+#define c03     #f1fabc
+#define c04     #8d93f9
+#define c05     #ff79c6
+#define c06     #8be9fd
+#define c07     #bfbebf
+
+#define c08     #4d4d4d
+#define c09     #ff6e67
+#define c10     #5af78e
+#define c11     #f4f99d
+#define c12     #caa9fa
+#define c13     #ff92d0
+#define c14     #9aedfe
+#define c15     #e8e8e8
+
+#define accent  #a101a1
