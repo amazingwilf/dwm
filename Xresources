@@ -1,0 +1,76 @@
+Xft.dpi:	144
+
+Xcursor.theme:  Breeze_Snow
+Xcursor.size:	44
+
+#define c000000 #000000
+#define base00  #1d2021
+#define base01  #3c3836
+#define base02  #504945
+#define base03  #665c54
+#define base04  #bdae93
+#define base05  #d5c4a1
+#define base06  #ebdbb2
+#define base07  #fbf1c7
+#define base08  #fb4934
+#define base09  #fe8019
+#define base0A  #fabd2f
+#define base0B  #b8bb26
+#define base0C  #8ec07c
+#define base0D  #83a598
+#define base0E  #d3869b
+#define base0F  #d65d0e
+
+*.foreground:	base05
+*.bakcgrond:	c000000
+
+*.color0:		base00
+*.color1:		base08
+*.color2:		base0B
+*.color3:		base0A
+*.color4:		base0D
+*.color5:		base0E
+*.color6:		base0C
+*.color7:		base04
+
+*.color8:		base03
+*.color9:		base09
+*.color10:		base0B
+*.color11:		base0A
+*.color12:		base0D
+*.color13:		base0E
+*.color14:		base0C
+*.color15:		base07
+
+
+dwm.normfgcolor:			base05
+dwm.normbgcolor:			c000000
+dwm.normbordercolor:		base03
+dwm.normfloatcolor:			base03
+
+dwm.selfgcolor:				base07
+dwm.selbgcolor:				c000000
+dwm.selbordercolor:			base0D
+dwm.selfloatcolor:			base0B
+
+dwm.tagsnormfgcolor:		base03
+dwm.tagsnormbgcolor:		c000000
+dwm.tagsoccfgcolor:		    base0D
+dwm.tagsoccbgcolor:		    c000000
+dwm.tagsselfgcolor:			base07
+dwm.tagsselbgcolor:			c000000
+
+dwm.titlenormfgcolor:		base0D
+dwm.titlenormbgcolor:		c000000
+dwm.titleselfgcolor:		base07
+dwm.titleselbgcolor:		c000000
+
+dwm.scratchnormbordercolor:	base03
+dwm.scratchnormfloatcolor:	base03
+dwm.scratchselbordercolor:	base0B
+dwm.scratchselfloatcolor:	base0B
+
+dwm.ltsymbolfgcolor:		base0B
+dwm.ltsymbolbgcolor:		c000000
+dwm.stbuttonfgcolor:		base0C
+dwm.stbuttonbgcolor:		c000000
