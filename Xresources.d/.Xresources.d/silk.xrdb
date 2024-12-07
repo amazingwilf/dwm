@@ -1,0 +1,17 @@
+#define c000000 #000000
+#define base00 #0e3c46
+#define base01 #1D494E
+#define base02 #2A5054
+#define base03 #587073
+#define base04 #9DC8CD
+#define base05 #C7DBDD
+#define base06 #CBF2F7
+#define base07 #D2FAFF
+#define base08 #fb6953
+#define base09 #fcab74
+#define base0A #fce380
+#define base0B #73d8ad
+#define base0C #3fb2b9
+#define base0D #46bddd
+#define base0E #756b8a
+#define base0F #9b647b
