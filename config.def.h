@@ -119,7 +119,7 @@ static char *colors[][ColCount] = {
 	[SchemeStButton]	= { stbuttonfgcolor, 	stbuttonbgcolor,	c000000,				c000000 },
 };
 
-static const unsigned int baralpha		= 0x40;
+static const unsigned int baralpha		= 0xa0;
 static const unsigned int borderalpha	= OPAQUE;
 
 static const unsigned int alphas[][3]      = {
@@ -185,7 +185,7 @@ static const Rule rules[] = {
 };
 
 static const BarRule barrules[] = {
-	/* monitor   bar    alignment         widthfunc                 drawfunc                clickfunc                hoverfunc                name */
+	/* monitor		bar	alignment         	widthfunc          	drawfunc           	clickfunc               hoverfunc       name */
 	{ -1,			0,	BAR_ALIGN_LEFT,		width_stbutton,		draw_stbutton,		click_stbutton,			NULL,			"statusbutton" },
 	{ -2,			0,	BAR_ALIGN_LEFT,		width_launcher,		draw_launcher,		click_launcher,			NULL,			"launcher" },
 	{ -1,			0,	BAR_ALIGN_LEFT,		width_tags,			draw_tags,			click_tags,				hover_tags,		"tags" },
@@ -223,12 +223,13 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask,	KEY,	toggletag,		{.ui = 1 << TAG} },
 
 /* commands */
-static const char *termcmd[]	= { "alacritty", NULL };
+static const char *termcmd[]	= { "st", "-t", "Terminal", NULL };
+static const char *dmenucmd[]	= { "dmenu_run", "-p", "Run: ", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *webcmd[]		= { "firefox", NULL };
 
-static const char *sptermcmd[]	= { "t", "alacritty", "--class", "spterm,spterm", NULL};
-static const char *spfmcmd[]	= { "r", "alacritty", "--class", "spranger,spranger", "-e", "ranger", NULL};
+static const char *sptermcmd[]	= { "t", "st", "-c", "spterm,spterm", NULL};
+static const char *spfmcmd[]	= { "r", "st", "-c", "spranger,spranger", "-e", "ranger", NULL};
 
 
 static const char *mutevol[]	= { "volume", "--toggle", NULL };
@@ -245,6 +246,7 @@ static const char *downbl[]		= { "brightness", "--dec", NULL };
 static const Key keys[] = {
 	{ MODKEY,				XK_space,					spawn,				{.v = roficmd } },
 	{ MODKEY,				XK_Return,					spawn,				{.v = termcmd } },
+	{ MODKEY|ShiftMask,		XK_Return,					spawn,				{.v = dmenucmd } },
 	{ MODKEY,				XK_w,						spawn,				{.v = webcmd } },
 	{ 0, 					XF86XK_AudioMute, 			spawn, 				{.v = mutevol } },
 	{ 0, 					XF86XK_AudioMicMute, 		spawn, 				{.v = mutemic } },
