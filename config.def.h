@@ -57,7 +57,7 @@ static char scratchnormfloatcolor[]		= "#444444";
 static char scratchselbordercolor[]		= "#007799";
 static char scratchselfloatcolor[]		= "#007799";
 
-static const unsigned int baralpha		= 0xd0;
+static const unsigned int baralpha		= 0x70;
 static const unsigned int borderalpha	= OPAQUE;
 
 static char *colors[][4]	= {
@@ -81,7 +81,7 @@ static const unsigned int alphas[][4]	= {
 	[SchemeTagsSel]		= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTitleSel]	= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
-	[SchemeLtSymbol]	= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
