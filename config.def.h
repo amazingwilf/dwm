@@ -17,22 +17,24 @@ static const char dmenufont[]		= "JetBrainsMono Nerd Font:size=15";
 static char normfgcolor[]			= "#bbbbbb";
 static char normbgcolor[]			= "#222222";
 static char normbordercolor[]		= "#444444";
+static char normfloatcolor[]		= "#444444";
 
 static char selfgcolor[]			= "#eeeeee";
 static char selbgcolor[]			= "#005577";
 static char selbordercolor[]		= "#005577";
+static char selfloatcolor[]			= "#005577";
 
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
 
-static char *colors[][3]      = {
-	[SchemeNorm]		= { normfgcolor,	normbgcolor,	normbordercolor },
-	[SchemeSel]			= { selfgcolor,		selbgcolor,		selbordercolor },
+static char *colors[][4]      = {
+	[SchemeNorm]		= { normfgcolor,	normbgcolor,	normbordercolor,	normfloatcolor },
+	[SchemeSel]			= { selfgcolor,		selbgcolor,		selbordercolor,		selfloatcolor },
 };
 
-static const unsigned int alphas[][3]      = {
-	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]			= { OPAQUE, baralpha, borderalpha },
+static const unsigned int alphas[][4]      = {
+	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
@@ -52,9 +54,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
 	{ .class = "Lxappearance", .isfloating = 1 },
 	{ .class = "Firefox", .tags = 1 << 1 },
+	{ .class = "floaterm", .isfloating = 1 },
 };
 
 /* layout(s) */
@@ -97,8 +99,9 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *dmenucmd[] = { "dmenu_run", 
+static const char *termcmd[]		= { "alacritty", NULL };
+static const char *floatermcmd[]	= { "alacritty", "--class", "floaterm,floaterm", NULL };
+static const char *dmenucmd[]		= { "dmenu_run", 
 	"-fn", dmenufont, 
 	"-nb", normbgcolor, 
 	"-nf", normfgcolor, 
@@ -108,8 +111,9 @@ static const char *dmenucmd[] = { "dmenu_run",
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = floatermcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -121,7 +125,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY|ShiftMask,             XK_g,      togglegaps,     {0} },
-	{ MODKEY,                       XK_g,      killclient,     {0} },
+	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
