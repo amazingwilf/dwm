@@ -47,22 +47,31 @@ static char titleselbgcolor[]			= "#005577";
 static char ltsymbolfgcolor[]			= "#ffdd00";
 static char ltsymbolbgcolor[]			= "#222222";
 
+static char scratchnormbordercolor[]	= "#444444";
+static char scratchnormfloatcolor[]		= "#444444";
+static char scratchselbordercolor[]		= "#007799";
+static char scratchselfloatcolor[]		= "#007799";
+
 static const unsigned int baralpha		= 0xd0;
 static const unsigned int borderalpha	= OPAQUE;
 
 static char *colors[][4]	= {
-	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,	normfloatcolor },
-	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,		selfloatcolor },
-	[SchemeTagsNorm]	= { tagsnormfgcolor,	tagsnormbgcolor,	c000000,			c000000 },
-	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		c000000,			c000000 },
-	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,			c000000 },
-	[SchemeTitleSel]	= { titleselfgcolor,	titleselbgcolor,	c000000,			c000000 },
-	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,			c000000 },
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,			normfloatcolor },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,				selfloatcolor },
+	[SchemeScratchNorm]	= { c000000,			c000000,			scratchnormbordercolor,		scratchnormfloatcolor },
+	[SchemeScratchSel]	= { c000000,			c000000,			scratchselbordercolor,		scratchselfloatcolor },
+	[SchemeTagsNorm]	= { tagsnormfgcolor,	tagsnormbgcolor,	c000000,					c000000 },
+	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		c000000,					c000000 },
+	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,					c000000 },
+	[SchemeTitleSel]	= { titleselfgcolor,	titleselbgcolor,	c000000,					c000000 },
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,					c000000 },
 };
 
 static const unsigned int alphas[][4]	= {
 	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTagsNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTagsSel]		= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
@@ -93,6 +102,7 @@ static const Rule rules[] = {
 	{ .class = "floaterm", .isfloating = 1, .isterminal = 1 },
 	{ .class = "Alacritty", .isterminal = 1 },
 	{ .title = "Event Tester", .noswallow = 1 },
+	{ .class = "spterm", .scratchkey = 't', .isfloating = 1 }
 };
 
 /* layout(s) */
@@ -146,6 +156,8 @@ static const char *dmenucmd[]		= { "dmenu_run",
 	NULL };
 static const char *webcmd[]			= { "firefox", NULL };
 
+static const char *sptermcmd[] 		= { "t", "alacritty", "--class", "spterm,spterm", NULL};
+
 #include <X11/XF86keysym.h>
 static const char *mutevol[]		= { "volume", "--toggle", NULL };
 static const char *mutemic[]		= { "volume", "--toggle-mic", NULL };
@@ -172,6 +184,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -180,6 +194,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY|ShiftMask,             XK_g,      togglegaps,     {0} },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = sptermcmd } },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
