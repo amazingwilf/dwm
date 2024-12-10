@@ -4,6 +4,8 @@
 static const unsigned int borderpx		= 3; 
 static const unsigned int snap			= 32;
 static const int attachmode				= 2; 
+static const int swallowfloating		= 0;
+static const int swterminheritfs		= 1;
 
 static const unsigned int gappih		= 10;
 static const unsigned int gappiv		= 10;
@@ -13,10 +15,11 @@ static int smartgaps					= 0;
 
 static const int showbar				= 1; 
 static const int topbar					= 1; 
+static const int user_bh				= 8;        /* 2 is the default spacing around the bar's font */
 
 static const char *fonts[]				= { "Noto Sans:style=Medium:size=16",
 											"JetBrainsMono Nerd Font:size=15",
-											"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
+											"JetBrainsMono Nerd Font:style=ExtraBold:size=13" };
 static const char dmenufont[]			= "Noto Sans:style=Medium:size=16";
 
 static char c000000[]					= "#000000";
@@ -87,7 +90,9 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating = 1 },
 	{ .class = "Firefox", .tags = 1 << 1 },
-	{ .class = "floaterm", .isfloating = 1 },
+	{ .class = "floaterm", .isfloating = 1, .isterminal = 1 },
+	{ .class = "Alacritty", .isterminal = 1 },
+	{ .title = "Event Tester", .noswallow = 1 },
 };
 
 /* layout(s) */
