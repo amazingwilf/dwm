@@ -108,12 +108,31 @@ static const char *dmenucmd[]		= { "dmenu_run",
 	"-sb", selbgcolor, 
 	"-sf", selfgcolor, 
 	NULL };
+static const char *webcmd[]			= { "firefox", NULL };
+
+#include <X11/XF86keysym.h>
+static const char *mutevol[]		= { "volume", "--toggle", NULL };
+static const char *mutemic[]		= { "volume", "--toggle-mic", NULL };
+static const char *upvol[]			= { "volume", "--inc", NULL };
+static const char *downvol[]		= { "volume", "--dec", NULL };
+static const char *upbl[]			= { "brightness", "--inc", NULL };
+static const char *downbl[]			= { "brightness", "--dec", NULL };
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = floatermcmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = webcmd } },
+
+	{ 0, 						XF86XK_AudioMute, 			spawn, {.v = mutevol } },
+	{ 0, 						XF86XK_AudioMicMute, 		spawn, {.v = mutemic } },
+	{ 0, 						XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },
+	{ 0, 						XF86XK_AudioRaiseVolume, 	spawn, {.v = upvol } },
+	{ 0, 						XF86XK_MonBrightnessUp, 	spawn, {.v = upbl } },
+	{ 0, 						XF86XK_MonBrightnessDown, 	spawn, {.v = downbl } },
+
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -137,6 +156,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_x,      xrdb,           {.v = NULL } },
+	{ MODKEY,                       XK_Right,  viewnext,       {0} },
+	{ MODKEY,                       XK_Left,   viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
