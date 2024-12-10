@@ -25,6 +25,8 @@ static const char *fonts[]				= { "Noto Sans:style=Medium:size=16",
 											"JetBrainsMono Nerd Font:style=ExtraBold:size=13" };
 static const char dmenufont[]			= "Noto Sans:style=Medium:size=16";
 
+#include "termcolors.h"
+
 static char c000000[]					= "#000000";
 
 static char normfgcolor[]				= "#bbbbbb";
