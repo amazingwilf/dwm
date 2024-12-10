@@ -17,6 +17,9 @@ static const int showbar				= 1;
 static const int topbar					= 1; 
 static const int user_bh				= 8;        /* 2 is the default spacing around the bar's font */
 
+#define ICONSIZE (bh - 12)  /* icon size */
+#define ICONSPACING 12 /* space between icon and title */
+
 static const char *fonts[]				= { "Noto Sans:style=Medium:size=16",
 											"JetBrainsMono Nerd Font:size=15",
 											"JetBrainsMono Nerd Font:style=ExtraBold:size=13" };
