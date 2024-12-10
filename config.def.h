@@ -1,40 +1,70 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 20;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 20;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
-static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const int attachmode         = 2;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=15" };
-static const char dmenufont[]		= "JetBrainsMono Nerd Font:size=15";
+static const unsigned int borderpx		= 3; 
+static const unsigned int snap			= 32;
+static const int attachmode				= 2; 
 
-static char normfgcolor[]			= "#bbbbbb";
-static char normbgcolor[]			= "#222222";
-static char normbordercolor[]		= "#444444";
-static char normfloatcolor[]		= "#444444";
+static const unsigned int gappih		= 10;
+static const unsigned int gappiv		= 10;
+static const unsigned int gappoh		= 20;
+static const unsigned int gappov		= 20;
+static int smartgaps					= 0; 
 
-static char selfgcolor[]			= "#eeeeee";
-static char selbgcolor[]			= "#005577";
-static char selbordercolor[]		= "#005577";
-static char selfloatcolor[]			= "#005577";
+static const int showbar				= 1; 
+static const int topbar					= 1; 
 
-static const unsigned int baralpha = 0xd0;
-static const unsigned int borderalpha = OPAQUE;
+static const char *fonts[]				= { "Noto Sans:style=Medium:size=16",
+											"JetBrainsMono Nerd Font:size=15",
+											"JetBrainsMono Nerd Font:style=ExtraBold:size=12" };
+static const char dmenufont[]			= "Noto Sans:style=Medium:size=16";
 
-static char *colors[][4]      = {
-	[SchemeNorm]		= { normfgcolor,	normbgcolor,	normbordercolor,	normfloatcolor },
-	[SchemeSel]			= { selfgcolor,		selbgcolor,		selbordercolor,		selfloatcolor },
+static char c000000[]					= "#000000";
+
+static char normfgcolor[]				= "#bbbbbb";
+static char normbgcolor[]				= "#222222";
+static char normbordercolor[]			= "#444444";
+static char normfloatcolor[]			= "#444444";
+
+static char selfgcolor[]				= "#eeeeee";
+static char selbgcolor[]				= "#005577";
+static char selbordercolor[]			= "#005577";
+static char selfloatcolor[]				= "#005577";
+
+static char tagsnormfgcolor[]			= "#bbbbbb";
+static char tagsnormbgcolor[]			= "#222222";
+static char tagsselfgcolor[]			= "#eeeeee";
+static char tagsselbgcolor[]			= "#005577";
+
+static char titlenormfgcolor[]			= "#bbbbbb";
+static char titlenormbgcolor[]			= "#222222";
+static char titleselfgcolor[]			= "#eeeeee";
+static char titleselbgcolor[]			= "#005577";
+
+static char ltsymbolfgcolor[]			= "#ffdd00";
+static char ltsymbolbgcolor[]			= "#222222";
+
+static const unsigned int baralpha		= 0xd0;
+static const unsigned int borderalpha	= OPAQUE;
+
+static char *colors[][4]	= {
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,	normfloatcolor },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,		selfloatcolor },
+	[SchemeTagsNorm]	= { tagsnormfgcolor,	tagsnormbgcolor,	c000000,			c000000 },
+	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		c000000,			c000000 },
+	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,			c000000 },
+	[SchemeTitleSel]	= { titleselfgcolor,	titleselbgcolor,	c000000,			c000000 },
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,			c000000 },
 };
 
-static const unsigned int alphas[][4]      = {
+static const unsigned int alphas[][4]	= {
 	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsSel]		= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTitleSel]	= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeLtSymbol]	= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
