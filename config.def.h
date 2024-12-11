@@ -60,6 +60,9 @@ static char scratchnormfloatcolor[]		= "#444444";
 static char scratchselbordercolor[]		= "#007799";
 static char scratchselfloatcolor[]		= "#007799";
 
+static char stickybordercolor[]			= "#ffdd00";
+static char stickyfloatcolor[]			= "#ffdd00";
+
 static const unsigned int baralpha		= 0x70;
 static const unsigned int borderalpha	= OPAQUE;
 
@@ -68,6 +71,7 @@ static char *colors[][4]	= {
 	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,				selfloatcolor },
 	[SchemeScratchNorm]	= { c000000,			c000000,			scratchnormbordercolor,		scratchnormfloatcolor },
 	[SchemeScratchSel]	= { c000000,			c000000,			scratchselbordercolor,		scratchselfloatcolor },
+	[SchemeSticky]		= { c000000,			c000000,			stickybordercolor,			stickyfloatcolor },
 	[SchemeTagsNorm]	= { tagsnormfgcolor,	tagsnormbgcolor,	c000000,					c000000 },
 	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		c000000,					c000000 },
 	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,					c000000 },
@@ -81,6 +85,7 @@ static const unsigned int alphas[][4]	= {
 	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSticky]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTagsNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTagsSel]		= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },

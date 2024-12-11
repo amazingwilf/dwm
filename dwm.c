@@ -87,7 +87,7 @@
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel, SchemeScratchNorm, SchemeScratchSel,
-	   SchemeTagsNorm, SchemeTagsSel, SchemeTitleNorm, 
+	   SchemeSticky, SchemeTagsNorm, SchemeTagsSel, SchemeTitleNorm, 
 	   SchemeTitleSel, SchemeLtSymbol, SchemeStButton }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetWMFullscreen, NetWMSticky, NetActiveWindow, NetWMWindowType,
@@ -1240,6 +1240,10 @@ focus(Client *c)
 			XSetWindowBorder(dpy, c->win, scheme[SchemeScratchSel][ColFloat].pixel);
 		else if (c->scratchkey)
 			XSetWindowBorder(dpy, c->win, scheme[SchemeScratchSel][ColBorder].pixel);
+		else if (c->issticky && c->isfloating)
+			XSetWindowBorder(dpy, c->win, scheme[SchemeSticky][ColFloat].pixel);
+		else if (c->issticky)
+			XSetWindowBorder(dpy, c->win, scheme[SchemeScratchSel][ColBorder].pixel);
 		else if(c->isfloating)
 			XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColFloat].pixel);
 		else
@@ -1603,6 +1607,9 @@ loadxrdb()
 		XRDB_LOAD_COLOR("dwm.scratchnormfloatcolor", scratchnormfloatcolor);
 		XRDB_LOAD_COLOR("dwm.scratchselbordercolor", scratchselbordercolor);
 		XRDB_LOAD_COLOR("dwm.scratchselfloatcolor", scratchselfloatcolor);
+
+		XRDB_LOAD_COLOR("dwm.stickybordercolor", stickybordercolor);
+		XRDB_LOAD_COLOR("dwm.stickyfloatcolor", stickyfloatcolor);
 
         XRDB_LOAD_COLOR("color0",  termcol0);
         XRDB_LOAD_COLOR("color1",  termcol1);
@@ -2662,7 +2669,11 @@ togglefloating(const Arg *arg)
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColFloat].pixel);
 	else if (selmon->sel->scratchkey != 0)
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColBorder].pixel);
-	if (selmon->sel->isfloating)
+	else if (selmon->sel->issticky && selmon->sel->isfloating)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSticky][ColFloat].pixel);
+	else if (selmon->sel->issticky)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColBorder].pixel);
+	else if (selmon->sel->isfloating)
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColFloat].pixel);
 	else
 		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
@@ -2812,6 +2823,18 @@ togglesticky(const Arg *arg)
 	if (!selmon->sel)
 		return;
 	setsticky(selmon->sel, !selmon->sel->issticky);
+	if (selmon->sel->scratchkey != 0 && selmon->sel->isfloating)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColFloat].pixel);
+	else if (selmon->sel->scratchkey)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColBorder].pixel);
+	else if (selmon->sel->issticky && selmon->sel->isfloating)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSticky][ColFloat].pixel);
+	else if (selmon->sel->issticky)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratchSel][ColBorder].pixel);
+	else if(selmon->sel->isfloating)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColFloat].pixel);
+	else
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
 	arrange(selmon);
 }
 
