@@ -223,6 +223,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,		XK_space,					togglefloating,		{0} },
 	{ MODKEY|ShiftMask,		XK_f,						togglefullscr,		{0} },
 	{ MODKEY|ShiftMask,		XK_g,						togglegaps,			{0} },
+	{ MODKEY|ShiftMask,		XK_s,						togglesticky,		{0} },
 	{ MODKEY|ShiftMask,		XK_x,						xrdb	,			{.v = NULL } },
 
 	{ MODKEY,				XK_0,						view,				{.ui = ~0 } },
