@@ -16,6 +16,7 @@ static int smartgaps					= 0;
 static const int showbar				= 1; 
 static const int topbar					= 1; 
 static const int user_bh				= 8;        /* 2 is the default spacing around the bar's font */
+static const char buttonbar[]			= " ";
 
 #define ICONSIZE (bh - 12)  /* icon size */
 #define ICONSPACING 12 /* space between icon and title */
@@ -51,6 +52,8 @@ static char titleselbgcolor[]			= "#005577";
 
 static char ltsymbolfgcolor[]			= "#ffdd00";
 static char ltsymbolbgcolor[]			= "#222222";
+static char stbuttonfgcolor[]			= "#007799";
+static char stbuttonbgcolor[]			= "#222222";
 
 static char scratchnormbordercolor[]	= "#444444";
 static char scratchnormfloatcolor[]		= "#444444";
@@ -70,6 +73,7 @@ static char *colors[][4]	= {
 	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,					c000000 },
 	[SchemeTitleSel]	= { titleselfgcolor,	titleselbgcolor,	c000000,					c000000 },
 	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,					c000000 },
+	[SchemeStButton]	= { stbuttonfgcolor,	stbuttonbgcolor,	c000000,					c000000 },
 };
 
 static const unsigned int alphas[][4]	= {
@@ -82,6 +86,7 @@ static const unsigned int alphas[][4]	= {
 	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTitleSel]	= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeStButton]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
@@ -232,6 +237,7 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
+	{ ClkButton,		0,		Button1,	spawn,		{.v = dmenucmd } },
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
