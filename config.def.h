@@ -5,9 +5,12 @@ static const unsigned int borderpx		= 3;
 static const unsigned int snap			= 32;
 static int floatposgrid_x				= 5; 
 static int floatposgrid_y				= 5;
+static const char *toggle_float_pos     = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 static const int showbar				= 1;
 static const int topbar					= 1; 
-static const char *fonts[]				= { "Noto Sans:size=15" };
+static const char *fonts[]				= { "Noto Sans:style=Medium:size=15",
+											"Noto Sans:size=14",
+											"JetBrainsMono Nerd Font:style=Bold:size=13" };
 static const char dmenufont[]			= "Noto Sans:size=15";
 
 static char normfgcolor[]				= "#bbbbbb";
