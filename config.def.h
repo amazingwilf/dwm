@@ -10,25 +10,30 @@ static const int topbar					= 1;
 static const char *fonts[]				= { "Noto Sans:size=15" };
 static const char dmenufont[]			= "Noto Sans:size=15";
 
-static const char col_gray1[]			= "#222222";
-static const char col_gray2[]			= "#444444";
-static const char col_gray3[]			= "#bbbbbb";
-static const char col_gray4[]			= "#eeeeee";
-static const char col_cyan[]			= "#005577";
-static const char col_blue[]			= "#61afef";
+static char normfgcolor[]				= "#bbbbbb";
+static char normbgcolor[]				= "#222222";
+static char normbordercolor[]			= "#444444";
+
+static char selfgcolor[]				= "#eeeeee";
+static char selbgcolor[]				= "#005588";
+static char selbordercolor[]			= "#005577";
+
+static char dmenunormfgcolor[]			= "#bbbbbb";
+static char dmenunormbgcolor[]			= "#222222";
+static char dmenuselfgcolor[]			= "#ffff00";
+static char dmenuselbgcolor[]			= "#dd0000";
 
 static const unsigned int baralpha		= 0xd0;
 static const unsigned int borderalpha	= OPAQUE;
 
-static const char *colors[][3]			= {
+static char *colors[][3]				= {
 
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_blue  },
+	[SchemeNorm]	= { normfgcolor,	normbgcolor,	normbordercolor },
+	[SchemeSel]		= { selfgcolor,		selbgcolor,		selbordercolor },
 };
 static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeNorm]	= { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]		= { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -68,13 +73,21 @@ static const Layout layouts[]	= {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *dmenucmd[]	= { "dmenu_run", 
+	"-fn", dmenufont, 
+	"-nb", dmenunormbgcolor, 
+	"-nf", dmenunormfgcolor, 
+	"-sb", dmenuselbgcolor, 
+	"-sf", dmenuselfgcolor, 
+	NULL };
+
+static const char *termcmd[]	= { "alacritty", NULL };
+static const char *gpickcmd[]	= { "colorpicker", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = gpickcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -97,6 +110,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_x,      xrdb,           {.v = NULL } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
