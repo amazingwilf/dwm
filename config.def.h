@@ -3,10 +3,12 @@
 /* appearance */
 static const unsigned int borderpx		= 3;
 static const unsigned int snap			= 32;
+static int floatposgrid_x				= 5; 
+static int floatposgrid_y				= 5;
 static const int showbar				= 1;
 static const int topbar					= 1; 
-static const char *fonts[]				= { "monospace:size=15" };
-static const char dmenufont[]			= "monospace:size=15";
+static const char *fonts[]				= { "Noto Sans:size=15" };
+static const char dmenufont[]			= "Noto Sans:size=15";
 
 static const char col_gray1[]			= "#222222";
 static const char col_gray2[]			= "#444444";
@@ -37,7 +39,7 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	{ .class = "Lxappearance", .isfloating =1 },
+	{ .class = "Lxappearance", .isfloating =1, .floatpos = "50% 50% -1h -1w" },
 	{ .class = "Firefox", .tags = 1 << 1 },
 };
 
