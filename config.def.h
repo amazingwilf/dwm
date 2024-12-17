@@ -5,7 +5,12 @@ static const unsigned int borderpx		= 3;
 static const unsigned int snap			= 32;
 static int floatposgrid_x				= 5; 
 static int floatposgrid_y				= 5;
-static const char *toggle_float_pos     = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
+static const char *toggle_float_pos     = "50% 50% 80% 80%"; 
+static const unsigned int gappih		= 10;  
+static const unsigned int gappiv		= 10; 
+static const unsigned int gappoh		= 10;
+static const unsigned int gappov		= 10;
+static int smartgaps					= 0;
 static const int showbar				= 1;
 static const int topbar					= 1; 
 static const char *fonts[]				= { "Noto Sans:style=Medium:size=15",
@@ -72,11 +77,26 @@ static const int nmaster		= 1;
 static const int resizehints	= 0;
 static const int lockfullscreen	= 1;
 
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+
 static const Layout layouts[]	= {
 	/* symbol     arrange function */
 	{ "[]=",      tile }, 
 	{ "><>",      NULL },
 	{ "[M]",      monocle },
+	{ "[@]",      spiral },
+	{ "[\\]",     dwindle },
+	{ "D[]",      deck },
+	{ "TTT",      bstack },
+	{ "===",      bstackhoriz },
+	{ "HHH",      grid },
+	{ "###",      nrowgrid },
+	{ "---",      horizgrid },
+	{ ":::",      gaplessgrid },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
+	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -114,7 +134,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY|ShiftMask,             XK_g,      togglegaps,     {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
