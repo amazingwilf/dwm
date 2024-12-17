@@ -13,6 +13,8 @@ static const char *fonts[]				= { "Noto Sans:style=Medium:size=15",
 											"JetBrainsMono Nerd Font:style=Bold:size=13" };
 static const char dmenufont[]			= "Noto Sans:size=15";
 
+static char c000000[]					= "#000000";
+
 static char normfgcolor[]				= "#bbbbbb";
 static char normbgcolor[]				= "#222222";
 static char normbordercolor[]			= "#444444";
@@ -20,6 +22,9 @@ static char normbordercolor[]			= "#444444";
 static char selfgcolor[]				= "#eeeeee";
 static char selbgcolor[]				= "#005588";
 static char selbordercolor[]			= "#005577";
+
+static char ltsymbolfgcolor[]			= "#dddd00";
+static char ltsymbolbgcolor[]			= "#222222";
 
 static char dmenunormfgcolor[]			= "#bbbbbb";
 static char dmenunormbgcolor[]			= "#222222";
@@ -31,12 +36,14 @@ static const unsigned int borderalpha	= OPAQUE;
 
 static char *colors[][3]				= {
 
-	[SchemeNorm]	= { normfgcolor,	normbgcolor,	normbordercolor },
-	[SchemeSel]		= { selfgcolor,		selbgcolor,		selbordercolor },
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor },
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000 },
 };
 static const unsigned int alphas[][3]      = {
-	[SchemeNorm]	= { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]		= { OPAQUE, baralpha, borderalpha },
+	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]			= { OPAQUE, baralpha, borderalpha },
+	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -124,6 +131,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask, 			XK_r,      quit,           {1} }, 
 };
 
 /* button definitions */
