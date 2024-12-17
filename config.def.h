@@ -46,6 +46,14 @@ static const unsigned int alphas[][3]      = {
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha },
 };
 
+static const char *const autostart[] = {
+	"/usr/bin/pipewire", NULL,
+	"/usr/libexec/polkit-gnome-authentication-agent-1", NULL,
+	"nitrogen", "--restore", NULL,
+	"picom", "-b", NULL,
+	NULL /* terminate */
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
 
