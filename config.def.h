@@ -24,10 +24,12 @@ static char c000000[]					= "#000000";
 static char normfgcolor[]				= "#bbbbbb";
 static char normbgcolor[]				= "#222222";
 static char normbordercolor[]			= "#444444";
+static char normfloatcolor[]			= "#444444";
 
 static char selfgcolor[]				= "#eeeeee";
 static char selbgcolor[]				= "#005588";
 static char selbordercolor[]			= "#005577";
+static char selfloatcolor[]				= "#005577";
 
 static char ltsymbolfgcolor[]			= "#dddd00";
 static char ltsymbolbgcolor[]			= "#222222";
@@ -40,16 +42,16 @@ static char dmenuselbgcolor[]			= "#dd0000";
 static const unsigned int baralpha		= 0xd0;
 static const unsigned int borderalpha	= OPAQUE;
 
-static char *colors[][3]				= {
+static char *colors[][4]				= {
 
-	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor },
-	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor },
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,	normfloatcolor },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,		selfloatcolor },
 	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000 },
 };
-static const unsigned int alphas[][3]      = {
-	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]			= { OPAQUE, baralpha, borderalpha },
-	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha },
+static const unsigned int alphas[][4]      = {
+	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha},
+	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
