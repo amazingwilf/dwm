@@ -31,6 +31,11 @@ static char selbgcolor[]				= "#005588";
 static char selbordercolor[]			= "#005577";
 static char selfloatcolor[]				= "#005577";
 
+static char scratchnormbordercolor[]	= "#444444";
+static char scratchnormfloatcolor[]		= "#444444";
+static char scratchselbordercolor[]		= "#007799";
+static char scratchselfloatcolor[]		= "#007799";
+
 static char ltsymbolfgcolor[]			= "#dddd00";
 static char ltsymbolbgcolor[]			= "#222222";
 
@@ -44,13 +49,18 @@ static const unsigned int borderalpha	= OPAQUE;
 
 static char *colors[][4]				= {
 
-	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,	normfloatcolor },
-	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,		selfloatcolor },
-	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000 },
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,		normfloatcolor },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,			selfloatcolor },
+	[SchemeScratchNorm]	= { c000000,			c000000,			scratchnormbordercolor,	normfloatcolor },
+	[SchemeScratchSel]	= { c000000,			c000000,			scratchselbordercolor,	selfloatcolor },
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,				c000000 },
 };
+
 static const unsigned int alphas[][4]      = {
 	[SchemeNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha},
 	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha},
+	[SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
@@ -72,6 +82,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating =1, .floatpos = "50% 50% -1h -1w" },
 	{ .class = "Firefox", .tags = 1 << 1 },
+	{ .class = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -124,12 +135,14 @@ static const char *downvol[]	= { "volume", "--dec", NULL };
 static const char *upbl[]		= { "brightness", "--inc", NULL };
 static const char *downbl[]		= { "brightness", "--dec", NULL };
 
+static const char *sptermcmd[]	= { "t", "alacritty", "--class", "spterm.spterm", NULL };
 
 static const Key keys[] = {
 	{ MODKEY,					XK_Return,					spawn,				{.v = termcmd } },
 	{ MODKEY,					XK_space,					spawn,				{.v = dmenucmd } },
 	{ MODKEY,					XK_w,						spawn,				{.v = webcmd } },
 	{ MODKEY,					XK_p,						spawn,				{.v = gpickcmd } },
+	{ MODKEY|ShiftMask,			XK_Return,					togglescratch,		{.v = sptermcmd } },
 	{ 0, 						XF86XK_AudioMute, 			spawn,				{.v = mutevol } },
 	{ 0, 						XF86XK_AudioMicMute, 		spawn,				{.v = mutemic } },
 	{ 0, 						XF86XK_AudioLowerVolume, 	spawn,				{.v = downvol } },
