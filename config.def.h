@@ -16,9 +16,11 @@ static const int showbar				= 1;
 static const int topbar					= 1; 
 static const int vertpad				= 20;
 static const int sidepad				= 20; 
+static const char buttonbar[]			= " ";
 static const char *fonts[]				= { "Noto Sans:style=Medium:size=15",
+											"JetBrainsMono Nerd Font:size=18",
 											"Noto Sans:size=14",
-											"JetBrainsMono Nerd Font:style=Bold:size=13" };
+											"JetBrainsMono Nerd Font:style=ExtraBold:size=13" };
 static const char dmenufont[]			= "Noto Sans:size=15";
 
 #include "termcolors.h"
@@ -216,6 +218,7 @@ static const Key keys[] = {
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
+	{ ClkButton,		0,				Button1,	spawn,				{.v = dmenucmd } },
 	{ ClkLtSymbol,		0,				Button1,	setlayout,			{0} },
 	{ ClkLtSymbol,		0,				Button3,	setlayout,			{.v = &layouts[2]} },
 	{ ClkWinTitle,		0,				Button2,	zoom,				{0} },
