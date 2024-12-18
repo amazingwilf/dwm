@@ -40,13 +40,35 @@ Xcursor.size:   44
 
 
 
-dwm.normfgcolor:        #bac2de
-dwm.normbgcolor:        #1e1e2e
-dwm.normbordercolor:    #585b70
+dwm.normfgcolor:            #bac2de
+dwm.normbgcolor:            #1e1e2e
+dwm.normbordercolor:        #585b70
+dwm.normfloatcolor:         #585b70
 
-dwm.selfgcolor:         #cdd6f4
-dwm.selbgcolor:         #45475a
-dwm.selbordercolor:     #89b4fa
+dwm.selfgcolor:             #cdd6f4
+dwm.selbgcolor:             #45475a
+dwm.selbordercolor:         #89b4fa
+dwm.selfloatcolor:          #a6e3a1
 
-dwm.ltsymbolfgcolor:    #f9e2af
-dwm.ltsymbolbgcolor:    #1e1e2e
+dwm.scratchnormbordercolor: #585b70
+dwm.scratchnormfloatcolor:  #585b70
+dwm.scratchselbordercolor:  #f5c2e7
+dwm.scratchselfloatcolor:   #f5c2e7
+
+dwm.tagsemptyfgcolor:       #585b70
+dwm.tagsemptybgcolor:       #1e1e2e
+dwm.tagsoccfgcolor:         #bac2de
+dwm.tagsoccbgcolor:         #1e1e2e
+dwm.tagsselfgcolor:         #cdd6f4
+dwm.tagsselbgcolor:         #585b70
+
+dwm.titlenormfgcolor:       #bac2de
+dwm.titlenormbgcolor:       #1e1e2e
+dwm.titleselfgcolor:        #cdd6f4
+dwm.titleselbgcolor:        #1e1e2e
+
+dwm.stbuttonfgcolor:        #94e2d5 
+dwm.stbuttonbgcolor:        #bb0000
+dwm.ltsymbolfgcolor:        #f9e2af
+dwm.ltsymbolbgcolor:        #1e1e2e
+
