@@ -215,6 +215,7 @@ static Picture geticonprop(Window w, unsigned int *icw, unsigned int *ich);
 static void getfloatpos(int pos, char pCh, int size, char sCh, int min_p, int max_s, int cp, int cs, int cbw, int defgrid, int *out_p, int *out_s);
 static int getrootptr(int *x, int *y);
 static long getstate(Window w);
+static pid_t getstatusbarpid();
 static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
 static void grabbuttons(Client *c, int focused);
 static void grabkeys(void);
@@ -258,6 +259,7 @@ static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sighup(int unused);
 static void sigterm(int unused);
+static void sigstatusbar(const Arg *arg);
 static void spawn(const Arg *arg);
 static void spawnscratch(const Arg *arg);
 static void tag(const Arg *arg);
@@ -302,6 +304,9 @@ static void autostart_exec(void);
 /* variables */
 static const char broken[] = "broken";
 static char stext[1024];
+static int statussig;
+static int statusw;
+static pid_t statuspid = -1;
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
@@ -618,9 +623,33 @@ buttonpress(XEvent *e)
 				arg.ui = 1 << i;
 			} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 				click = ClkLtSymbol;
-			else if (ev->x > selmon->ww - TEXTW(stext))
+			else if (ev->x > selmon->ww - statusw) {
+				x = selmon->ww - statusw;
 				click = ClkStatusText;
-			else
+				char *text, *s, ch;
+				statussig = 0;
+				for (text = s = stext; *s && x <= ev->x; s++) {
+					if ((unsigned char)(*s) < ' ') {
+						ch = *s;
+						*s = '\0';
+						x += TEXTW(text) - lrpad;
+						*s = ch;
+						text = s + 1;
+						if (x >= ev->x)
+							break;
+						statussig = ch;
+					} else if (*s == '^') {
+						*s = '\0';
+						x += TEXTW(text) - lrpad;
+						*s = '^';
+						if (*(++s) == 'f')
+							x += atoi(++s);
+						while (*(s++) != '^');
+						text = s;
+						s--;
+					}
+				}
+			} else
 				click = ClkWinTitle;
 		}
 	} else if ((c = wintoclient(ev->window))) {
@@ -903,7 +932,7 @@ dirtomon(int dir)
 
 int
 drawstatusbar(Monitor *m, int bh, char* stext) {
-	int ret, i, w, x, len;
+	int ret, i, j, w, x, len;
 	short isCode = 0;
 	char *text;
 	char *p;
@@ -912,7 +941,12 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	if (!(text = (char*) malloc(sizeof(char)*len)))
 		die("malloc");
 	p = text;
-	memcpy(text, stext, len);
+
+	i = -1, j = 0;
+	while (stext[++i])
+		if ((unsigned char)stext[i] >= ' ')
+			text[j++] = stext[i];
+	text[j] = '\0';
 
 	/* compute width of the status text */
 	w = 0;
@@ -1033,7 +1067,7 @@ drawbar(Monitor *m)
 	if (m == selmon) { 
 		drw->fonts = drw->fonts->next;
 		drw->fonts = drw->fonts->next;
-		tw = m->ww - drawstatusbar(m, bh, stext);
+		tw = statusw = m->ww - drawstatusbar(m, bh, stext);
 		drw->fonts = cur; 
 	}
 
@@ -1437,6 +1471,30 @@ geticonprop(Window win, unsigned int *picw, unsigned int *pich)
 	XFree(p);
 
 	return ret;
+}
+
+pid_t
+getstatusbarpid()
+{
+	char buf[32], *str = buf, *c;
+	FILE *fp;
+
+	if (statuspid > 0) {
+		snprintf(buf, sizeof(buf), "/proc/%u/cmdline", statuspid);
+		if ((fp = fopen(buf, "r"))) {
+			fgets(buf, sizeof(buf), fp);
+			while ((c = strchr(str, '/')))
+				str = c + 1;
+			fclose(fp);
+			if (!strcmp(str, STATUSBAR))
+				return statuspid;
+		}
+	}
+	if (!(fp = popen("pidof -s "STATUSBAR, "r")))
+		return -1;
+	fgets(buf, sizeof(buf), fp);
+	pclose(fp);
+	return strtoul(buf, NULL, 10);
 }
 
 int
@@ -2519,6 +2577,20 @@ sigterm(int unused)
 {
 	Arg a = {.i = 0};
 	quit(&a);
+}
+
+void
+sigstatusbar(const Arg *arg)
+{
+	union sigval sv;
+
+	if (!statussig)
+		return;
+	sv.sival_int = arg->i;
+	if ((statuspid = getstatusbarpid()) <= 0)
+		return;
+
+	sigqueue(statuspid, SIGRTMIN+statussig, sv);
 }
 
 void
