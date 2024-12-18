@@ -17,6 +17,8 @@ static const int topbar					= 1;
 static const int vertpad				= 20;
 static const int sidepad				= 20; 
 static const char buttonbar[]			= " ";
+#define ICONSIZE (bh - 8)
+#define ICONSPACING 12
 static const char *fonts[]				= { "Noto Sans:style=Medium:size=15",
 											"JetBrainsMono Nerd Font:size=18",
 											"Noto Sans:size=14",
