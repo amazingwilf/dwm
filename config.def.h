@@ -104,6 +104,7 @@ static const char *const autostart[] = {
 	"/usr/libexec/polkit-gnome-authentication-agent-1", NULL,
 	"nitrogen", "--restore", NULL,
 	"picom", "-b", NULL,
+	"dwmblocks", NULL,
 	NULL /* terminate */
 };
 
