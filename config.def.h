@@ -39,6 +39,18 @@ static char scratchselfloatcolor[]		= "#007799";
 static char ltsymbolfgcolor[]			= "#dddd00";
 static char ltsymbolbgcolor[]			= "#222222";
 
+static char tagsemptyfgcolor[]			= "#444444";
+static char tagsemptybgcolor[]			= "#222222";
+static char tagsoccfgcolor[]			= "#bbbbbb";
+static char tagsoccbgcolor[]			= "#222222";
+static char tagsselfgcolor[]			= "#eeeeee";
+static char tagsselbgcolor[]			= "#005577";
+
+static char titlenormfgcolor[]			= "#bbbbbb";
+static char titlenormbgcolor[]			= "#222222";
+static char titleselfgcolor[]			= "#eeeeee";
+static char titleselbgcolor[]			= "#005577";
+
 static char dmenunormfgcolor[]			= "#bbbbbb";
 static char dmenunormbgcolor[]			= "#222222";
 static char dmenuselfgcolor[]			= "#ffff00";
@@ -53,6 +65,11 @@ static char *colors[][4]				= {
 	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,			selfloatcolor },
 	[SchemeScratchNorm]	= { c000000,			c000000,			scratchnormbordercolor,	normfloatcolor },
 	[SchemeScratchSel]	= { c000000,			c000000,			scratchselbordercolor,	selfloatcolor },
+	[SchemeTagsEmpty]	= { tagsemptyfgcolor,	tagsemptybgcolor,	c000000,				c000000 },
+	[SchemeTagsOcc]		= { tagsoccfgcolor,		tagsoccbgcolor,		c000000,				c000000 },
+	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		c000000,				c000000 },
+	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,				c000000 },
+	[SchemeTitleSel]	= { titleselfgcolor,	titleselbgcolor,	c000000,				c000000 },
 	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,				c000000 },
 };
 
@@ -61,6 +78,11 @@ static const unsigned int alphas[][4]      = {
 	[SchemeSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha},
 	[SchemeScratchSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsEmpty]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsOcc]		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTagsSel]		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeTitleSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 

@@ -79,7 +79,8 @@
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel, SchemeScratchNorm, SchemeScratchSel,
-	   SchemeLtSymbol }; /* color schemes */
+	   SchemeTagsEmpty, SchemeTagsOcc, SchemeTagsSel, 
+	   SchemeTitleNorm, SchemeTitleSel, SchemeLtSymbol }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetLast }; /* EWMH atoms */
@@ -916,7 +917,13 @@ drawbar(Monitor *m)
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+		drw_setscheme(drw, 
+				scheme[m->tagset[m->seltags] & 1 << i 
+				? SchemeTagsSel 
+				: occ & 1 << i
+				? SchemeTagsOcc
+				: SchemeTagsEmpty
+			]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
 			drw_rect(drw, x + boxs, boxs, boxw, boxw,
@@ -934,12 +941,12 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
-			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+			drw_setscheme(drw, scheme[m == selmon ? SchemeTitleSel : SchemeTitleNorm]);
 			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
-			drw_setscheme(drw, scheme[SchemeNorm]);
+			drw_setscheme(drw, scheme[SchemeTitleNorm]);
 			drw_rect(drw, x, 0, w, bh, 1, 1);
 		}
 	}
@@ -1420,6 +1427,18 @@ loadxrdb()
         XRDB_LOAD_COLOR("dwm.scratchnormfloatcolor", scratchnormfloatcolor);
         XRDB_LOAD_COLOR("dwm.scratchselbordercolor", scratchselbordercolor);
         XRDB_LOAD_COLOR("dwm.scratchselfloatcolor", scratchselfloatcolor);
+
+        XRDB_LOAD_COLOR("dwm.tagsemptyfgcolor", tagsemptyfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsemptybgcolor", tagsemptybgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsoccfgcolor", tagsoccfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsoccbgcolor", tagsoccbgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsselfgcolor", tagsselfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsselbgcolor", tagsselbgcolor);
+		
+		XRDB_LOAD_COLOR("dwm.titlenormfgcolor", titlenormfgcolor);
+        XRDB_LOAD_COLOR("dwm.titlenormbgcolor", titlenormbgcolor);
+        XRDB_LOAD_COLOR("dwm.titleselfgcolor", titleselfgcolor);
+        XRDB_LOAD_COLOR("dwm.titleselbgcolor", titleselbgcolor);
 
         XRDB_LOAD_COLOR("dwm.ltsymbolfgcolor", ltsymbolfgcolor);
         XRDB_LOAD_COLOR("dwm.ltsymbolbgcolor", ltsymbolbgcolor);
