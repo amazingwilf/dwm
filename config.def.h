@@ -44,6 +44,8 @@ static char scratchnormfloatcolor[]		= "#444444";
 static char scratchselbordercolor[]		= "#007799";
 static char scratchselfloatcolor[]		= "#007799";
 
+static char stbuttonfgcolor[]			= "#bbbbbb";
+static char stbuttonbgcolor[]			= "#222222";
 static char ltsymbolfgcolor[]			= "#dddd00";
 static char ltsymbolbgcolor[]			= "#222222";
 
@@ -78,6 +80,7 @@ static char *colors[][4]				= {
 	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		c000000,				c000000 },
 	[SchemeTitleNorm]	= { titlenormfgcolor,	titlenormbgcolor,	c000000,				c000000 },
 	[SchemeTitleSel]	= { titleselfgcolor,	titleselbgcolor,	c000000,				c000000 },
+	[SchemeStButton]	= { stbuttonfgcolor,	stbuttonbgcolor,	c000000,				c000000 },
 	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	c000000,				c000000 },
 };
 
@@ -91,6 +94,7 @@ static const unsigned int alphas[][4]      = {
 	[SchemeTagsSel]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTitleNorm]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeTitleSel]	= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeStButton]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeLtSymbol]	= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 

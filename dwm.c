@@ -82,7 +82,7 @@
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel, SchemeScratchNorm, SchemeScratchSel,
 	   SchemeTagsEmpty, SchemeTagsOcc, SchemeTagsSel, 
-	   SchemeTitleNorm, SchemeTitleSel, SchemeLtSymbol }; /* color schemes */
+	   SchemeTitleNorm, SchemeTitleSel, SchemeStButton, SchemeLtSymbol }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetLast }; /* EWMH atoms */
@@ -1045,7 +1045,7 @@ drawbar(Monitor *m)
 	x = 0;
 	drw->fonts = drw->fonts->next;
 	w = TEXTW(buttonbar);
-	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_setscheme(drw, scheme[SchemeStButton]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, buttonbar, 0);
 	drw->fonts = cur; 
 
@@ -1059,10 +1059,6 @@ drawbar(Monitor *m)
 				: SchemeTagsEmpty
 			]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
-		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i);
 		x += w;
 	}
 
@@ -1637,6 +1633,8 @@ loadxrdb()
         XRDB_LOAD_COLOR("dwm.titleselfgcolor", titleselfgcolor);
         XRDB_LOAD_COLOR("dwm.titleselbgcolor", titleselbgcolor);
 
+        XRDB_LOAD_COLOR("dwm.stbuttonfgcolor", stbuttonfgcolor);
+        XRDB_LOAD_COLOR("dwm.stbuttonbgcolor", stbuttonbgcolor);
         XRDB_LOAD_COLOR("dwm.ltsymbolfgcolor", ltsymbolfgcolor);
         XRDB_LOAD_COLOR("dwm.ltsymbolbgcolor", ltsymbolbgcolor);
 
