@@ -16,10 +16,11 @@ static const int showbar				= 1;
 static const int topbar					= 1; 
 static const int vertpad				= 20;
 static const int sidepad				= 20; 
+static const int user_bh				= 8;        /* 2 is the default spacing around the bar's font */
 static const char buttonbar[]			= " ";
-#define ICONSIZE (bh - 8)
+#define ICONSIZE (bh - 12)
 #define ICONSPACING 12
-static const char *fonts[]				= { "Noto Sans:style=Medium:size=15",
+static const char *fonts[]				= { "Noto Sans:style=Medium:size=16",
 											"JetBrainsMono Nerd Font:size=18",
 											"Noto Sans:size=14",
 											"JetBrainsMono Nerd Font:style=ExtraBold:size=13" };
