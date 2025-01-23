@@ -25,22 +25,24 @@ static const char *fonts[]          = { "Noto Sans:style=Medium:size=15",
 static char normfgcolor[]			= "#bbbbbb";
 static char normbgcolor[]			= "#222222";
 static char normbordercolor[]		= "#444444";
+static char normfloatcolor[]		= "#444444";
 
 static char selfgcolor[]			= "#eeeeee";
 static char selbgcolor[]			= "#005577";
 static char selbordercolor[]		= "#005577";
-static char *colors[][3]      = {
+static char selfloatcolor[]         = "#005577";
+
+static char *colors[][4]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-	[SchemeSel]  = { selfgcolor, selbgcolor, selbordercolor  },
+	[SchemeNorm] = { normfgcolor,   normbgcolor,    normbordercolor,    normfloatcolor },
+	[SchemeSel]  = { selfgcolor,    selbgcolor,     selbordercolor,     selfloatcolor },
 };
 
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0xa0;
 static const unsigned int borderalpha = OPAQUE;
-static const unsigned int alphas[][3]      = {
-	/*               fg      bg        border     */
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, OPAQUE,   borderalpha },
+static const unsigned int alphas[][4]      = {
+	[SchemeNorm] = { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSel]  = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 };
 
 /* tagging */
@@ -79,7 +81,7 @@ static const BarRule barrules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -119,7 +121,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]  = { "ghostty", NULL };
-static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
+static const char *roficmd[]	= { "rofi", "-show", "drun", "-dpi", "1", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
