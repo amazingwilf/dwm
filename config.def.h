@@ -5,6 +5,7 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
+static const char *toggle_float_pos      = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 15;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 15;       /* horiz outer gap between windows and screen edge */
@@ -32,17 +33,30 @@ static char selbgcolor[]			= "#005577";
 static char selbordercolor[]		= "#005577";
 static char selfloatcolor[]         = "#005577";
 
+static char scratchnormfgcolor[]    = "#bbbbbb";
+static char scratchnormbgcolor[]    = "#222222";
+static char scratchnormbordercolor[]    = "#444444";
+static char scratchnormfloatcolor[]     = "#444444";
+
+static char scratchselfgcolor[]    = "#eeeeee";
+static char scratchselbgcolor[]    = "#005577";
+static char scratchselbordercolor[]    = "#005577";
+static char scratchselfloatcolor[]     = "#005577";
+
 static char *colors[][4]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { normfgcolor,   normbgcolor,    normbordercolor,    normfloatcolor },
-	[SchemeSel]  = { selfgcolor,    selbgcolor,     selbordercolor,     selfloatcolor },
+	[SchemeNorm]        = { normfgcolor,        normbgcolor,        normbordercolor,        normfloatcolor },
+	[SchemeSel]         = { selfgcolor,         selbgcolor,         selbordercolor,         selfloatcolor },
+    [SchemeScratchNorm] = { scratchnormfgcolor, scratchnormbgcolor, scratchnormbordercolor, scratchnormfloatcolor },
+    [SchemeScratchSel]  = { scratchselfgcolor,  scratchselbgcolor,  scratchselbordercolor,  scratchselfloatcolor },
 };
 
 static const unsigned int baralpha = 0xa0;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][4]      = {
-	[SchemeNorm] = { OPAQUE, baralpha, borderalpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeNorm]        = { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSel]         = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeScratchNorm] = { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeScratchSel]  = { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 /* tagging */
@@ -55,6 +69,8 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1h -1w" },
 	{ .class = "firefox", .tags = 1 << 1 },
+    { .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%"},
+    { .instance = "spfm", .scratchkey = 'f', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* Bar rules allow you to configure what is shown where on the bar, as well as
@@ -110,18 +126,25 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define SCRATCHKEYS(KEY,CMD) \
+    { MODKEY,               KEY,    togglescratch,      {.v = CMD } }, \
+    { MODKEY|ShiftMask,     KEY,    removescratch,      {.v = CMD } }, \
+    { MODKEY|ControlMask,   KEY,    setscratch,         {.v = CMD } }, 
+
 
 /* commands */
 static const char *termcmd[]  = { "ghostty", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", "-dpi", "1", NULL };
+
+static const char *sptermcmd[]     = { "t", "ghostty", "--x11-instance-name=spterm", NULL };
+static const char *spfmcmd[]        = { "f", "thunar", "--name=spfm", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -151,6 +174,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,      xrdb,           {.v = NULL } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+    SCRATCHKEYS(                    XK_grave,                  sptermcmd)
+    SCRATCHKEYS(                    XK_e,                      spfmcmd)
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
