@@ -3,10 +3,29 @@ Xft.dpi:                144
 Xcursor.theme:          Bibata-Modern-Ice
 Xcursor.size:           44
 
-dwm.normfgcolor:        #bac2de
-dwm.normbgcolor:        #1e1e2e
-dwm.normbordercolor:    #45475a
+dwm.normfgcolor:            #bac2de
+dwm.normbgcolor:            #1e1e2e
+dwm.normbordercolor:        #45475a
+dwm.normfloatcolor:         #45475a
 
-dwm.selfgcolor:         #cdd6f4
-dwm.selbgcolor:         #cd0245
-dwm.selbordercolor:     #89b4fa
+dwm.selfgcolor:             #cdd6f4
+dwm.selbgcolor:             #cd0245
+dwm.selbordercolor:         #89b4fa
+dwm.selfloatcolor:          #f5c2e7
+
+dwm.scratchnormfgcolor:     #bac2de
+dwm.scratchnormbgcolor:     #1e1e2e
+dwm.scratchnormbordercolor: #45475a
+dwm.scratchnormfloatcolor:  #45475a
+
+dwm.scratchselfgcolor:      #cdd6f4
+dwm.scratchselbgcolor:      #cd0245
+dwm.scratchselbordrecolor:  #a6e3a1
+dwm.scratchselfloatcolor:   #a6e3a1
+
+dwm.stickyfgcolor:          #bac2de
+dwm.stickybgcolor:          #1e1e2e
+dwm.stickybordercolor:      #f9e2af
+dwm.stickyfloatcolor:       #f9e2af
+
+
