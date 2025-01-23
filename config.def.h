@@ -174,6 +174,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_x,      xrdb,           {.v = NULL } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
+	{ MODKEY,                       XK_Right,  viewnext,       {0} },
+	{ MODKEY,                       XK_Left,   viewprev,       {0} },
+	{ MODKEY|ShiftMask,             XK_Right,  tagtonext,      {0} },
+	{ MODKEY|ShiftMask,             XK_Left,   tagtoprev,      {0} },
     SCRATCHKEYS(                    XK_grave,                  sptermcmd)
     SCRATCHKEYS(                    XK_e,                      spfmcmd)
 	TAGKEYS(                        XK_1,                      0)
