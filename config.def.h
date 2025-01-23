@@ -43,11 +43,18 @@ static char scratchselbgcolor[]    = "#005577";
 static char scratchselbordercolor[]    = "#005577";
 static char scratchselfloatcolor[]     = "#005577";
 
+static char stickyfgcolor[]    = "#eeeeee";
+static char stickybgcolor[]    = "#005577";
+static char stickybordercolor[]    = "#005577";
+static char stickyfloatcolor[]     = "#005577";
+
+
 static char *colors[][4]      = {
 	[SchemeNorm]        = { normfgcolor,        normbgcolor,        normbordercolor,        normfloatcolor },
 	[SchemeSel]         = { selfgcolor,         selbgcolor,         selbordercolor,         selfloatcolor },
     [SchemeScratchNorm] = { scratchnormfgcolor, scratchnormbgcolor, scratchnormbordercolor, scratchnormfloatcolor },
     [SchemeScratchSel]  = { scratchselfgcolor,  scratchselbgcolor,  scratchselbordercolor,  scratchselfloatcolor },
+	[SchemeSticky]      = { stickyfgcolor,      stickybgcolor,      stickybordercolor,      stickyfloatcolor },
 };
 
 static const unsigned int baralpha = 0xa0;
@@ -57,6 +64,7 @@ static const unsigned int alphas[][4]      = {
 	[SchemeSel]         = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 	[SchemeScratchNorm] = { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchSel]  = { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSticky]      = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 };
 
 /* tagging */
@@ -171,6 +179,7 @@ static Key keys[] = {
 	{ MODKEY,	                	XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
 	{ MODKEY|ShiftMask,             XK_x,      xrdb,           {.v = NULL } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
