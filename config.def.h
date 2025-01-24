@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
@@ -48,6 +48,13 @@ static char stickybgcolor[]    = "#005577";
 static char stickybordercolor[]    = "#005577";
 static char stickyfloatcolor[]     = "#005577";
 
+static char tagsemptyfgcolor[]    = "#444444";
+static char tagsemptybgcolor[]    = "#222222";
+static char tagsemptybordercolor[]    = "#000000";
+static char tagsemptyfloatcolor[]     = "#000000";
+
+
+
 
 static char *colors[][4]      = {
 	[SchemeNorm]        = { normfgcolor,        normbgcolor,        normbordercolor,        normfloatcolor },
@@ -55,6 +62,7 @@ static char *colors[][4]      = {
     [SchemeScratchNorm] = { scratchnormfgcolor, scratchnormbgcolor, scratchnormbordercolor, scratchnormfloatcolor },
     [SchemeScratchSel]  = { scratchselfgcolor,  scratchselbgcolor,  scratchselbordercolor,  scratchselfloatcolor },
 	[SchemeSticky]      = { stickyfgcolor,      stickybgcolor,      stickybordercolor,      stickyfloatcolor },
+	[SchemeTagsEmpty]   = { tagsemptyfgcolor,      tagsemptybgcolor,      tagsemptybordercolor,      tagsemptyfloatcolor },
 };
 
 static const unsigned int baralpha = 0xa0;
@@ -65,10 +73,16 @@ static const unsigned int alphas[][4]      = {
 	[SchemeScratchNorm] = { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchSel]  = { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSticky]      = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeTagsEmpty]   = { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+ 
+static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/* xprop(1):

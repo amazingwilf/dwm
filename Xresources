@@ -1,31 +1,38 @@
+#include ".Xresources.d/colors.xrdb"
+
+
 Xft.dpi:                144
 
 Xcursor.theme:          Bibata-Modern-Ice
 Xcursor.size:           44
 
-dwm.normfgcolor:            #bac2de
-dwm.normbgcolor:            #1e1e2e
-dwm.normbordercolor:        #45475a
-dwm.normfloatcolor:         #45475a
+dwm.normfgcolor:            base05
+dwm.normbgcolor:            base00
+dwm.normbordercolor:        base03
+dwm.normfloatcolor:         base03
 
-dwm.selfgcolor:             #cdd6f4
+dwm.selfgcolor:             base07
 dwm.selbgcolor:             #cd0245
-dwm.selbordercolor:         #89b4fa
-dwm.selfloatcolor:          #f5c2e7
+dwm.selbordercolor:         base0D
+dwm.selfloatcolor:          base0E
 
-dwm.scratchnormfgcolor:     #bac2de
-dwm.scratchnormbgcolor:     #1e1e2e
-dwm.scratchnormbordercolor: #45475a
-dwm.scratchnormfloatcolor:  #45475a
+dwm.scratchnormfgcolor:     base05
+dwm.scratchnormbgcolor:     base00
+dwm.scratchnormbordercolor: base08
+dwm.scratchnormfloatcolor:  base08
 
-dwm.scratchselfgcolor:      #cdd6f4
+dwm.scratchselfgcolor:      base05
 dwm.scratchselbgcolor:      #cd0245
-dwm.scratchselbordrecolor:  #a6e3a1
-dwm.scratchselfloatcolor:   #a6e3a1
+dwm.scratchselbordrecolor:  base09
+dwm.scratchselfloatcolor:   base09
 
-dwm.stickyfgcolor:          #bac2de
-dwm.stickybgcolor:          #1e1e2e
-dwm.stickybordercolor:      #f9e2af
-dwm.stickyfloatcolor:       #f9e2af
+dwm.stickyfgcolor:          base05
+dwm.stickybgcolor:          base00
+dwm.stickybordercolor:      base0A
+dwm.stickyfloatcolor:       base0A
 
+dwm.tagsemptyfgcolor:          base03
+dwm.tagsemptybgcolor:          base00
+dwm.tagsemptybordercolor:      base00
+dwm.tagsemptyfloatcolor:       base00
 

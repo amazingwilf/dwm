@@ -1,0 +1,14 @@
+! .Xresources - DWM colours
+
+dwm.col_black:      #000000
+dwm.col_gray1:      base00
+dwm.col_gray2:      base02
+dwm.col_gray3:      base05
+dwm.col_gray4:      base07
+dwm.col_red:        base08
+dwm.col_yellow:     base0A
+dwm.col_green:      base0B
+dwm.col_blue:       base0D
+dwm.col_pink:       base0E
+dwm.col_cyan:       base0C
+

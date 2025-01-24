@@ -84,7 +84,7 @@
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum { SchemeNorm, SchemeSel, SchemeScratchNorm,
-       SchemeScratchSel, SchemeSticky }; /* color schemes */
+       SchemeScratchSel, SchemeSticky, SchemeTagsEmpty }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetWMFullscreen, NetWMSticky, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetLast }; /* EWMH atoms */
@@ -275,7 +275,6 @@ static void loadxrdb(void);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
-static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static unsigned int nexttag(void);
@@ -1578,6 +1577,11 @@ loadxrdb()
         XRDB_LOAD_COLOR("dwm.stickybordercolor", stickybordercolor);
         XRDB_LOAD_COLOR("dwm.stickyfloatcolor", stickyfloatcolor);
 
+        XRDB_LOAD_COLOR("dwm.tagsemptyfgcolor", tagsemptyfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsemptybgcolor", tagsemptybgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsemptybordercolor", tagsemptybordercolor);
+        XRDB_LOAD_COLOR("dwm.tagsemptyfloatcolor", tagsemptyfloatcolor);
+
         XRDB_LOAD_COLOR("color0",  termcol0);
         XRDB_LOAD_COLOR("color1",  termcol1);
         XRDB_LOAD_COLOR("color2",  termcol2);
@@ -1713,21 +1717,6 @@ maprequest(XEvent *e)
 		return;
 	if (!wintoclient(ev->window))
 		manage(ev->window, &wa);
-}
-
-void
-monocle(Monitor *m)
-{
-	unsigned int n = 0;
-	Client *c;
-
-	for (c = m->clients; c; c = c->next)
-		if (ISVISIBLE(c))
-			n++;
-	if (n > 0) /* override layout symbol */
-		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
 }
 
 void

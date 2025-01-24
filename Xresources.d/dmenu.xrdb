@@ -1,0 +1,8 @@
+! .Xresources - dmenu settings
+
+dmenu.foreground:           base05
+dmenu.background:           base00
+dmenu.selforeground:        base07
+dmenu.selbackground:        base0F
+dmenu.bordercolor:          base0D
+dmenu.font:                 Aptos Medium:size=15
