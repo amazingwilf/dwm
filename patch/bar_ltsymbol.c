@@ -2,7 +2,7 @@ int
 width_ltsymbol(Bar *bar, BarWidthArg *a)
 {
 	/*return TEXTW(bar->mon->ltsymbol);*/
-	return 80;
+	return 85;
 }
 
 int

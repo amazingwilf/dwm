@@ -100,7 +100,7 @@ static const BarRule barrules[] = {
 	{ -1,       0,     BAR_ALIGN_LEFT,   width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
 	{ 'A',      0,     BAR_ALIGN_RIGHT,  width_status2d,        draw_status2d,        click_statuscmd,    "status2d" },
 	{ -1,       0,     BAR_ALIGN_NONE,   width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
-	{  0,       1,     BAR_ALIGN_CENTER, width_status2d_es,     draw_status2d_es,     click_statuscmd_es, "status2d_es" },
+	{ -2,       1,     BAR_ALIGN_CENTER, width_status2d_es,     draw_status2d_es,     click_statuscmd_es, "status2d_es" },
 
 };
 
@@ -179,6 +179,7 @@ static Key keys[] = {
 	{ MODKEY,	                	XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY,                       XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY|ShiftMask,             XK_s,      togglesticky,   {0} },
 	{ MODKEY|ShiftMask,             XK_x,      xrdb,           {.v = NULL } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

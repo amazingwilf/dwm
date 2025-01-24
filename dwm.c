@@ -319,6 +319,7 @@ static void tagmon(const Arg *arg);
 static void tagtonext(const Arg *arg);
 static void tagtoprev(const Arg *arg);
 static void togglebar(const Arg *arg);
+static void togglefullscr(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglescratch(const Arg *arg);
 static void togglesticky(const Arg *arg);
@@ -2747,6 +2748,13 @@ togglesticky(const Arg *arg)
     else
         XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
     arrange(selmon);
+}
+
+void
+togglefullscr(const Arg *arg)
+{
+  if(selmon->sel)
+    setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
 }
 
 void
