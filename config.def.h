@@ -40,9 +40,9 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1h -1w" },
+	{ .class = "Pavucontrol", .isfloating = 1, .floatpos = "50% 50% -1h -1w" },
+	{ .class = "firefox", .tags = 1 << 1 },
 };
 
 /* layout(s) */
@@ -50,6 +50,8 @@ static const float mfact     = 0.50; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+static int floatposgrid_x           = 5;        /* float grid columns */
+static int floatposgrid_y           = 5;        /* float grid rows */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
