@@ -34,6 +34,10 @@ static char floatfgcolor[]          = "#eeeeee";
 static char floatbgcolor[]          = "#005577";
 static char floatbordercolor[]      = "#005577";
 
+static char scratchfgcolor[]		= "#bbbbbb";
+static char scratchbgcolor[]		= "#222222";
+static char scratchbordercolor[]	= "#005577";
+
 static char stbuttonfgcolor[]       = "#eeeeee";
 static char stbuttonbgcolor[]       = "#005577";
 
@@ -58,6 +62,7 @@ static char *colors[][3]      = {
 	[SchemeNorm]        = { normfgcolor,        normbgcolor,        normbordercolor },
 	[SchemeSel]         = { selfgcolor,         selbgcolor,         selbordercolor },
     [SchemeFloat]       = { floatfgcolor,       floatbgcolor,       floatbordercolor },
+    [SchemeScratch]     = { scratchfgcolor,     scratchbgcolor,     scratchbordercolor },
     [SchemeStButton]    = { stbuttonfgcolor,    stbuttonbgcolor,    c000000 },
     [SchemeLtSymbol]    = { ltsymbolfgcolor,    ltsymbolbgcolor,    c000000 },
     [SchemeTagsSel]     = { tagsselfgcolor,     tagsselbgcolor,     c000000 },
@@ -81,6 +86,7 @@ static const unsigned int alphas[][3]   = {
     [SchemeNorm]        = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]         = { OPAQUE, baralpha, borderalpha },
 	[SchemeFloat]       = { OPAQUE, baralpha, borderalpha },
+	[SchemeScratch]     = { OPAQUE, baralpha, borderalpha },
 	[SchemeStButton]    = { OPAQUE, baralpha, borderalpha },
 	[SchemeLtSymbol]    = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsSel]     = { OPAQUE, baralpha, borderalpha },
@@ -117,6 +123,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating = 1, .floatpos = "50% 50% -1h -1w", .bw = -1 },
 	{ .class = "firefox", .tags = 1 << 1, .bw = -1 },
+	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 85% 85%", .bw = 5},
 };
 
 /* layout(s) */
@@ -165,11 +172,15 @@ static const char *downvol[] 			= { "/usr/share/archcraft/dwm/scripts/dwm_volume
 static const char *upbl[] 				= { "/usr/share/archcraft/dwm/scripts/dwm_brightness", "--inc",    NULL };
 static const char *downbl[] 			= { "/usr/share/archcraft/dwm/scripts/dwm_brightness", "--dec",  NULL };
 
+static const char *sptermcmd[]			= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+
+	{ MODKEY,						XK_s,	   togglescratch,  {.v = sptermcmd } },
 
 	{ 0, 						XF86XK_AudioMute, 			spawn, {.v = mutevol } },
 	{ 0, 						XF86XK_AudioMicMute, 		spawn, {.v = mutemic } },

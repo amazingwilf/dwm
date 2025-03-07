@@ -78,7 +78,7 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeFloat, SchemeStButton,
+enum { SchemeNorm, SchemeSel, SchemeFloat, SchemeScratch, SchemeStButton,
        SchemeLtSymbol, SchemeTagsSel, SchemeTagsEmpty, SchemeTag1, 
        SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5, SchemeTag6 }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
@@ -115,6 +115,7 @@ struct Client {
 	int bw, oldbw;
 	unsigned int tags;
 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
+	char scratchkey;
 	unsigned int icw, ich; Picture icon;
 	int ignoresizehints;
 	Client *next;
@@ -169,6 +170,7 @@ typedef struct {
 	unsigned int tags;
 	int isfloating;
 	const char *floatpos;
+	const char scratchkey;
 	int monitor;
 	int bw;
 } Rule;
@@ -229,6 +231,7 @@ static unsigned int prevtag(void);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
+static void removescratch(const Arg *arg);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
 static void resizeclient(Client *c, int x, int y, int w, int h);
 static void resizemouse(const Arg *arg);
@@ -245,12 +248,14 @@ static void setfullscreen(Client *c, int fullscreen);
 static void setlayout(const Arg *arg);
 static void setcfact(const Arg *arg);
 static void setmfact(const Arg *arg);
+static void setscratch(const Arg *arg);
 static void setup(void);
 static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sighup(int unused);
 static void sigterm(int unused);
 static void spawn(const Arg *arg);
+static void spawnscratch(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tagtonext(const Arg *arg);
@@ -258,6 +263,7 @@ static void tagtoprev(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void togglefullscr(const Arg *arg);
+static void togglescratch(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void freeicon(Client *c);
@@ -389,6 +395,7 @@ applyrules(Client *c)
 	/* rule matching */
 	c->isfloating = 0;
 	c->tags = 0;
+	c->scratchkey = 0;
 	c->bw = borderpx;
 	XGetClassHint(dpy, c->win, &ch);
 	class    = ch.res_class ? ch.res_class : broken;
@@ -402,6 +409,7 @@ applyrules(Client *c)
 		{
 			c->isfloating = r->isfloating;
 			c->tags |= r->tags;
+			c->scratchkey = r->scratchkey;
 			if (r->bw != -1)
 				c->bw = r->bw;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -415,6 +423,7 @@ applyrules(Client *c)
 		XFree(ch.res_class);
 	if (ch.res_name)
 		XFree(ch.res_name);
+
 	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : c->mon->tagset[c->mon->seltags];
     Arg a = {.ui = c->tags};
 	view(&a);
@@ -1101,7 +1110,9 @@ focus(Client *c)
 		detachstack(c);
 		attachstack(c);
 		grabbuttons(c, 1);
-        if (c->isfloating)
+		if (c->scratchkey != 0)
+			XSetWindowBorder(dpy, c->win, scheme[SchemeScratch][ColBorder].pixel);
+		else if (c->isfloating)
 	    	XSetWindowBorder(dpy, c->win, scheme[SchemeFloat][ColBorder].pixel);
         else
 		    XSetWindowBorder(dpy, c->win, scheme[SchemeSel][ColBorder].pixel);
@@ -1540,6 +1551,10 @@ loadxrdb()
         XRDB_LOAD_COLOR("dwm.floatbgcolor", floatbgcolor);
         XRDB_LOAD_COLOR("dwm.floatbordercolor", floatbordercolor);
 
+        XRDB_LOAD_COLOR("dwm.scratchfgcolor", scratchfgcolor);
+        XRDB_LOAD_COLOR("dwm.scratchbgcolor", scratchbgcolor);
+        XRDB_LOAD_COLOR("dwm.scratchbordercolor", scratchbordercolor);
+
         XRDB_LOAD_COLOR("dwm.stbuttonfgcolor", stbuttonfgcolor);
         XRDB_LOAD_COLOR("dwm.stbuttonbgcolor", stbuttonbgcolor);
 
@@ -1858,6 +1873,15 @@ recttomon(int x, int y, int w, int h)
 			r = m;
 		}
 	return r;
+}
+
+void
+removescratch(const Arg *arg)
+{
+	Client *c = selmon->sel;
+	if (!c)
+		return;
+	c->scratchkey = 0;
 }
 
 void
@@ -2189,6 +2213,16 @@ setmfact(const Arg *arg)
 }
 
 void
+setscratch(const Arg *arg)
+{
+	Client *c = selmon->sel;
+	if (!c)
+		return;
+
+	c->scratchkey = ((char**)arg->v)[0][0];
+}
+
+void
 setup(void)
 {
 	int i;
@@ -2316,6 +2350,9 @@ showhide(Client *c)
 			resize(c, c->x, c->y, c->w, c->h, 0);
 		showhide(c->snext);
 	} else {
+		/* optional: auto-hide scratchpads when moving to other tags */
+		if (c->scratchkey != 0 && !(c->tags & c->mon->tagset[c->mon->seltags]))
+			c->tags = 0;
 		/* hide clients bottom up */
 		showhide(c->snext);
 		XMoveWindow(dpy, c->win, WIDTH(c) * -2, c->y);
@@ -2362,6 +2399,19 @@ setclienttagprop(Client *c)
 	long data[] = { (long) c->tags, (long) c->mon->num };
 	XChangeProperty(dpy, c->win, netatom[NetClientInfo], XA_CARDINAL, 32,
 			PropModeReplace, (unsigned char *) data, 2);
+}
+
+void spawnscratch(const Arg *arg)
+{
+	if (fork() == 0) {
+		if (dpy)
+			close(ConnectionNumber(dpy));
+		setsid();
+		execvp(((char **)arg->v)[1], ((char **)arg->v)+1);
+		fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[1]);
+		perror(" failed");
+		exit(EXIT_SUCCESS);
+	}
 }
 
 void
@@ -2429,7 +2479,9 @@ togglefloating(const Arg *arg)
 	if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
-    if (selmon->sel->isfloating)
+	if (selmon->sel->scratchkey != 0)
+		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeScratch][ColBorder].pixel);
+	else if (selmon->sel->isfloating)
   	    XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeFloat][ColBorder].pixel);
     else
 	    XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
@@ -2443,6 +2495,125 @@ togglefullscr(const Arg *arg)
 {
   if(selmon->sel)
     setfullscreen(selmon->sel, !selmon->sel->isfullscreen);
+}
+
+void
+togglescratch(const Arg *arg)
+{
+	Client *c, *next, *last = NULL, *found = NULL, *monclients = NULL;
+	Monitor *mon;
+	int scratchvisible = 0; // whether the scratchpads are currently visible or not
+	int multimonscratch = 0; // whether we have scratchpads that are placed on multiple monitors
+	int scratchmon = -1; // the monitor where the scratchpads exist
+	int numscratchpads = 0; // count of scratchpads
+
+	/* Looping through monitors and client's twice, the first time to work out whether we need
+	   to move clients across from one monitor to another or not */
+	for (mon = mons; mon; mon = mon->next)
+		for (c = mon->clients; c; c = c->next) {
+			if (c->scratchkey != ((char**)arg->v)[0][0])
+				continue;
+			if (scratchmon != -1 && scratchmon != mon->num)
+				multimonscratch = 1;
+			if (c->mon->tagset[c->mon->seltags] & c->tags) // && !HIDDEN(c)
+				++scratchvisible;
+			scratchmon = mon->num;
+			++numscratchpads;
+		}
+
+	/* Now for the real deal. The logic should go like:
+	    - hidden scratchpads will be shown
+	    - shown scratchpads will be hidden, unless they are being moved to the current monitor
+	    - the scratchpads will be moved to the current monitor if they all reside on the same monitor
+	    - multiple scratchpads residing on separate monitors will be left in place
+	 */
+	for (mon = mons; mon; mon = mon->next) {
+		for (c = mon->stack; c; c = next) {
+			next = c->snext;
+			if (c->scratchkey != ((char**)arg->v)[0][0])
+				continue;
+
+			/* awesomebar / wintitleactions compatibility, unhide scratchpad if hidden
+			if (HIDDEN(c)) {
+				XMapWindow(dpy, c->win);
+				setclientstate(c, NormalState);
+			}
+			*/
+
+			/* Record the first found scratchpad client for focus purposes, but prioritise the
+			   scratchpad on the current monitor if one exists */
+			if (!found || (mon == selmon && found->mon != selmon))
+				found = c;
+
+			/* If scratchpad clients reside on another monitor and we are moving them across then
+			   as we are looping through monitors we could be moving a client to a monitor that has
+			   not been processed yet, hence we could be processing a scratchpad twice. To avoid
+			   this we detach them and add them to a temporary list (monclients) which is to be
+			   processed later. */
+			if (!multimonscratch && c->mon != selmon) {
+				detach(c);
+				detachstack(c);
+				c->next = NULL;
+				/* Note that we are adding clients at the end of the list, this is to preserve the
+				   order of clients as they were on the adjacent monitor (relevant when tiled) */
+				if (last)
+					last = last->next = c;
+				else
+					last = monclients = c;
+			} else if (scratchvisible == numscratchpads) {
+				c->tags = 0;
+			} else {
+				XSetWindowBorder(dpy, c->win, scheme[SchemeScratch][ColBorder].pixel);
+				c->tags = c->mon->tagset[c->mon->seltags];
+				if (c->isfloating)
+					XRaiseWindow(dpy, c->win);
+			}
+		}
+	}
+
+	/* Attach moved scratchpad clients on the selected monitor */
+	for (c = monclients; c; c = next) {
+		next = c->next;
+		mon = c->mon;
+		c->mon = selmon;
+		c->tags = selmon->tagset[selmon->seltags];
+		/* Attach scratchpad clients from other monitors at the bottom of the stack */
+		if (selmon->clients) {
+			for (last = selmon->clients; last && last->next; last = last->next);
+			last->next = c;
+		} else
+			selmon->clients = c;
+		c->next = NULL;
+		attachstack(c);
+
+		/* Center floating scratchpad windows when moved from one monitor to another */
+		if (c->isfloating) {
+			if (c->w > selmon->ww)
+				c->w = selmon->ww - c->bw * 2;
+			if (c->h > selmon->wh)
+				c->h = selmon->wh - c->bw * 2;
+
+			if (numscratchpads > 1) {
+				c->x = c->mon->wx + (c->x - mon->wx) * ((double)(abs(c->mon->ww - WIDTH(c))) / MAX(abs(mon->ww - WIDTH(c)), 1));
+				c->y = c->mon->wy + (c->y - mon->wy) * ((double)(abs(c->mon->wh - HEIGHT(c))) / MAX(abs(mon->wh - HEIGHT(c)), 1));
+			} else if (c->x < c->mon->mx || c->x > c->mon->mx + c->mon->mw ||
+			           c->y < c->mon->my || c->y > c->mon->my + c->mon->mh)	{
+				c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
+				c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+			}
+			resizeclient(c, c->x, c->y, c->w, c->h);
+			XRaiseWindow(dpy, c->win);
+		}
+	}
+
+	if (found) {
+		focus(ISVISIBLE(found) ? found : NULL);
+		arrange(NULL);
+		if (found->isfloating)
+			XRaiseWindow(dpy, found->win);
+	} else {
+		spawnscratch(arg);
+	}
 }
 
 void
@@ -2508,7 +2679,10 @@ unfocus(Client *c, int setfocus)
 	if (!c)
 		return;
 	grabbuttons(c, 0);
-	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
+	if (c->scratchkey != 0)
+		XSetWindowBorder(dpy, c->win, scheme[SchemeScratch][ColBorder].pixel);
+	else
+		XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
 	if (setfocus) {
 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
