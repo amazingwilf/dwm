@@ -10,20 +10,42 @@ static const unsigned int gappov    = 15;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Noto Sans:style=Medium:size=11",
+static const int user_bh            = 8;        /* 2 is the default spacing around the bar's font */
+static const char *fonts[]          = { "Inter Nerd Font:style=Medium:size=11",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=9" };
 
 #include "themes/tokyonight.h"
 
 static const char *colors[][3]      = {
-	[SchemeNorm] 		= { white, 	black, 	gray3 },
-	[SchemeSel]  		= { white, 	sel,   	blue },
+	[SchemeNorm] 		= { white2,	black, 	gray3 },
+	[SchemeSel]  		= { white, 	black, 	blue },
 	[SchemeFloat]  		= { white, 	black,	pink },
 	[SchemeLtSymbol]	= { yellow,	black,	black },
+    [SchemeTag1]		= { blue,   black,  black },
+    [SchemeTag2]		= { red,    black,  black },
+    [SchemeTag3]		= { green,  black,  black },
+    [SchemeTag4]		= { orange, black,  black },
+    [SchemeTag5]		= { purple, black,  black },
+    [SchemeTag6]		= { yellow, black,  black },
+    [SchemeTag7]		= { pink,   black,  black },
+    [SchemeTag8]		= { cyan,   black,  black },
+    [SchemeEmpty]		= { gray3,  black,  black },
+
 };
 
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,
+                                  SchemeTag4, SchemeTag5, SchemeTag6,
+                                  SchemeTag7, SchemeTag8
+                                };
+
+
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
+static const char *tags[] = {"", "", "", "", "", "", "", ""};
+
+static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
+static const unsigned int ulinestroke	= 1;	/* thickness / height of the underline */
+static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
+static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -32,6 +54,8 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Lxappearance", .isfloating = 1, .iscentered = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
+	{ .class = "Alacritty", .isterminal = 1 },
+	{ .title = "Event Tester", .noswallow = 1 },
 };
 
 /* layout(s) */
@@ -43,6 +67,7 @@ static const int attachmode         = 2;        /* 0 master (default), 1 = above
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
 static const char *toggle_float_pos      = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
@@ -74,7 +99,7 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+#define STATUSBAR "dwmblocks"
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 static const Key keys[] = {
@@ -124,6 +149,11 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
