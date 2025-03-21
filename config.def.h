@@ -17,8 +17,8 @@ static const char *fonts[]          = { "Noto Sans:style=Medium:size=11",
 
 static const char *colors[][3]      = {
 	[SchemeNorm] 		= { white, 	black, 	gray3 },
-	[SchemeSel]  		= { white, 	sel,   	blue  },
-	[SchemeFloat]  		= { white, 	black,	orange },
+	[SchemeSel]  		= { white, 	sel,   	blue },
+	[SchemeFloat]  		= { white, 	black,	pink },
 	[SchemeLtSymbol]	= { yellow,	black,	black },
 };
 
@@ -30,7 +30,7 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	{ .class = "Lxappearance", .isfloating = 1 },
+	{ .class = "Lxappearance", .isfloating = 1, .iscentered = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
 };
 
@@ -42,6 +42,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const int attachmode         = 2;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
+static const char *toggle_float_pos      = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
