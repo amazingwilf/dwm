@@ -18,7 +18,7 @@ static const char *fonts[]          = { "Noto Sans:style=Medium:size=11",
 static const char *colors[][3]      = {
 	[SchemeNorm] 		= { white, 	black, 	gray3 },
 	[SchemeSel]  		= { white, 	sel,   	blue  },
-	[SchemeFloat]  		= { white, 	black,	pink },
+	[SchemeFloat]  		= { white, 	black,	orange },
 	[SchemeLtSymbol]	= { yellow,	black,	black },
 };
 
@@ -31,7 +31,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	{ .class = "Lxappearance", .isfloating = 1 },
-	{ .class = "Firefox", .tags = 1 << 1 },
+	{ .class = "firefox", .tags = 1 << 1 },
 };
 
 /* layout(s) */
