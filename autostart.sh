@@ -2,6 +2,10 @@
 
 export XDG_CURRENT_DESKTOP='dwm'
 
+/usr/libexec/at-spi-bus-lauuncher --launch-immediately &
+
+xrdb -merge $HOME/.Xresources
+
 if [[ ! `pidof pipewire` ]]; then
 	/usr/bin/pipewire &
 fi
@@ -27,8 +31,8 @@ killall -q picom
 while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
 picom -b
 
-# if [[ `pidof slstatus` ]]; then
-# 	pkill slstatus
-# fi
+if [[ `pidof dwmblocks` ]]; then
+	pkill dwmblocks
+fi
 
-# slstatus &
+dwmblocks &
