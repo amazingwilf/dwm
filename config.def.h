@@ -58,6 +58,7 @@ static const Rule rules[] = {
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Alacritty", .isterminal = 1 },
 	{ .title = "Event Tester", .noswallow = 1 },
+	{ .class = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -104,6 +105,8 @@ static const Layout layouts[] = {
 #define STATUSBAR "dwmblocks"
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+static const char *sptermcmd[] = { "t", "alacritty", "--class", "spterm,spterm", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -130,6 +133,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = sptermcmd } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_Right,  viewnext,       {0} },
