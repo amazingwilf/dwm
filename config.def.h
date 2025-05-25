@@ -7,12 +7,25 @@ static const unsigned int snap		= 32;
 static const int showbar			= 1;
 static const int topbar				= 1;
 
-static const char *fonts[]			= { "Ubuntu Nerd Font:size=12" };
+static const unsigned int gappih	= 10;
+static const unsigned int gappiv	= 10;
+static const unsigned int gappoh	= 10;
+static const unsigned int gappov	= 10;
+static int smartgaps				= 1;
+
+static const char *fonts[]			= { "Inter Nerd Font:size=11",
+										"Inter Nerd Font:style=Italic:size=10",
+										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
 
 #include "colors.h"
 static const char *colors[][3]		= {
-	[SchemeNorm]	= { col_gray3,	col_gray1,	col_gray2 },
-	[SchemeSel]		= { col_gray4,	col_title,	col_blue },
+	[SchemeNorm]		= { col_gray3,	col_gray1,	col_gray2 },
+	[SchemeSel]			= { col_gray4,	col_title,	col_blue },
+	[SchemeStatus]		= { col_green,	col_gray1,	NULL },
+	[SchemeLtSym]		= { col_yellow,	col_gray1,	NULL },
+	[SchemeTagsEmpty]	= { col_gray2,	col_gray1,	NULL },
+	[SchemeTagsOcc]		= { col_blue,	col_gray1,	NULL },
+	[SchemeTagsSel]		= { col_gray4,	col_title,	NULL },
 };
 
 /* tagging */
@@ -34,11 +47,26 @@ static const int nmaster		= 1;
 static const int resizehints	= 0;
 static const int lockfullscreen	= 1;
 
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "[@]",      spiral },
+	{ "[\\]",     dwindle },
+	{ "D[]",      deck },
+	{ "TTT",      bstack },
+	{ "===",      bstackhoriz },
+	{ "HHH",      grid },
+	{ "###",      nrowgrid },
+	{ "---",      horizgrid },
+	{ ":::",      gaplessgrid },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
+	{ NULL,       NULL },
 };
 
 /* key definitions */
@@ -70,12 +98,18 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {1} }, 
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_g,      togglegaps,     {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	TAGKEYS(                        XK_1,                      0)
@@ -87,7 +121,6 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
 /* button definitions */
