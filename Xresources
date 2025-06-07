@@ -1,0 +1,69 @@
+Xft.dpi:		192
+
+Xcursor.theme:	Bibata-Modern-Ice
+Xcursor.sizE:	44
+
+#define base00	#181818
+#define base01	#16161E
+#define base02	#2F3549
+#define base03	#444B6A
+#define base04	#787C99
+#define base05	#d2d2d2
+#define base06	#e4d4d4
+#define base07	#f2f2f2
+#define base08	#f43841
+#define base09	#ff4f58
+#define base0A	#ffdd44
+#define base0B	#73d936
+#define base0C	#95a99f
+#define base0D	#9695c7
+#define base0E	#9e95c7
+#define base0F	#004466
+
+*.foreground:	base06
+*.background:	base00
+*.cursorColor:	base0D
+
+*.color0:		base00
+*.color1:		base08
+*.color2:		base0B
+*.color3:		base0A
+*.color4:		base0D
+*.color5:		base0E
+*.color6:		base0C
+*.color7:		base05
+
+*.color8:		base03
+*.color9:		base09
+*.color10:		base0B
+*.color11:		base0A
+*.color12:		base0D
+*.color13:		base0E
+*.color14:		base0C
+*.color15:		base07
+
+! st.font:		Hack Nerd Font:size=12
+! st.borderpx:	20
+
+dwm.normfgcolor:		base05
+dwm.normbgcolor:		base00
+dwm.normbordercolor:	base03
+dwm.normfloatcolor:	    base03
+
+dwm.selfgcolor:			base07
+dwm.selbgcolor:			base00
+dwm.selbordercolor:		base0D
+dwm.selfloatcolor:		base0B
+
+dwm.statusfgcolor:		base0E
+dwm.statusbgcolor:		base00
+
+dwm.ltsymfgcolor:		base0C
+dwm.ltsymbgcolor:		base00
+
+dwm.tagsemptyfgcolor:	base03
+dwm.tagsemptybgcolor:	base00
+dwm.tagsoccfgcolor:		base0B
+dwm.tagsoccbgcolor:		base00
+dwm.tagsselfgcolor:		base0A
+dwm.tagsselbgcolor:		base00
