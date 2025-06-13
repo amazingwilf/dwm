@@ -1,0 +1,45 @@
+Xft.dpi:			192
+
+Xcursor.theme:		Bibata-Modern-Ice
+Xcursor.size:		44
+
+#define base00 #020202
+#define base01 #353b45
+#define base02 #3e4451
+#define base03 #545862
+#define base04 #565c64
+#define base05 #abb2bf
+#define base06 #b6bdca
+#define base07 #c8ccd4
+#define base08 #e06c75
+#define base09 #d19a66
+#define base0A #e5c07b
+#define base0B #98c379
+#define base0C #56b6c2
+#define base0D #61afef
+#define base0E #c678dd
+#define base0F #0101a1
+
+
+
+dwm.normfgcolor:		base05
+dwm.normbgcolor:		base00
+dwm.normbordercolor:	base03
+dwm.normfloatcolor:		base03
+
+dwm.selfgcolor:			base07
+dwm.selbgcolor:			base00
+dwm.selbordercolor:		base0D
+dwm.selfloatcolor:		base0E
+
+dwm.tagsselfgcolor:		base07
+dwm.tagsselbgcolor:		base0F
+
+dwm.tagsoccfgcolor:		base0D
+dwm.tagsoccbgcolor:		base00
+
+dwm.tagsemptyfgcolor:	base01
+dwm.tagsemptybgcolor:	base00
+
+dwm.ltsymbolfgcolor:	base0A
+dwm.ltsymbolbgcolor:	base00
