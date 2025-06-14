@@ -20,9 +20,9 @@ static const int user_bh			= 8;
 #define ICONSIZE (bh - 12)
 #define ICONSPACING 10
 
-static const char *fonts[]			= { "IosevkaTerm Nerd Font:size=12:style=Medium",
-										"IosevkaTerm Nerd Font Mono:size=10:style=ExtraBold" };
-static const char dmenufont[]		= "IosevkaTerm Nerd Font:size=14:style=Medium";
+static const char *fonts[]			= { "Ubuntu:size=12:style=Medium",
+										"JetBrainsMono Nerd Font :size=10:style=ExtraBold" };
+static const char dmenufont[]		= "Ubuntu:size=13:style=Medium";
 
 static char normfgcolor[]			= "#bbbbbb";
 static char normbgcolor[]			= "#222222";
@@ -65,6 +65,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Nwg-look", .isfloating = 1, .bw = -1, .iscentered = 1, .bw = 5 },
 	{ .class = "firefox", .tags = 1 << 1, .bw = -1 },
+	{ .class = "Thunar", .tags = 1 << 2, .bw = -1 },
 	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%", .bw = 5 },
 };
 
@@ -102,6 +103,7 @@ static const Layout layouts[] = {
 static const char *termcmd[] 		= { "ghostty", "--title=Terminal", NULL };
 static const char *dmenucmd[]		= { "dmenu_run", "-p", "Run: ", "-fn", dmenufont, "-nb", normbgcolor, "-nf", selbordercolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *webcmd[]			= { "firefox", NULL };
+static const char *fmcmd[]			= { "thunar", NULL };
 
 static const char *volmutecmd[]		= { "volume", "--toggle", NULL };
 static const char *voldowncmd[]		= { "volume", "--dec", NULL };
@@ -118,6 +120,7 @@ static const Key keys[] = {
 	{ MOD,			XK_Return, 		spawn,				{.v = termcmd } },
 	{ MOD,			XK_space,		spawn,				{.v = dmenucmd } },
 	{ MOD,			XK_w,			spawn,				{.v = webcmd } },
+	{ MOD,			XK_e,			spawn,				{.v = fmcmd } },
 
 	{ 0,			XK_F1,			spawn,				{.v = volmutecmd } },
 	{ 0,			XK_F2,			spawn,				{.v = voldowncmd } },
