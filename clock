@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+printf "^c#61afef^$(date '+%l:%M %P') "

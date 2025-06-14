@@ -102,6 +102,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *termcmd[] 		= { "ghostty", "--title=Terminal", NULL };
 static const char *dmenucmd[]		= { "dmenu_run", "-p", "Run: ", "-fn", dmenufont, "-nb", normbgcolor, "-nf", selbordercolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *roficmd[]		= { "/home/david/.config/rofi/launchers/type-2/launcher.sh", NULL };
 static const char *webcmd[]			= { "firefox", NULL };
 static const char *fmcmd[]			= { "thunar", NULL };
 
@@ -119,6 +120,7 @@ static const Key keys[] = {
 	/* modifier	key	function	argument */
 	{ MOD,			XK_Return, 		spawn,				{.v = termcmd } },
 	{ MOD,			XK_space,		spawn,				{.v = dmenucmd } },
+	{ MOD,			XK_r,			spawn,				{.v = roficmd } },
 	{ MOD,			XK_w,			spawn,				{.v = webcmd } },
 	{ MOD,			XK_e,			spawn,				{.v = fmcmd } },
 
