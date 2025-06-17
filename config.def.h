@@ -12,7 +12,7 @@ static const unsigned int gappih		= 20;
 static const unsigned int gappiv		= 20;
 static const unsigned int gappoh		= 10;
 static const unsigned int gappov		= 10;
-static int smartgaps					= 0;
+static int smartgaps					= 1;
 
 
 static const char *fonts[]				= { "NotoSans Nerd Font:size=11" };
