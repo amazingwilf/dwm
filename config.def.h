@@ -18,6 +18,8 @@ static int smartgaps					= 1;
 static const char *fonts[]				= { "NotoSans Nerd Font:size=11" };
 static const char dmenufont[]			= "NotoSans Nerd Font:size=11";
 
+#include "termcolors.h"
+
 static char normfgcolor[]				= "#bbbbbb";
 static char normbgcolor[]				= "#222222";
 static char normbordercolor[]			= "#444444";
