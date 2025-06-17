@@ -989,6 +989,7 @@ drawbar(Monitor *m)
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
+	Fnt *cur;
 
 	if (!m->showbar)
 		return;
@@ -1013,9 +1014,12 @@ drawbar(Monitor *m)
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		x += w;
 	}
+	cur = drw->fonts;
+	drw->fonts = drw->fonts->next; 
 	w = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
+	drw->fonts = cur; 
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {

@@ -15,7 +15,8 @@ static const unsigned int gappov		= 10;
 static int smartgaps					= 1;
 
 
-static const char *fonts[]				= { "NotoSans Nerd Font:size=11" };
+static const char *fonts[]				= { "NotoSans Nerd Font:size=11",
+											"JetBrainsMono Nerd Font:size=10:style=ExtraBold" };
 static const char dmenufont[]			= "NotoSans Nerd Font:size=11";
 
 #include "termcolors.h"
