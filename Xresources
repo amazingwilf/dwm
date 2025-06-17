@@ -1,0 +1,29 @@
+Xft.dpi:	192
+
+Xcursor.theme:	Bibata-Modern-Ice
+Xcursor.size:	44
+
+#define base00 #1c1917
+#define base01 #2d2a28
+#define base02 #3d4042
+#define base03 #403833
+#define base04 #888f94
+#define base05 #b4bdc3
+#define base06 #c4cacf
+#define base07 #f6fcef
+#define base08 #de6e7c
+#define base09 #e8838f
+#define base0A #d68c67
+#define base0B #8bae68
+#define base0C #65b8c1
+#define base0D #6099c0
+#define base0E #b279a7
+#define base0F #004466
+
+dwm.normfgcolor:	base05
+dwm.normbgcolor:	base00
+dwm.normbordercolor:	base03
+
+dwm.selfgcolor:		base07
+dwm.selbgcolor:		base0F
+dwm.selbordercolor:	base0D
