@@ -8,6 +8,9 @@ static const int attachmode				= 2;
 static const int showbar				= 1;
 static const int topbar					= 1;
 
+#define ICONSIZE (bh - 10)
+#define ICONSPACING 10 
+
 static const unsigned int gappih		= 20; 
 static const unsigned int gappiv		= 20;
 static const unsigned int gappoh		= 10;
@@ -96,7 +99,7 @@ static const Layout layouts[] = {
 #define STATUSBAR "dwmblocks"
 
 /* commands */
-static const char *termcmd[]	= { "ghostty", NULL };
+static const char *termcmd[]	= { "ghostty", "--title=Terminal", NULL };
 static const char *dmenucmd[]	= { "dmenu_run", "-p", "Run: ", "-fn", dmenufont, "-nb", "#171717", "-nf", "#61afef", "-sb", "#aa0000", "-sf", "#dddd00", NULL };
 static const char *webcmd[]		= { "firefox", NULL};
 
@@ -151,6 +154,8 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
