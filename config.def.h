@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx		= 2;
 static const unsigned int snap			= 32;
+static const int attachmode				= 2;
 
 static const int showbar				= 1;
 static const int topbar					= 1;
