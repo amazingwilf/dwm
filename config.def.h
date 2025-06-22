@@ -20,9 +20,9 @@ static const unsigned int gappov		= 10;
 static int smartgaps					= 1;
 
 
-static const char *fonts[]				= { "NotoSans Nerd Font:size=11",
-											"JetBrainsMono Nerd Font:size=10:style=ExtraBold" };
-static const char dmenufont[]			= "NotoSans Nerd Font:size=11";
+static const char *fonts[]				= { "NotoSans Nerd Font:size=12",
+											"JetBrainsMono Nerd Font:size=11:style=ExtraBold" };
+static const char dmenufont[]			= "NotoSans Nerd Font:size=12";
 
 #include "termcolors.h"
 
@@ -61,7 +61,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Nwg-look", .isfloating = 1, .iscentered = 1 },
 	{ .class = "pavucontrol", .isfloating = 1, .iscentered = 1 },
-	{ .class = "Firefox", .tags = 1 << 1 },
+	{ .class = "firefox", .tags = 1 << 1 },
 	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
