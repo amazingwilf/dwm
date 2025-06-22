@@ -51,6 +51,15 @@ static const unsigned int alphas[][3]	= {
 	[SchemeLtSym]	= { OPAQUE, baralpha, borderalpha },
 };
 
+static const char *const autostart[] = {
+	"/usr/lib/xfce-polkit/xfce-polkit", NULL,
+	"dunst", NULL,
+	"nitrogen", "--restore", NULL,
+	"picom", "-b", NULL,
+	"dwmblocks", NULL,
+	NULL /* terminate */
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
