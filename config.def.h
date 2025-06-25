@@ -52,7 +52,7 @@ static const unsigned int alphas[][3]	= {
 };
 
 static const char *const autostart[] = {
-	"/usr/lib/xfce-polkit/xfce-polkit", NULL,
+	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"dunst", NULL,
 	"nitrogen", "--restore", NULL,
 	"picom", "-b", NULL,
