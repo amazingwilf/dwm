@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx		= 2;
+static const unsigned int borderpx		= 3;
 static const unsigned int snap			= 32;
 static const int attachmode				= 2;
 static int floatposgrid_x				= 5;	/* float grid columns */
@@ -76,7 +76,10 @@ static const Rule rules[] = {
 	{ .class = "Nwg-look", .isfloating = 1, .iscentered = 1 },
 	{ .class = "pavucontrol", .isfloating = 1, .iscentered = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
+	{ .class = "Thunar", .tags = 1 << 2 },
+	{ .class = "thunderbird", .tags = 1 << 3 },
 	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
+	{ .instance = "floaterm", .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -126,9 +129,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *termcmd[]	= { "ghostty", "--title=Terminal", NULL };
+static const char *ftermcmd[]	= { "ghostty", "--x11-instance-name=floaterm", "--title=Terminal", NULL };
 static const char *dmenucmd[]	= { "dmenu_run", "-p", "Run: ", "-fn", dmenufont, "-nb", "#171717", "-nf", "#61afef", "-sb", "#aa0000", "-sf", "#dddd00", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *webcmd[]		= { "firefox", NULL};
+static const char *fmcmd[]		= { "thunar", NULL};
+static const char *mailcmd[]	= { "thunderbird", NULL};
 
 static const char *volmute[]	= { "volume", "--toggle", NULL };
 static const char *voldown[]	= { "volume", "--dec", NULL };
@@ -141,11 +147,13 @@ static const char *blup[]		= { "brightness", "--inc", NULL };
 static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
 
 static const Key keys[] = {
-	/* modifier	key	function	argument */
 	{ MOD,			XK_Return,	spawn,			{.v = termcmd } },
+	{ MOD|SFT,		XK_Return,	spawn,			{.v = ftermcmd } },
 	{ MOD,			XK_space,	spawn,			{.v = dmenucmd } },
 	{ MOD,			XK_r,		spawn,			{.v = roficmd } },
 	{ MOD,			XK_w,		spawn,			{.v = webcmd } },
+	{ MOD,			XK_e,		spawn,			{.v = fmcmd } },
+	{ MOD|SFT,		XK_m,		spawn,			{.v = mailcmd } },
 
 	{ 0,			XK_F1,		spawn,			{.v = volmute } },
 	{ 0,			XK_F2,		spawn,			{.v = voldown } },
@@ -157,19 +165,18 @@ static const Key keys[] = {
 
 	{ MOD,			XK_grave,	togglescratch,	{.v = sptermcmd } },
 
-	{ MOD,			XK_j,		focusstack,		{.i = +1 } },
-	{ MOD,			XK_k,		focusstack,		{.i = -1 } },
-
-	{ MOD|SFT,		XK_j,		rotatestack,	{.i = +1 } },
-	{ MOD|SFT,		XK_k,		rotatestack,	{.i = -1 } },
+	{ MOD,			XK_h,		focusdir,		{.i = 0 } },
+	{ MOD,			XK_l,		focusdir,		{.i = 1 } },
+	{ MOD,			XK_k,		focusdir,		{.i = 2 } },
+	{ MOD,			XK_j,		focusdir,		{.i = 3 } },
 
 	{ MOD,			XK_i,		incnmaster,		{.i = +1 } },
 	{ MOD,			XK_d,		incnmaster,		{.i = -1 } },
 
-	{ MOD,			XK_h,		setmfact,		{.f = -0.05} },
-	{ MOD,			XK_l,		setmfact,		{.f = +0.05} },
-	{ MOD|SFT,		XK_h,		setcfact,		{.f = +0.25} },
-	{ MOD|SFT,		XK_l,		setcfact,		{.f = -0.25} },
+	{ MOD|SFT,		XK_h,		setmfact,		{.f = -0.05} },
+	{ MOD|SFT,		XK_l,		setmfact,		{.f = +0.05} },
+	{ MOD|SFT,		XK_j,		setcfact,		{.f = +0.25} },
+	{ MOD|SFT,		XK_k,		setcfact,		{.f = -0.25} },
 	{ MOD|SFT,		XK_o,		setcfact,		{.f = 0.00} },
 
 	{ MOD,			XK_q,		killclient,		{0} },
