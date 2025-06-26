@@ -170,14 +170,19 @@ static const Key keys[] = {
 	{ MOD,			XK_k,		focusdir,		{.i = 2 } },
 	{ MOD,			XK_j,		focusdir,		{.i = 3 } },
 
-	{ MOD,			XK_i,		incnmaster,		{.i = +1 } },
-	{ MOD,			XK_d,		incnmaster,		{.i = -1 } },
-
 	{ MOD|SFT,		XK_h,		setmfact,		{.f = -0.05} },
 	{ MOD|SFT,		XK_l,		setmfact,		{.f = +0.05} },
 	{ MOD|SFT,		XK_j,		setcfact,		{.f = +0.25} },
 	{ MOD|SFT,		XK_k,		setcfact,		{.f = -0.25} },
 	{ MOD|SFT,		XK_o,		setcfact,		{.f = 0.00} },
+
+	{ MOD|CTL,		XK_h,		placedir,		{.i = 0 } }, 
+	{ MOD|CTL,		XK_l,		placedir,		{.i = 1 } },
+	{ MOD|CTL,		XK_k,		placedir,		{.i = 2 } },
+	{ MOD|CTL,		XK_j,		placedir,		{.i = 3 } },
+
+	{ MOD,			XK_i,		incnmaster,		{.i = +1 } },
+	{ MOD,			XK_d,		incnmaster,		{.i = -1 } },
 
 	{ MOD,			XK_q,		killclient,		{0} },
 	{ MOD|SFT,		XK_q,		quit,			{0} },
