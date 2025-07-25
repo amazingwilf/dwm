@@ -1,0 +1,45 @@
+Xft.dpi:	192
+
+Xcursor.theme:	Bibata-Modern-Ice
+Xcursor.size:	44
+
+
+#define black_1   #181818
+#define red_1     #f43841
+#define green_1   #73d936
+#define yellow_1  #ffdd33
+#define blue_1    #96a6c8
+#define magenta_1 #9e95c7
+#define cyan_1    #95a99f
+#define white_1   #e4e4e4
+#define black_2   #52494e
+#define red_2     #ff4f58
+#define green_2   #73d936
+#define yellow_2  #ffdd33
+#define blue_2    #96a6c8
+#define magenta_2 #afafd7
+#define cyan_2    #95a99f
+#define white_2   #f5f5f5
+#define title_bg  #800080
+
+dwm.normfgcolor:			white_1
+dwm.normbgcolor:			black_1
+dwm.normbordercolor:		black_2
+dwm.normfloatcolor:			black_2
+
+dwm.selfgcolor:				white_2
+dwm.selbgcolor:				title_bg
+dwm.selbordercolor:			blue_1
+dwm.selfloatcolor:			magenta_1
+
+dwm.scratchnormbordercolor:	black_2
+dwm.scratchnormfloatcolor:	black_2
+dwm.scratchselbordercolor:	green_2
+dwm.scratchselfloatcolor:	green_2
+
+dwm.tagsemptyfgcolor:		black_2
+dwm.tagsemptybgcolor:		black_1
+dwm.tagsoccfgcolor:			blue_1
+dwm.tagsoccbgcolor:			black_1
+dwm.tagsselfgcolor:			white_2
+dwm.tagsselbgcolor:			title_bg
