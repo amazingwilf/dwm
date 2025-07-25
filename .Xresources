@@ -22,6 +22,29 @@ Xcursor.size:	44
 #define white_2   #f5f5f5
 #define title_bg  #800080
 
+*.foreground:	white_1
+*.background:	black_1
+*.cursorColor:	cyan_1
+
+*.color0:		black_1
+*.color1:		red_1
+*.color2:		green_1
+*.color3:		yellow_1
+*.color4:		blue_1
+*.color5:		magenta_1
+*.color6:		cyan_1
+*.color7:		white_1
+
+*.color8:		black_2
+*.color9:		red_2
+*.color10:		green_2
+*.color11:		yellow_2
+*.color12:		blue_2
+*.color13:		magenta_2
+*.color14:		cyan_2
+*.color15:		white_2
+
+
 dwm.normfgcolor:			white_1
 dwm.normbgcolor:			black_1
 dwm.normbordercolor:		black_2
@@ -30,7 +53,7 @@ dwm.normfloatcolor:			black_2
 dwm.selfgcolor:				white_2
 dwm.selbgcolor:				title_bg
 dwm.selbordercolor:			blue_1
-dwm.selfloatcolor:			magenta_1
+dwm.selfloatcolor:			green_1
 
 dwm.scratchnormbordercolor:	black_2
 dwm.scratchnormfloatcolor:	black_2
@@ -43,3 +66,6 @@ dwm.tagsoccfgcolor:			blue_1
 dwm.tagsoccbgcolor:			black_1
 dwm.tagsselfgcolor:			white_2
 dwm.tagsselbgcolor:			title_bg
+
+dwm.ltsymbolfgcolor:		yellow_1
+dwm.ltsymbolbgcolor:		black_1
