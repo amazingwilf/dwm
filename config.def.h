@@ -17,7 +17,7 @@ static const int showbar				= 1;
 static const int topbar					= 1;
 static const int user_bh				= 8;
 
-static const char *fonts[]				= { "Adwaita Sans:size=12",
+static const char *fonts[]				= { "Iosevka:size=12",
 											"JetBrainsMono Nerd Font:size=12",
 											"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
 
@@ -82,7 +82,7 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[]	= {" ", " ", " ", " ", " ", " ", " ", " "};
+static const char *tags[]	= { "1", "2", "3", "4", "5", "6", "7", "8" };
 
 static const Rule rules[]	= {
 	/* xprop(1):
@@ -156,6 +156,13 @@ static const char *thunarcmd[]		= { "thunar", NULL };
 static const char *launchercmd[] 	= { "/usr/share/archcraft/dwm/scripts/rofi_launcher", NULL };
 static const char *powercmd[] 		= { "/usr/share/archcraft/dwm/scripts/rofi_powermenu", NULL };
 
+static const char *volmute[]		= { "volume", "--toggle", NULL };
+static const char *voldown[]		= { "volume", "--dec", NULL };
+static const char *volup[]			= { "volume", "--inc", NULL };
+static const char *micmute[]		= { "volume", "--toggle-mic", NULL };
+static const char *bldown[]			= { "brightness", "--dec", NULL };
+static const char *blup[]			= { "brightness", "--inc", NULL };
+
 static const char *sptermcmd[]		= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
 
 static const Key keys[] = {
@@ -164,6 +171,12 @@ static const Key keys[] = {
 	{ Mod,			XK_e,		spawn,				{.v = thunarcmd } },
 	{ Alt,			XK_F1,		spawn,				{.v = launchercmd } },
 	{ 0,			XK_F12,		spawn,				{.v = powercmd } },
+	{ 0,			XK_F1,		spawn,				{.v = volmute } },
+	{ 0,			XK_F2,		spawn,				{.v = voldown } },
+	{ 0,			XK_F3,		spawn,				{.v = volup } },
+	{ 0,			XK_F4,		spawn,				{.v = micmute } },
+	{ 0,			XK_F5,		spawn,				{.v = bldown } },
+	{ 0,			XK_F6,		spawn,				{.v = blup } },
 	{ Mod,			XK_j,		focusstack,			{.i = +1 } },
 	{ Mod,			XK_k,		focusstack,			{.i = -1 } },
 	{ Mod,			XK_i,		incnmaster,			{.i = +1 } },
@@ -185,6 +198,7 @@ static const Key keys[] = {
 	{ Mod|Shift,	XK_b,		togglebar,			{0} },
 	{ Mod|Shift,	XK_space,	togglefloating,		{0} },
 	{ Mod|Shift,	XK_f,		togglefullscr,		{0} },
+	{ 0,			XK_F11,		togglefullscr,		{0} },
 	{ Mod|Shift,	XK_x,		xrdb,				{.v = NULL } },
 	{ Mod,			XK_0,		view,				{.ui = ~0 } },
 	{ Mod|Shift,	XK_0,		tag,				{.ui = ~0 } },
