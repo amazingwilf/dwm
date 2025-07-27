@@ -70,13 +70,13 @@ static const unsigned int baralpha		= 0xd0;
 static const unsigned int borderalpha	= OPAQUE;
 static const unsigned int alphas[][4]	= {
     [SchemeNorm]			= { OPAQUE, baralpha, borderalpha, borderalpha },
-	[SchemeSel]				= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+	[SchemeSel]				= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeScratchNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchSel]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeSticky]			= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsEmpty]		= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsOcc]			= { OPAQUE, baralpha, borderalpha, borderalpha },
-    [SchemeTagsSel]			= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
+    [SchemeTagsSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
@@ -91,6 +91,11 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[]	= { "1", "2", "3", "4", "5", "6", "7", "8" };
+
+static const unsigned int ulinepad		= 5;
+static const unsigned int ulinestroke	= 1;
+static const unsigned int ulinevoffset	= 0;
+static const int ulineall				= 0;
 
 static const Rule rules[]	= {
 	/* xprop(1):
