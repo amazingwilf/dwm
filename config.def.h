@@ -80,6 +80,7 @@ static const unsigned int alphas[][4]	= {
     [SchemeTagsEmpty]		= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsOcc]			= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+    [SchemeLtSymbol]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
