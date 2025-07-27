@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx		= 3;
+static const unsigned int borderpx		= 4;
 static const unsigned int snap			= 32;
 static const int swallowfloating		= 0; 
 static const int swterminheritfs		= 1; 
@@ -19,6 +19,9 @@ static const int showbar				= 1;
 static const int topbar					= 1;
 static const int user_bh				= 8;
 static const int hidevacanttags			= 0;
+
+#define ICONSIZE (bh - 12)
+#define ICONSPACING 10
 
 static const char *fonts[]				= { "Iosevka:size=12",
 											"JetBrainsMono Nerd Font:size=12",
