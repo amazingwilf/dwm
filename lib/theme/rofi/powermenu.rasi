@@ -28,7 +28,7 @@ window {
     padding:                     0px;
     border:                      2px solid;
     border-radius:               12px;
-    border-color:                @background-alt;
+    border-color:                @border;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -63,14 +63,14 @@ textbox-prompt-colon {
     padding:                     8px 10px;
     border-radius:               8px;
     background-color:            @selected;
-    text-color:                  @background;
+    text-color:                  @foreground;
 }
 prompt {
     enabled:                     true;
     padding:                     8px 10px;
     border-radius:               8px;
     background-color:            @active;
-    text-color:                  @background;
+    text-color:                  @foreground;
 }
 
 /*****----- Message -----*****/
@@ -134,15 +134,15 @@ element normal.urgent,
 element alternate.urgent,
 element selected.active {
     background-color:            var(urgent);
-    text-color:                  var(background);
+    text-color:                  var(foreground);
 }
 element normal.active,
 element alternate.active,
 element selected.urgent {
     background-color:            var(active);
-    text-color:                  var(background);
+    text-color:                  var(foreground);
 }
 element selected.normal {
     background-color:            var(selected);
-    text-color:                  var(background);
+    text-color:                  var(foreground);
 }

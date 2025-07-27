@@ -40,6 +40,7 @@ fi
 # Rofi CMD
 rofi_cmd() {
 	rofi -dmenu \
+		-dpi 192 \
 		-p "$prompt" \
 		-mesg "$mesg" \
 		-markup-rows \
@@ -54,6 +55,7 @@ run_rofi() {
 # Confirmation CMD
 confirm_cmd() {
 	rofi -dmenu \
+		-dpi 192 \
 		-p 'Confirmation' \
 		-mesg 'Are you Sure?' \
 		-selected-row 1 \

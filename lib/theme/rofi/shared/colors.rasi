@@ -3,10 +3,10 @@
 /* Colors */
 
 * {
-    background:     #181818;
+    background:     #15161e;
     background-alt: #262A32;
-	border:			#96a6c8;
-    foreground:     #e4e4e4;
+	border:			#7aa2f7;
+    foreground:     #a9b1d6;
     selected:       #800080;
     active:         #008000;
     urgent:         #e06c75;
