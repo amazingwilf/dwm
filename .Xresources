@@ -51,21 +51,24 @@ dwm.normbordercolor:		black_2
 dwm.normfloatcolor:			black_2
 
 dwm.selfgcolor:				white_2
-dwm.selbgcolor:				title_bg
+dwm.selbgcolor:				black_1
 dwm.selbordercolor:			blue_1
 dwm.selfloatcolor:			green_1
 
 dwm.scratchnormbordercolor:	black_2
 dwm.scratchnormfloatcolor:	black_2
-dwm.scratchselbordercolor:	green_2
-dwm.scratchselfloatcolor:	green_2
+dwm.scratchselbordercolor:	cyan_1
+dwm.scratchselfloatcolor:	cyan_1
+
+dwm.stickybordercolor:		yellow_1
+dwm.stickyfloatcolor:		yellow_1
 
 dwm.tagsemptyfgcolor:		black_2
 dwm.tagsemptybgcolor:		black_1
-dwm.tagsoccfgcolor:			blue_1
+dwm.tagsoccfgcolor:			green_1
 dwm.tagsoccbgcolor:			black_1
 dwm.tagsselfgcolor:			white_2
-dwm.tagsselbgcolor:			title_bg
+dwm.tagsselbgcolor:			black_1
 
 dwm.ltsymbolfgcolor:		yellow_1
 dwm.ltsymbolbgcolor:		black_1
