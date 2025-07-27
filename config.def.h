@@ -18,6 +18,7 @@ static int smartgaps					= 0;
 static const int showbar				= 1;
 static const int topbar					= 1;
 static const int user_bh				= 8;
+static const int hidevacanttags			= 0;
 
 static const char *fonts[]				= { "Iosevka:size=12",
 											"JetBrainsMono Nerd Font:size=12",
