@@ -246,6 +246,8 @@ static const Key keys[] = {
 static const Button buttons[] = {
 	{ ClkLtSymbol,		0,		Button1,	setlayout,		{0} },
 	{ ClkLtSymbol,		0,		Button3,	setlayout,		{.v = &layouts[2]} },
+	{ ClkLtSymbol,		0,		Button4,	cyclelayout,	{.i = +1 } },
+	{ ClkLtSymbol,		0,		Button5,	cyclelayout,	{.i = -1 } },
 	{ ClkWinTitle,		0,		Button2,	zoom,			{0} },
 	{ ClkStatusText,	0,		Button1,	sigstatusbar,	{.i = 1} },
 	{ ClkStatusText,	0,		Button2,	sigstatusbar,	{.i = 2} },
