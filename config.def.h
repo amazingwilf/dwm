@@ -97,7 +97,7 @@ static const Rule rules[]	= {
 	 *	WM_NAME(STRING) = title
 	 */
 	{ .class = "Nwg-look", .isfloating = 1, .iscentered = 1 },
-	{ .class = "pavucontrol", .isfloating = 1, .iscentered = 1 },
+	{ .class = "pavucontrol", .isfloating = 1, .floatpos = "50% 50% 70% 70%" },
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
 	{ .class = "com.mitchellh.ghostty", .isterminal = 1 },
