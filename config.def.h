@@ -3,6 +3,8 @@
 /* appearance */
 static const unsigned int borderpx		= 3;
 static const unsigned int snap			= 32;
+static const int swallowfloating		= 0; 
+static const int swterminheritfs		= 1; 
 static int floatposgrid_x				= 5; 
 static int floatposgrid_y				= 5;
 static const char *toggle_float_pos		= "50% 50% 80% 80%"; // default floating position when triggering togglefloating
@@ -38,6 +40,9 @@ static char scratchnormfloatcolor[]		= "#444444";
 static char scratchselbordercolor[]		= "#005577";
 static char scratchselfloatcolor[]		= "#005577";
 
+static char stickybordercolor[]			= "#dddd00";
+static char stickyfloatcolor[]			= "#dddd00";
+
 static char tagsemptyfgcolor[]			= "#444444";
 static char tagsemptybgcolor[]			= "#222222";
 static char tagsoccfgcolor[]			= "#bbbbbb";
@@ -53,6 +58,7 @@ static char *colors[][4] = {
        [SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,			selfloatcolor },
        [SchemeScratchNorm]	= { NULL,				NULL,				scratchnormbordercolor,	scratchnormfloatcolor },
        [SchemeScratchSel]	= { NULL,				NULL,				scratchselbordercolor,	scratchselfloatcolor },
+       [SchemeSticky]		= { NULL,				NULL,				stickybordercolor,		stickyfloatcolor },
        [SchemeTagsEmpty]	= { tagsemptyfgcolor,	tagsemptybgcolor,	NULL,					NULL },
        [SchemeTagsOcc]		= { tagsoccfgcolor,		tagsoccbgcolor,		NULL,					NULL },
        [SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		NULL,					NULL },
@@ -63,12 +69,13 @@ static const unsigned int baralpha		= 0xd0;
 static const unsigned int borderalpha	= OPAQUE;
 static const unsigned int alphas[][4]	= {
     [SchemeNorm]			= { OPAQUE, baralpha, borderalpha, borderalpha },
-	[SchemeSel]				= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSel]				= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
     [SchemeScratchNorm]		= { OPAQUE, baralpha, borderalpha, borderalpha },
 	[SchemeScratchSel]		= { OPAQUE, baralpha, borderalpha, borderalpha },
+	[SchemeSticky]			= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsEmpty]		= { OPAQUE, baralpha, borderalpha, borderalpha },
     [SchemeTagsOcc]			= { OPAQUE, baralpha, borderalpha, borderalpha },
-    [SchemeTagsSel]			= { OPAQUE, baralpha, borderalpha, borderalpha },
+    [SchemeTagsSel]			= { OPAQUE, OPAQUE,   borderalpha, borderalpha },
 };
 
 static const char *const autostart[] = {
@@ -93,6 +100,11 @@ static const Rule rules[]	= {
 	{ .class = "pavucontrol", .isfloating = 1, .iscentered = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
+	{ .class = "com.mitchellh.ghostty", .isterminal = 1 },
+	{ .class = "st", .isterminal = 1 },
+	{ .class = "Alacritty", .isterminal = 1 },
+	{ .class = "kitty", .isterminal = 1 },
+	{ .title = "Event Tester", .noswallow = 1 },
 	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 	{ .instance = "calcurse", .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 	{ .instance = "floaterm", .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
@@ -199,6 +211,7 @@ static const Key keys[] = {
 	{ Mod|Shift,	XK_space,	togglefloating,		{0} },
 	{ Mod|Shift,	XK_f,		togglefullscr,		{0} },
 	{ 0,			XK_F11,		togglefullscr,		{0} },
+	{ Mod|Shift,	XK_s,		togglesticky,		{0} },
 	{ Mod|Shift,	XK_x,		xrdb,				{.v = NULL } },
 	{ Mod,			XK_0,		view,				{.ui = ~0 } },
 	{ Mod|Shift,	XK_0,		tag,				{.ui = ~0 } },
