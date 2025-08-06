@@ -1532,8 +1532,6 @@ manage(Window w, XWindowAttributes *wa)
 	configure(c); /* propagates border_width, if size doesn't change */
 	updatewindowtype(c);
 	updatesizehints(c);
-	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
-	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 	updatewmhints(c);
 	{
 		int format;
@@ -2439,7 +2437,8 @@ togglefloating(const Arg *arg)
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
 	if (selmon->sel->isfloating)
-		floatpos(&((Arg) { .v = toggle_float_pos }));
+		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
+			selmon->sel->w, selmon->sel->h, 0);
 	arrange(selmon);
 }
 
