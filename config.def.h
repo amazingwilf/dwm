@@ -91,6 +91,14 @@ static const char *termcmd[]	= { "ghostty", NULL };
 static const char *dmenucmd[]	= { "dmenu_run", "-p", "Run: ", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_sel, "-sf", col_gray4, NULL };
 static const char *firefoxcmd[]	= { "firefox", NULL };
 
+static const char *volmutecmd[]	= { "volume", "--toggle", NULL };
+static const char *voldowncmd[]	= { "volume", "--dec", NULL };
+static const char *volupcmd[]	= { "volume", "--inc", NULL };
+static const char *micmutecmd[]	= { "volume", "--toggle-mic", NULL };
+static const char *bldowncmd[]	= { "brightness", "--dec", NULL };
+static const char *blupcmd[]	= { "brightness", "--inc", NULL };
+
+
 static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
 
 static const Key keys[] = {
@@ -98,6 +106,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+
+	{ 0,							XK_F1,	   spawn,		   {.v = volmutecmd } },
+	{ 0,							XK_F2,	   spawn,		   {.v = voldowncmd } },
+	{ 0,							XK_F3,	   spawn,		   {.v = volupcmd } },
+	{ 0,							XK_F4,	   spawn,		   {.v = micmutecmd } },
+	{ 0,							XK_F5,	   spawn,		   {.v = bldowncmd } },
+	{ 0,							XK_F6,	   spawn,		   {.v = blupcmd } },
+
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
