@@ -57,6 +57,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Nwg-look", .isfloating = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
+	{ .class = "Thunar", .tags = 1 << 2 },
 	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
@@ -92,6 +93,7 @@ static const char *termcmd[]	= { "ghostty", NULL };
 static const char *dmenucmd[]	= { "dmenu_run", "-p", "Run: ", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_sel, "-sf", col_gray4, NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *firefoxcmd[]	= { "firefox", NULL };
+static const char *thunarcmd[]	= { "thunar", NULL };
 
 static const char *volmutecmd[]	= { "volume", "--toggle", NULL };
 static const char *voldowncmd[]	= { "volume", "--dec", NULL };
@@ -108,6 +110,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+	{ MODKEY,                       XK_e,      spawn,          {.v = thunarcmd } },
 
 	{ 0,							XK_F1,	   spawn,		   {.v = volmutecmd } },
 	{ 0,							XK_F2,	   spawn,		   {.v = voldowncmd } },
