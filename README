@@ -36,4 +36,5 @@ be changed in the config.def.h.
  -	pertag-togglelayout (differing layouts on tags, and toggling of
  	layouts)
  -	rotatestack (move selected window through the stack)
+ -	floatpos (define keybindings and rules to position floating windows)
 
