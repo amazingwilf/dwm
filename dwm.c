@@ -78,7 +78,7 @@
 
 /* enums */
 enum { CurResizeBR, CurResizeBL, CurResizeTR, CurResizeTL, CurNormal, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeTagsEmpty, SchemeTagsOcc, SchemeTagsSel }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetLast }; /* EWMH atoms */
@@ -1029,14 +1029,17 @@ drawbar(Monitor *m)
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+		drw_setscheme(drw, scheme[
+			m->tagset[m->seltags] 
+			& 1 << i 
+			? SchemeTagsSel 
+			: occ & 1 << i
+			? SchemeTagsOcc
+			: SchemeTagsEmpty
+		]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
 			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
-		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i);
 		x += w;
 	}
 
@@ -1607,7 +1610,16 @@ loadxrdb()
         XRDB_LOAD_COLOR("dwm.selbgcolor", selbgcolor);
         XRDB_LOAD_COLOR("dwm.selbordercolor", selbordercolor);
 
-        XRDB_LOAD_COLOR("color0",  termcol0);
+        XRDB_LOAD_COLOR("dwm.tagsemptyfgcolor", tagsemptyfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsemptybgcolor", tagsemptybgcolor);
+
+        XRDB_LOAD_COLOR("dwm.tagsoccfgcolor", tagsoccfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsoccbgcolor", tagsoccbgcolor);
+        
+		XRDB_LOAD_COLOR("dwm.tagsselfgcolor", tagsselfgcolor);
+        XRDB_LOAD_COLOR("dwm.tagsselbgcolor", tagsselbgcolor);
+
+		XRDB_LOAD_COLOR("color0",  termcol0);
         XRDB_LOAD_COLOR("color1",  termcol1);
         XRDB_LOAD_COLOR("color2",  termcol2);
         XRDB_LOAD_COLOR("color3",  termcol3);

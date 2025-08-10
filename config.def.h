@@ -26,10 +26,19 @@ static char normbordercolor[]       = "#444444";
 static char selfgcolor[]            = "#eeeeee";
 static char selbgcolor[]            = "#005577";
 static char selbordercolor[]        = "#005577";
+static char tagsemptyfgcolor[]      = "#444444";
+static char tagsemptybgcolor[]      = "#222222";
+static char tagsoccfgcolor[]		= "#bbbbbb";
+static char tagsoccbgcolor[]        = "#222222";
+static char tagsselfgcolor[]        = "#eeeeee";
+static char tagsselbgcolor[]        = "#005577";
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+       [SchemeNorm]		= { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]		= { selfgcolor,  selbgcolor,  selbordercolor  },
+	   [SchemeTagsEmpty]	= { tagsemptyfgcolor,	tagsemptybgcolor,	NULL },
+	   [SchemeTagsOcc]		= { tagsoccfgcolor,		tagsoccbgcolor,		NULL },
+	   [SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		NULL },
 };
 
 static const unsigned int baralpha = 0xe0;
@@ -38,6 +47,9 @@ static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
     [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsEmpty]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsOcc]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeTagsSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 static const char *const autostart[] = {
