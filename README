@@ -23,5 +23,8 @@ be changed in the config.def.h.
 
  The following patches have been applied, in order:
 
-
+ -	alpha (transparency in the title bar)
+ -	xrdb (define colorscheme in .Xresources)
+ 	- requires modification of the xrdb() function to include alphas
+ -	cfacts-vanitygaps
 
