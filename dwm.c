@@ -400,6 +400,8 @@ applyrules(Client *c)
 				c->mon = m;
 			if (c->isfloating && r->floatpos)
 				setfloatpos(c, r->floatpos);
+			Arg a = {.ui = c->tags};
+			view(&a);
 		}
 	}
 	if (ch.res_class)
@@ -2211,6 +2213,7 @@ tag(const Arg *arg)
 		setclienttagprop(c);
 		focus(NULL);
 		arrange(selmon);
+		view(arg);
 	}
 }
 

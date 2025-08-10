@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
@@ -36,6 +36,8 @@ static const unsigned int alphas[][3]      = {
 
 static const char *const autostart[] = {
 	"/usr/bin/lxpolkit", NULL,
+	"dunst", NULL,
+	"nitrogen", "--restore", NULL,
 	"picom", "-b", NULL,
 	NULL /* terminate */
 };
@@ -48,9 +50,8 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   floatpos   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           NULL,      -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           NULL,      -1 },
+	{ .class = "Nwg-look", .isfloating = 1 },
+	{ .class = "firefox", .tags = 1 << 1 },
 };
 
 /* layout(s) */
