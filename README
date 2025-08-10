@@ -44,4 +44,5 @@ be changed in the config.def.h.
  -	statuscmd (signal defs to trigger actions from mouse clicks in the status
  	bar)
  -	resizepoint (resize floating windows from any location in the window)
+ -	bar-height (user-definable bar height)
 
