@@ -33,4 +33,6 @@ be changed in the config.def.h.
  -	preserveonrestart (saves window positions when restarting)
  -	cool-autostart (autostart, defined within config.h)
  -	attachaside (spawn new windows on the right and top)
+ -	pertag-togglelayout (differing layouts on tags, and toggling of
+ 	layouts)
 
