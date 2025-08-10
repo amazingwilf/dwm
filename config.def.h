@@ -63,6 +63,7 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Nwg-look", .isfloating = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
+	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -111,11 +112,14 @@ static const char *termcmd[]	= { "ghostty", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *firefoxcmd[]	= { "firefox", NULL };
 
+static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+	{ MODKEY,                       XK_grave,  togglescratch,  {.v = sptermcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

@@ -48,4 +48,5 @@ be changed in the config.def.h.
  -	underline-tags (underline selected tag)
  -	winicon (application icons with window title)
  -	alwayscenter (centre floating windows)
+ -	namedscratchpads (multiple scratchpads)
 
