@@ -14,6 +14,9 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "DejaVu Sans:style=Book:size=12",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
+
+#include "termcolors.h"
+
 static char normfgcolor[]           = "#bbbbbb";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
