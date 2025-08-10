@@ -37,4 +37,5 @@ be changed in the config.def.h.
  	layouts)
  -	rotatestack (move selected window through the stack)
  -	floatpos (define keybindings and rules to position floating windows)
+ -	actualfullscreen (toggle fullscreen with a key binding)
 
