@@ -43,4 +43,5 @@ be changed in the config.def.h.
  -	status2d-xrdb (add definitation for terminal colors to status2d)
  -	statuscmd (signal defs to trigger actions from mouse clicks in the status
  	bar)
+ -	resizepoint (resize floating windows from any location in the window)
 
