@@ -47,4 +47,5 @@ be changed in the config.def.h.
  -	bar-height (user-definable bar height)
  -	underline-tags (underline selected tag)
  -	winicon (application icons with window title)
+ -	alwayscenter (centre floating windows)
 
