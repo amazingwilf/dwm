@@ -39,4 +39,5 @@ be changed in the config.def.h.
  -	floatpos (define keybindings and rules to position floating windows)
  -	actualfullscreen (toggle fullscreen with a key binding)
  -	adjacentags (move back and forth through tags using keybinds)
+ -	status2d (adds tags for colourful status bar)
 
