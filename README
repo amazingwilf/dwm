@@ -26,5 +26,10 @@ be changed in the config.def.h.
  -	alpha (transparency in the title bar)
  -	xrdb (define colorscheme in .Xresources)
  	- requires modification of the xrdb() function to include alphas
- -	cfacts-vanitygaps
+ -	cfacts-vanitygaps (adds gaps between client windows, and also
+ 	horixontal resizing)
+ -	removebordersonmonocle (does what it says on the tin)
+ -	restartsig (restart without leaving dwm)
+ -	preserveonrestart (saves window positions when restarting)
+ -	cool-autostart (autostart, defined within config.h)
 
