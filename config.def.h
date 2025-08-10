@@ -33,6 +33,7 @@ static const unsigned int alphas[][3]      = {
 
 static const char *const autostart[] = {
 	"/usr/bin/lxpolkit", NULL,
+	"picom", "-b", NULL,
 	NULL /* terminate */
 };
 
