@@ -46,4 +46,5 @@ be changed in the config.def.h.
  -	resizepoint (resize floating windows from any location in the window)
  -	bar-height (user-definable bar height)
  -	underline-tags (underline selected tag)
+ -	winicon (application icons with window title)
 
