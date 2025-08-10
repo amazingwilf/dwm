@@ -35,4 +35,5 @@ be changed in the config.def.h.
  -	attachaside (spawn new windows on the right and top)
  -	pertag-togglelayout (differing layouts on tags, and toggling of
  	layouts)
+ -	rotatestack (move selected window through the stack)
 
