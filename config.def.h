@@ -68,7 +68,8 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };
+/*static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8" };*/
+static char *tags[] = {" ", " ", " ", " ", " ", " ", " ", " "};
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 1;	/* thickness / height of the underline */
