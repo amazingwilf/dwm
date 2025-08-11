@@ -49,4 +49,5 @@ be changed in the config.def.h.
  -	winicon (application icons with window title)
  -	alwayscenter (centre floating windows)
  -	namedscratchpads (multiple scratchpads)
+ -	cyclelayouts (keymaps to cycle through layouts)
 
