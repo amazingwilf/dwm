@@ -78,7 +78,8 @@
 
 /* enums */
 enum { CurResizeBR, CurResizeBL, CurResizeTR, CurResizeTL, CurNormal, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeTagsEmpty, SchemeTagsOcc, SchemeTagsSel }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeTagsEmpty, SchemeTagsOcc, SchemeTagsSel,
+       SchemeLtSymbol }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMIcon, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
        NetWMWindowTypeDialog, NetClientList, NetClientInfo, NetLast }; /* EWMH atoms */
@@ -1045,7 +1046,7 @@ drawbar(Monitor *m)
 
 	drw->fonts = drw->fonts->next;
 	w = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_setscheme(drw, scheme[SchemeLtSymbol]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 	drw->fonts = cur; 
 
@@ -1618,6 +1619,9 @@ loadxrdb()
         
 		XRDB_LOAD_COLOR("dwm.tagsselfgcolor", tagsselfgcolor);
         XRDB_LOAD_COLOR("dwm.tagsselbgcolor", tagsselbgcolor);
+
+		XRDB_LOAD_COLOR("dwm.ltsymbolfgcolor", ltsymbolfgcolor);
+        XRDB_LOAD_COLOR("dwm.ltsymbolbgcolor", ltsymbolbgcolor);
 
 		XRDB_LOAD_COLOR("color0",  termcol0);
         XRDB_LOAD_COLOR("color1",  termcol1);

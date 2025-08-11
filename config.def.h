@@ -32,6 +32,8 @@ static char tagsoccfgcolor[]		= "#bbbbbb";
 static char tagsoccbgcolor[]        = "#222222";
 static char tagsselfgcolor[]        = "#eeeeee";
 static char tagsselbgcolor[]        = "#005577";
+static char ltsymbolfgcolor[]       = "#eeeeee";
+static char ltsymbolbgcolor[]       = "#222222";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm]		= { normfgcolor, normbgcolor, normbordercolor },
@@ -39,6 +41,7 @@ static char *colors[][3] = {
 	   [SchemeTagsEmpty]	= { tagsemptyfgcolor,	tagsemptybgcolor,	NULL },
 	   [SchemeTagsOcc]		= { tagsoccfgcolor,		tagsoccbgcolor,		NULL },
 	   [SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		NULL },
+	   [SchemeLtSymbol]		= { ltsymbolfgcolor,	ltsymbolbgcolor,	NULL },
 };
 
 static const unsigned int baralpha = 0xe0;
@@ -50,6 +53,7 @@ static const unsigned int alphas[][3]      = {
 	[SchemeTagsEmpty]  = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsOcc]  = { OPAQUE, baralpha, borderalpha },
 	[SchemeTagsSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeLtSymbol]  = { OPAQUE, baralpha, borderalpha },
 };
 
 static const char *const autostart[] = {
@@ -120,9 +124,17 @@ static const Layout layouts[] = {
 #define STATUSBAR "dwmblocks"
 
 /* commands */
+#include <X11/XF86keysym.h>
 static const char *termcmd[]	= { "ghostty", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *firefoxcmd[]	= { "firefox", NULL };
+
+static const char *mutevol[]	= { "volume", "--toggle", NULL };
+static const char *mutemic[]	= { "volume", "--toggle-mic", NULL };
+static const char *upvol[]		= { "volume", "--inc", NULL };
+static const char *downvol[]	= { "volume", "--dec", NULL };
+static const char *upbl[]		= { "brightness", "--inc", NULL };
+static const char *downbl[]		= { "brightness", "--dec", NULL };
 
 static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
 
@@ -131,6 +143,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+	{ 0, 						XF86XK_AudioMute, 			spawn, {.v = mutevol } },
+	{ 0, 						XF86XK_AudioMicMute, 		spawn, {.v = mutemic } },
+	{ 0, 						XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },
+	{ 0, 						XF86XK_AudioRaiseVolume, 	spawn, {.v = upvol } },
+	{ 0, 						XF86XK_MonBrightnessUp, 	spawn, {.v = upbl   } },
+	{ 0, 						XF86XK_MonBrightnessDown, 	spawn, {.v = downbl } },
 	{ MODKEY,                       XK_grave,  togglescratch,  {.v = sptermcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
