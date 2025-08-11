@@ -127,8 +127,10 @@ static const Layout layouts[] = {
 /* commands */
 #include <X11/XF86keysym.h>
 static const char *termcmd[]	= { "ghostty", NULL };
-static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *firefoxcmd[]	= { "firefox", NULL };
+
+static const char *launchercmd[]	= { "/usr/share/dwm/scripts/launcher", NULL };
+static const char *powercmd[]		= { "/usr/share/dwm/scripts/powermenu", NULL };
 
 static const char *mutevol[]	= { "volume", "--toggle", NULL };
 static const char *mutemic[]	= { "volume", "--toggle-mic", NULL };
@@ -142,8 +144,9 @@ static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm",
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_space,  spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
+	{ MODKEY,                       XK_space,  spawn,          {.v = launchercmd } },
+	{ MODKEY,                       XK_x,  spawn,          {.v = powercmd } },
 	{ 0, 						XF86XK_AudioMute, 			spawn, {.v = mutevol } },
 	{ 0, 						XF86XK_AudioMicMute, 		spawn, {.v = mutemic } },
 	{ 0, 						XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },
@@ -215,3 +218,73 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
+void
+setlayoutex(const Arg *arg)
+{
+	setlayout(&((Arg) { .v = &layouts[arg->i] }));
+}
+
+void
+viewex(const Arg *arg)
+{
+	view(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+viewall(const Arg *arg)
+{
+	view(&((Arg){.ui = ~0}));
+}
+
+void
+toggleviewex(const Arg *arg)
+{
+	toggleview(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagex(const Arg *arg)
+{
+	tag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+toggletagex(const Arg *arg)
+{
+	toggletag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagall(const Arg *arg)
+{
+	tag(&((Arg){.ui = ~0}));
+}
+
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
+static Signal signals[] = {
+	/* signum           function */
+	{ "focusstack",     focusstack },
+	{ "setmfact",       setmfact },
+	{ "togglebar",      togglebar },
+	{ "incnmaster",     incnmaster },
+	{ "togglefloating", togglefloating },
+	{ "focusmon",       focusmon },
+	{ "tagmon",         tagmon },
+	{ "zoom",           zoom },
+	{ "view",           view },
+	{ "viewall",        viewall },
+	{ "viewex",         viewex },
+	{ "toggleview",     view },
+	{ "toggleviewex",   toggleviewex },
+	{ "tag",            tag },
+	{ "tagall",         tagall },
+	{ "tagex",          tagex },
+	{ "toggletag",      tag },
+	{ "toggletagex",    toggletagex },
+	{ "killclient",     killclient },
+	{ "quit",           quit },
+	{ "setlayout",      setlayout },
+	{ "setlayoutex",    setlayoutex },
+};

@@ -50,4 +50,5 @@ be changed in the config.def.h.
  -	alwayscenter (centre floating windows)
  -	namedscratchpads (multiple scratchpads)
  -	cyclelayouts (keymaps to cycle through layouts)
+ -	dwmc (execute dwm functions using shell commands)
 
