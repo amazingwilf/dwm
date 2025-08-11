@@ -1,0 +1,59 @@
+Xft.dpi:	192
+
+Xcursor.theme:	Bibata-Modern-Ice
+Xcursor.size:	44
+
+#define base00 #181818
+#define base01 #453d41
+#define base02 #484848
+#define base03 #52494e
+#define base04 #e4e4ef
+#define base05 #f4f4ff
+#define base06 #f5f5f5
+#define base07 #e4e4ef
+#define base08 #f43841
+#define base09 #c73c3f
+#define base0A #ffdd33
+#define base0B #73c936
+#define base0C #95a99f
+#define base0D #96a6c8
+#define base0E #9e95c7
+#define base0F #cc8c3c
+
+
+#define col00 #181818
+#define col01 #f43841
+#define col02 #73d936
+#define col03 #ffdd33
+#define col04 #96a6c8
+#define col05 #9e95c7
+#define col06 #95a99f
+#define col07 #e4e4e4
+#define col08 #52494e
+#define col09 #ff4f58
+#define col10 #73d936
+#define col11 #ffdd33
+#define col12 #96a6c8
+#define col13 #afafd7
+#define col14 #95a99f
+#define col15 #f5f5f5
+
+dwm.normfgcolor:			col07
+dwm.normbgcolor:			col00
+dwm.normbordercolor:		col08
+
+dwm.selfgcolor:				col15
+dwm.selbgcolor:				col00
+dwm.selbordercolor:			col04
+
+dwm.tagsemptyfgcolor:		col08
+dwm.tagsemptybgcolor:		col00
+
+dwm.tagsoccfgcolor:			col06
+dwm.tagsoccbgcolor:			col00
+
+dwm.tagsselfgcolor:			col15
+dwm.tagsselbgcolor:			col00
+
+dwm.ltsymbolfgcolor:		col05
+dwm.ltsymbolbgcolor:		col00

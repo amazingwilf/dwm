@@ -1,0 +1,13 @@
+/* Copyright (C) 2020-2025 Aditya Shakya <adi1090x@gmail.com> */
+
+/* Colors */
+
+* {
+    background:     #181818;
+    background-alt: #262A32;
+    foreground:     #e4e4ef;
+    selected:       #2777ff;
+    active:         #73c936;
+	border:			#96a6c8;
+    urgent:         #e06c75;
+}
