@@ -52,3 +52,9 @@ be changed in the config.def.h.
  -	cyclelayouts (keymaps to cycle through layouts)
  -	dwmc (execute dwm functions using shell commands)
 
+
+
+
+
+
+gir1.2-gtk-3.0

@@ -17,6 +17,7 @@ static const int user_bh            = 10;        /* 2 is the default spacing aro
 #define ICONSIZE (bh - 12)  /* icon size */
 #define ICONSPACING 10 /* space between icon and title */
 static const char *fonts[]          = { "DejaVu Sans:style=Book:size=12",
+										"JetBrainsMono Nerd Font:size=12",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
 
 #include "termcolors.h"
@@ -62,6 +63,7 @@ static const char *const autostart[] = {
 	"dunst", NULL,
 	"nitrogen", "--restore", NULL,
 	"picom", "-b", NULL,
+	"dwmblocks", NULL,
 	NULL /* terminate */
 };
 
