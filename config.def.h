@@ -5,6 +5,7 @@ static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
+static const char *toggle_float_pos      = "50% 50% 80% 80%"; // default floating position when triggering togglefloating
 static const unsigned int gappih    = 5;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 5;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 15;       /* horiz outer gap between windows and screen edge */
