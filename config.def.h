@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx	= 3;
+static const unsigned int borderpx	= 6;
 static const unsigned int snap		= 32;
 static int floatposgrid_x			= 5;
 static int floatposgrid_y			= 5;
