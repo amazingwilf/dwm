@@ -10,7 +10,7 @@ static const unsigned int gappov    = 15;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Adwaita Sans:size=11",
+static const char *fonts[]          = { "Adwaita Sans:size=10",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=9" };
 #include "colors.h"
 static const char *colors[][3]      = {
@@ -47,17 +47,9 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-	{ "[@]",      spiral },
-	{ "[\\]",     dwindle },
-	{ "D[]",      deck },
+	{ "|||",      columnlayout },
 	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
-	{ "HHH",      grid },
-	{ "###",      nrowgrid },
-	{ "---",      horizgrid },
-	{ ":::",      gaplessgrid },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
+	{ "HHH",      gaplessgrid },
 	{ NULL,       NULL },
 };
 
@@ -98,6 +90,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_b,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },

@@ -13,6 +13,7 @@ static void bstack(Monitor *m);
 static void bstackhoriz(Monitor *m);
 static void centeredmaster(Monitor *m);
 static void centeredfloatingmaster(Monitor *m);
+static void columnlayout(Monitor *m);
 static void deck(Monitor *m);
 static void dwindle(Monitor *m);
 static void fibonacci(Monitor *m, int s);
@@ -419,6 +420,33 @@ centeredfloatingmaster(Monitor *m)
 			resize(c, sx, sy, sw * (c->cfact / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), sh - (2*c->bw), 0);
 			sx += WIDTH(c) + iv;
 		}
+}
+
+void
+columnlayout(Monitor *m) {
+    unsigned int i, n;
+    int w, x;
+    Client *c;
+
+    /* Count number of non-floating, visible windows */
+    for (n = 0, c = m->clients; c; c = c->next)
+        if (ISVISIBLE(c) && !c->isfloating)
+            n++;
+
+    if (n == 0)
+        return;
+
+    /* Calculate column width and initial x position, accounting for gaps */
+    w = (m->ww - 2 * gappoh - (n - 1) * gappiv) / n;
+    x = m->wx + gappoh;
+
+    /* Tile non-floating windows */
+    for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
+        if (!c->isfloating && ISVISIBLE(c)) {
+            resize(c, x, m->wy + gappov, w - (2 * c->bw), m->wh - 2 * gappov - (2 * c->bw), 0);
+            x += w + gappiv;
+        }
+    }
 }
 
 /*
