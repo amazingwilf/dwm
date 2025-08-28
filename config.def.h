@@ -41,8 +41,8 @@ static const Rule rules[] = {
 	 */
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Nwg-look", .isfloating = 1 },
-	{ .instance = "spterm", .tags = SPTAG(0), .isfloating = 1},
-	{ .instance = "spfm", .tags = SPTAG(1), .isfloating = 1},
+	{ .instance = "spterm", .tags = SPTAG(0), .isfloating = 1, .floatpos = "50% 50% 85% 85%" },
+	{ .instance = "spfm", .tags = SPTAG(1), .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -51,6 +51,8 @@ static const int nmaster		= 1;
 static const int resizehints	= 0;
 static const int lockfullscreen	= 1;
 static const int refreshrate	= 120;
+static int floatposgrid_x		= 5;
+static int floatposgrid_y		= 5;
 static const int attachmode		= 2; 
 
 #define FORCE_VSPLIT 1 
