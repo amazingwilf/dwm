@@ -349,6 +349,11 @@ applyrules(Client *c)
 	if (ch.res_name)
 		XFree(ch.res_name);
 	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : (c->mon->tagset[c->mon->seltags] & ~SPTAGMASK);
+	if(viewonrulestag)
+	{
+		Arg a = {.ui = c->tags};
+		view(&a);
+	}
 }
 
 int
@@ -2074,6 +2079,8 @@ tag(const Arg *arg)
 		setclienttagprop(c);
 		focus(NULL);
 		arrange(selmon);
+		if(viewontag)
+			view(arg);
 	}
 }
 
