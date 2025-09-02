@@ -37,6 +37,7 @@ static char *colors[][3]		= {
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"nitrogen", "--restore", NULL,
+	"picom", "-b", NULL,
 	NULL /* terminate */
 };
 
