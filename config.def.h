@@ -59,11 +59,14 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact		= 0.50;
-static const int nmaster		= 1;
-static const int resizehints	= 0;
-static const int lockfullscreen	= 1;
-static const int refreshrate	= 120; 
+static const float mfact			= 0.50;
+static const int nmaster			= 1;
+static const int resizehints		= 0;
+static const int lockfullscreen		= 1;
+static const int refreshrate		= 120; 
+static int floatposgrid_x			= 5;
+static int floatposgrid_y			= 5; 
+static const char *toggle_float_pos	= "50% 50% 80% 80%";
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
 #include "vanitygaps.c"
