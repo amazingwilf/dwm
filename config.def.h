@@ -12,6 +12,7 @@ static int smartgaps				= 0;
 
 static const int showbar			= 1;
 static const int topbar				= 1;
+static const int user_bh			= 6;
 
 static const char *fonts[]			= { "Iosevka Nerd Font Propo:size=12",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
@@ -29,10 +30,27 @@ static char selfloatcolor[]		= "#005577";
 static char ltsymbolfgcolor[]	= "#eeeeee";
 static char ltsymbolbgcolor[]	= "#222222";
 
+static char tagsemptyfgcolor[]	= "#444444";
+static char tagsemptybgcolor[]	= "#222222";
+static char tagsoccfgcolor[]	= "#bbbbbb";
+static char tagsoccbgcolor[]	= "#222222";
+static char tagsselfgcolor[]	= "#eeeeee";
+static char tagsselbgcolor[]	= "#005577";
+
+static char scratchnormbordercolor[]	= "#444444";
+static char scratchnormfloatcolor[]		= "#444444";
+static char scratchselbordercolor[]		= "#995577";
+static char scratchselfloatcolor[]		= "#006688";
+
 static char *colors[][4]		= {
-	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,	normfloatcolor  },
-	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,		selfloatcolor  },
-	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	NULL,				NULL },
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,		normfloatcolor  },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,			selfloatcolor  },
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	NULL,					NULL },
+	[SchemeTagsEmpty]	= { tagsemptyfgcolor,	tagsemptybgcolor,	NULL,					NULL },
+	[SchemeTagsOcc]		= { tagsoccfgcolor,		tagsoccbgcolor,		NULL,					NULL },
+	[SchemeTagsSel]		= { tagsselfgcolor,		tagsselbgcolor,		NULL,					NULL },
+	[SchemeScratchNorm]	= { NULL,				NULL,				scratchnormbordercolor,	scratchnormfloatcolor },
+	[SchemeScratchSel]	= { NULL,				NULL,				scratchselbordercolor,	scratchselfloatcolor },
 };
 
 
@@ -44,7 +62,8 @@ static const char *const autostart[] = {
 };
 
 /* tagging */
-static const char *tags[]			= { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+// static const char *tags[]			= { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[]			= { "", "", "", "", "", "", "", "" };
 static const Bool viewontag			= 1;
 static const int viewonrulestag 	= 1;
 
@@ -56,6 +75,7 @@ static const Rule rules[] = {
 	{ .class = "Nwg-look", .isfloating = 1, .iscentered = 1 },
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
+	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -101,6 +121,12 @@ static const Layout layouts[] = {
 	{ Super|Shift,			KEY,	tag,			{.ui = 1 << TAG} }, \
 	{ Super|Ctrl|Shift,		KEY,	toggletag, 		{.ui = 1 << TAG} },
 
+#define SCRATCHKEYS(KEY,CMD) \
+	{ Super,			KEY,	togglescratch,	{.v = CMD} }, \
+	{ Super|Shift,		KEY,	removescratch,	{.v = CMD} }, \
+	{ Super|Ctrl,		KEY,	setscratch,		{.v = CMD} },
+
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -109,6 +135,8 @@ static const char *termcmd[]	= { "ghostty", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
 static const char *firefoxcmd[]	= { "firefox", NULL };
 static const char *thunarcmd[]	= { "thunar", NULL };
+
+static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
 
 static const Key keys[] = {
 	{ Super,				XK_space,		spawn,			{.v = roficmd } },
@@ -130,9 +158,15 @@ static const Key keys[] = {
 	{ Super,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ Super|Shift,             XK_b,      togglebar,      {0} },
 	{ Super|Shift,             XK_space,  togglefloating, {0} },
+	{ Super|Shift,             XK_f,      togglefullscr,  {0} },
 	{ Super|Shift,             XK_x,      xrdb,           {.v = NULL } },
 	{ Super,                       XK_0,      view,           {.ui = ~0 } },
 	{ Super|Shift,             XK_0,      tag,            {.ui = ~0 } },
+	{ Super,                       XK_Right,  viewnext,       {0} },
+	{ Super,                       XK_Left,   viewprev,       {0} },
+	{ Super|Shift,             XK_Right,  tagtonext,      {0} },
+	{ Super|Shift,             XK_Left,   tagtoprev,      {0} },
+	SCRATCHKEYS(                    XK_grave,                  sptermcmd)
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
