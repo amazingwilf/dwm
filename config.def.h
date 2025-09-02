@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx	= 2; 
+static const unsigned int borderpx	= 3; 
 static const unsigned int snap		= 32;
 
 static const unsigned int gappih	= 10; 
@@ -19,18 +19,20 @@ static const char *fonts[]			= { "Iosevka Nerd Font Propo:size=12",
 static char normfgcolor[]		= "#bbbbbb";
 static char normbgcolor[]		= "#222222";
 static char normbordercolor[]	= "#444444";
+static char normfloatcolor[]	= "#444444";
 
 static char selfgcolor[]		= "#eeeeee";
 static char selbgcolor[]		= "#005577";
 static char selbordercolor[]	= "#005577";
+static char selfloatcolor[]		= "#005577";
 
 static char ltsymbolfgcolor[]	= "#eeeeee";
 static char ltsymbolbgcolor[]	= "#222222";
 
-static char *colors[][3]		= {
-	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor },
-	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor },
-	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	NULL },
+static char *colors[][4]		= {
+	[SchemeNorm]		= { normfgcolor,		normbgcolor,		normbordercolor,	normfloatcolor  },
+	[SchemeSel]			= { selfgcolor,			selbgcolor,			selbordercolor,		selfloatcolor  },
+	[SchemeLtSymbol]	= { ltsymbolfgcolor,	ltsymbolbgcolor,	NULL,				NULL },
 };
 
 
