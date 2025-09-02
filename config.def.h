@@ -8,14 +8,19 @@ static const unsigned int gappih	= 10;
 static const unsigned int gappiv	= 10;
 static const unsigned int gappoh	= 15; 
 static const unsigned int gappov	= 15;
-static int smartgaps				= 0; 
+static int smartgaps				= 1; 
 
 static const int showbar			= 1;
 static const int topbar				= 1;
 static const int user_bh			= 6;
 
+#define ICONSIZE (bh - 10)
+#define ICONSPACING 8
+
 static const char *fonts[]			= { "Iosevka Nerd Font Propo:size=12",
 										"JetBrainsMono Nerd Font:style=ExtraBold:size=10" };
+
+#include "termcolors.h"
 
 static char normfgcolor[]		= "#bbbbbb";
 static char normbgcolor[]		= "#222222";
@@ -57,7 +62,9 @@ static char *colors[][4]		= {
 static const char *const autostart[] = {
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
 	"nitrogen", "--restore", NULL,
+	"dunst", NULL,
 	"picom", "-b", NULL,
+	"dwmblocks", NULL,
 	NULL /* terminate */
 };
 
@@ -130,6 +137,8 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define STATUSBAR "dwmblocks"
+
 /* commands */
 static const char *termcmd[]	= { "ghostty", NULL };
 static const char *roficmd[]	= { "rofi", "-show", "drun", NULL };
@@ -143,8 +152,10 @@ static const Key keys[] = {
 	{ Super,				XK_Return,		spawn,			{.v = termcmd } },
 	{ Super,				XK_w,			spawn,			{.v = firefoxcmd } },
 	{ Super,				XK_e,			spawn,			{.v = thunarcmd } },
-	{ Super,                       XK_j,      focusstack,     {.i = +1 } },
-	{ Super,                       XK_k,      focusstack,     {.i = -1 } },
+	{ Super,				XK_j,      focusstack,     {.i = +1 } },
+	{ Super,				XK_k,      focusstack,     {.i = -1 } },
+	{ Super|Shift,			XK_j,      rotatestack,    {.i = +1 } },
+	{ Super|Shift,			XK_k,      rotatestack,    {.i = -1 } },
 	{ Super,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ Super,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ Super,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -156,6 +167,8 @@ static const Key keys[] = {
 	{ Super,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ Super,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ Super,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ Super,		XK_comma,  cyclelayout,    {.i = -1 } },
+	{ Super,           XK_period, cyclelayout,    {.i = +1 } },
 	{ Super|Shift,             XK_b,      togglebar,      {0} },
 	{ Super|Shift,             XK_space,  togglefloating, {0} },
 	{ Super|Shift,             XK_f,      togglefullscr,  {0} },
@@ -186,8 +199,14 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkLtSymbol,          0,              Button4,        cyclelayout,      {.i = +1} },
+	{ ClkLtSymbol,          0,              Button5,        cyclelayout,      {.i = -1} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} },
 	{ ClkClientWin,         Super,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         Super,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         Super,         Button3,        resizemouse,    {0} },
