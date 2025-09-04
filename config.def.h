@@ -147,11 +147,25 @@ static const char *thunarcmd[]	= { "thunar", NULL };
 
 static const char *sptermcmd[]	= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
 
+#include <X11/XF86keysym.h>
+static const char *mutevol[] 			= { "volume", "--toggle",  NULL };
+static const char *mutemic[] 			= { "volume", "--toggle-mic",  NULL };
+static const char *upvol[]   			= { "volume", "--inc",  	NULL };
+static const char *downvol[] 			= { "volume", "--dec",    	NULL };
+static const char *upbl[] 				= { "brightness", "--inc",    NULL };
+static const char *downbl[] 			= { "brightness", "--dec",  NULL };
+
 static const Key keys[] = {
 	{ Super,				XK_space,		spawn,			{.v = roficmd } },
 	{ Super,				XK_Return,		spawn,			{.v = termcmd } },
 	{ Super,				XK_w,			spawn,			{.v = firefoxcmd } },
 	{ Super,				XK_e,			spawn,			{.v = thunarcmd } },
+	{ 0, 						XF86XK_AudioMute, 			spawn, {.v = mutevol } },
+	{ 0, 						XF86XK_AudioMicMute, 		spawn, {.v = mutemic } },
+	{ 0, 						XF86XK_AudioLowerVolume, 	spawn, {.v = downvol } },
+	{ 0, 						XF86XK_AudioRaiseVolume, 	spawn, {.v = upvol   } },
+	{ 0, 						XF86XK_MonBrightnessUp, 	spawn, {.v = upbl   } },
+	{ 0, 						XF86XK_MonBrightnessDown, 	spawn, {.v = downbl   } },
 	{ Super,				XK_j,      focusstack,     {.i = +1 } },
 	{ Super,				XK_k,      focusstack,     {.i = -1 } },
 	{ Super|Shift,			XK_j,      rotatestack,    {.i = +1 } },
