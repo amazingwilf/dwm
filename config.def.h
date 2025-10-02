@@ -21,6 +21,7 @@ static const char *colors[][3]		= {
 	/*					fg			bg			border	*/
 	[SchemeNorm]	= { col_gray3,	col_gray1,	col_gray2 },
 	[SchemeSel]		= { col_gray4,	col_cyan,	col_blue },
+	[SchemeTitle]	= { col_gray4,	col_gray1,	NULL },
 };
 
 static const char *const autostart[] = {
@@ -44,6 +45,7 @@ static const Rule rules[]	= {
 	{ .instance = "floaterm", .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 	{ .class = "firefox", .tags = 1 << 1 },
 	{ .class = "Thunar", .tags = 1 << 2 },
+	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 };
 
 /* layout(s) */
@@ -88,6 +90,8 @@ static const char *roficmd[]		= { "rofi", "-show", "drun", NULL };
 static const char *firefoxcmd[]		= { "firefox", NULL };
 static const char *thunarcmd[]		= { "thunar", NULL };
 
+static const char *sptermcmd[]		= { "t", "ghostty", "--x11-instance-name=spterm", "--title=Scratchpad", NULL };
+
 static const Key keys[] = {
 	/* modifier			key					function			argument */
 	{ Super,			XK_Return, 			spawn,				{.v = termcmd } },
@@ -96,6 +100,7 @@ static const Key keys[] = {
 	{ Super,			XK_space,			spawn,				{.v = roficmd } },
 	{ Super,			XK_w,				spawn,				{.v = firefoxcmd } },
 	{ Super,			XK_e,				spawn,				{.v = thunarcmd } },
+	{ Super,			XK_s,				togglescratch,		{.v = sptermcmd } },
 	{ Super,			XK_j,				focusstack,			{.i = +1 } },
 	{ Super,			XK_k,				focusstack,			{.i = -1 } },
 	{ Super|Shift,		XK_j,				rotatestack,		{.i = +1 } },
