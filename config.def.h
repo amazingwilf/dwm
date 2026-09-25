@@ -67,7 +67,9 @@ static const Rule rules[] = {
 	 */
 	{ .class = "Nwg-look", .isfloating = 1, .floatpos = "50% 50% -1h -1w" },
 	{ .class = "firefox", .tags = 1 << 1 },
+	{ .class = "Thunar", .isfloating = 1 << 2, .floatpos = "50% 50% 90% 90%" },
 	{ .instance = "spterm", .scratchkey = 't', .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
+	{ .instance = "floaterm", .isfloating = 1, .floatpos = "50% 50% 80% 80%" },
 	{ .class = "kitty", .isterminal = 1 },
 	{ .title = "Event Tester", .noswallow = 1, .isfloating = 1 },
 };
@@ -128,8 +130,8 @@ static const Key keys[] = {
 	{ MOD,			XK_b,		setlayout,		{.v = &layouts[2]} },
 	{ MOD,			XK_g,		setlayout,		{.v = &layouts[3]} },
 	{ MOD|SHIFT,	XK_b,		togglebar,		{0} },
-	{ MOD|SHIFT,	XK_space,	togglefloating, {0} },
-	{ MOD|SHIFT,	XK_f,		togglefullscr,	{0} },
+	{ MOD,			XK_space,	togglefloating, {0} },
+	{ MOD,			XK_f,		togglefullscr,	{0} },
 	{ MOD|SHIFT,	XK_g,		togglegaps,		{0} },
 	{ MOD,			XK_s,		togglesticky,	{0} },
 	{ MOD,			XK_grave,	togglescratch,	{.v = sptermcmd} },
@@ -165,3 +167,73 @@ static const Button buttons[] = {
 	{ ClkTagBar,	MOD,	Button3,	toggletag,		{0} },
 };
 
+void
+setlayoutex(const Arg *arg)
+{
+	setlayout(&((Arg) { .v = &layouts[arg->i] }));
+}
+
+void
+viewex(const Arg *arg)
+{
+	view(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+viewall(const Arg *arg)
+{
+	view(&((Arg){.ui = ~0}));
+}
+
+void
+toggleviewex(const Arg *arg)
+{
+	toggleview(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagex(const Arg *arg)
+{
+	tag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+toggletagex(const Arg *arg)
+{
+	toggletag(&((Arg) { .ui = 1 << arg->ui }));
+}
+
+void
+tagall(const Arg *arg)
+{
+	tag(&((Arg){.ui = ~0}));
+}
+
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signame> [<type> <value>]"` */
+static Signal signals[] = {
+	/* signum           function */
+	{ "focusstack",     focusstack },
+	{ "setmfact",       setmfact },
+	{ "togglebar",      togglebar },
+	{ "incnmaster",     incnmaster },
+	{ "togglefloating", togglefloating },
+	{ "focusmon",       focusmon },
+	{ "tagmon",         tagmon },
+	{ "zoom",           zoom },
+	{ "view",           view },
+	{ "viewall",        viewall },
+	{ "viewex",         viewex },
+	{ "toggleview",     view },
+	{ "toggleviewex",   toggleviewex },
+	{ "tag",            tag },
+	{ "tagall",         tagall },
+	{ "tagex",          tagex },
+	{ "toggletag",      tag },
+	{ "toggletagex",    toggletagex },
+	{ "killclient",     killclient },
+	{ "quit",           quit },
+	{ "setlayout",      setlayout },
+	{ "setlayoutex",    setlayoutex },
+};
