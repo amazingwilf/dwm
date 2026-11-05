@@ -5,13 +5,13 @@ col="^c#E5C07B^"
 LIGHT=$(printf "%.0f\n" `light -G`)
 
 if [[ ("$LIGHT" -ge "0") && ("$LIGHT" -le "25") ]]; then
-	printf "$col 󰃞 ^d^ $LIGHT%%"
+	printf "$col󰃞 ^d^$LIGHT%%"
 elif [[ ("$LIGHT" -ge "25") && ("$LIGHT" -le "50") ]]; then
-	printf "$col 󰃝 ^d^ $LIGHT%%"
+	printf "$col󰃝 ^d^$LIGHT%%"
 elif [[ ("$LIGHT" -ge "50") && ("$LIGHT" -le "75") ]]; then
-	printf "$col 󰃟 ^d^ $LIGHT%%"
+	printf "$col󰃟 ^d^$LIGHT%%"
 elif [[ ("$LIGHT" -ge "75") && ("$LIGHT" -le "100") ]]; then
-	printf "$col 󰃠 ^d^ $LIGHT%%"
+	printf "$col󰃠 ^d^$LIGHT%%"
 fi
 
 case "$BLOCK_BUTTON" in

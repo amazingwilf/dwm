@@ -31,4 +31,4 @@ esac
 
 
 # echo "^c#61afef^  $(date '+%l:%M%p') "
-echo "$col   ^d^$(date '+%l:%M %P') "
+echo "$col^d^$(date '+%l:%M %P') "
