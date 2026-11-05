@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cpu_load=$(grep -o "^[^ ]*" /proc/loadavg)
+
+echo "  $cpu_load%"
+

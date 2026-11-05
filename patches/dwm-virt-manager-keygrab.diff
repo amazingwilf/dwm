@@ -1,0 +1,129 @@
+diff --git a/config.h b/config.h
+index 1111111..2222222 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -1,6 +1,10 @@
+ /* See LICENSE file for copyright and license details. */
+ 
+ /* appearance */
++
++/* Keep this one DWM binding active while a VM has keyboard focus. */
++#define VMESCAPEMOD  (MODKEY|ShiftMask)
++#define VMESCAPEKEY  XK_Escape
+ 
+@@ -90,6 +94,7 @@ static const Key keys[] = {
+ 	/* modifier                     key        function        argument */
++	{ VMESCAPEMOD,                  VMESCAPEKEY, vmrelease,     {0} },
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+ 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+@@ -130,8 +135,9 @@ static const Button buttons[] = {
+ 
+ /* class      instance    title       tags mask     isfloating   monitor */
+ static const Rule rules[] = {
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	{ "Gimp",         NULL, NULL, 0,      1, 0, -1 },
++	{ "Firefox",      NULL, NULL, 1 << 8, 0, 0, -1 },
++	{ "Virt-manager", NULL, NULL, 0,      0, 1, -1 },
+ };
+ 
+diff --git a/dwm.c b/dwm.c
+index 3333333..4444444 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -100,7 +100,7 @@ struct Client {
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isvm;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
+@@ -138,6 +138,7 @@ typedef struct {
+ 	const char *title;
+ 	unsigned int tags;
+ 	int isfloating;
++	int isvm;
+ 	int monitor;
+ } Rule;
+ 
+@@ -220,6 +221,7 @@ static void updatewindowtype(Client *c);
+ static void updatewmhints(Client *c);
+ static void view(const Arg *arg);
++static void vmrelease(const Arg *arg);
+ static Client *wintoclient(Window w);
+ static Monitor *wintomon(Window w);
+ static int xerror(Display *dpy, XErrorEvent *ee);
+@@ -300,6 +302,7 @@ applyrules(Client *c)
+ 		&& (!r->title || strstr(c->name, r->title)))
+ 		{
+ 			c->isfloating = r->isfloating;
++			c->isvm |= r->isvm;
+ 			c->tags |= r->tags;
+ 			for (m = mons; m && m->num != r->monitor; m = m->next);
+ 			if (m)
+@@ -800,6 +803,7 @@ focus(Client *c)
+ 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
+ 	}
+ 	selmon->sel = c;
++	grabkeys();
+ 	drawbars();
+ }
+ 
+@@ -955,24 +959,42 @@ grabkeys(void)
+ {
++	unsigned int i, j;
++	unsigned int modifiers[] = { 0, LockMask, numlockmask,
++	                           numlockmask|LockMask };
++	KeyCode code;
++	int vmfocused;
++
+ 	updatenumlockmask();
+-	{
+-		unsigned int i, j;
+-		unsigned int modifiers[] = { 0, LockMask, numlockmask,
+-		                            numlockmask|LockMask };
+-		KeyCode code;
+-
+-		XUngrabKey(dpy, AnyKey, AnyModifier, root);
+-		for (i = 0; i < LENGTH(keys); i++)
+-			if ((code = XKeysymToKeycode(dpy, keys[i].keysym)))
+-				for (j = 0; j < LENGTH(modifiers); j++)
+-					XGrabKey(dpy, code, keys[i].mod | modifiers[j],
+-					         root, True, GrabModeAsync, GrabModeAsync);
++	XUngrabKey(dpy, AnyKey, AnyModifier, root);
++
++	vmfocused = selmon && selmon->sel && selmon->sel->isvm;
++
++	if (vmfocused) {
++		/* Leave one emergency binding available to DWM. */
++		if ((code = XKeysymToKeycode(dpy, VMESCAPEKEY)))
++			for (j = 0; j < LENGTH(modifiers); j++)
++				XGrabKey(dpy, code, VMESCAPEMOD | modifiers[j],
++				         root, True, GrabModeAsync, GrabModeAsync);
++		return;
+ 	}
++
++	for (i = 0; i < LENGTH(keys); i++)
++		if ((code = XKeysymToKeycode(dpy, keys[i].keysym)))
++			for (j = 0; j < LENGTH(modifiers); j++)
++				XGrabKey(dpy, code, keys[i].mod | modifiers[j],
++				         root, True, GrabModeAsync, GrabModeAsync);
+ }
+ 
++void
++vmrelease(const Arg *arg)
++{
++	if (selmon->sel)
++		unfocus(selmon->sel, 1);
++
++	selmon->sel = NULL;
++	XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
++	grabkeys();
++	drawbars();
++}
++
+ void
+ incnmaster(const Arg *arg)
+ {

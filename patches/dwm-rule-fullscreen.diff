@@ -1,0 +1,68 @@
+diff --git a/config.def.h b/config.def.h
+index 9efa774..5de5145 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -26,10 +26,10 @@ static const Rule rules[] = {
+-	/* xprop(1):
+-	 *	WM_CLASS(STRING) = instance, class
+-	 *	WM_NAME(STRING) = title
+-	 */
+-	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	/* xprop(1):
++	 *	WM_CLASS(STRING) = instance, class
++	 *	WM_NAME(STRING) = title
++	 */
++	/* class      instance    title       tags mask     isfloating   rulefullscreen monitor */
++	{ "Gimp",     NULL,       NULL,       0,            1,           0,             -1 },
++	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           0,             -1 },
+ };
+ 
+ /* layout(s) */
+diff --git a/dwm.c b/dwm.c
+index f1d86b2..6da77d6 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -92,7 +92,7 @@ struct Client {
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, rulefullscreen;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
+@@ -138,6 +138,7 @@ typedef struct {
+ 	const char *title;
+ 	unsigned int tags;
+ 	int isfloating;
++	int rulefullscreen;
+ 	int monitor;
+ } Rule;
+ 
+@@ -301,6 +302,7 @@ applyrules(Client *c)
+ 	Monitor *m;
+ 	XClassHint ch = { NULL, NULL };
+ 
++	c->rulefullscreen = 0;
+ 	/* rule matching */
+ 	c->isfloating = 0;
+ 	c->tags = 0;
+@@ -315,6 +317,7 @@ applyrules(Client *c)
+ 		&& (!r->instance || strstr(instance, r->instance)))
+ 		{
+ 			c->isfloating = r->isfloating;
++			c->rulefullscreen = r->rulefullscreen;
+ 			c->tags |= r->tags;
+ 			for (m = mons; m && m->num != r->monitor; m = m->next);
+ 			if (m)
+@@ -1073,6 +1076,8 @@ manage(Window w, XWindowAttributes *wa)
+ 	c->mon->sel = c;
+ 	arrange(c->mon);
+ 	XMapWindow(dpy, c->win);
++	if (c->rulefullscreen)
++		setfullscreen(c, 1);
+ 	focus(NULL);
+ }
+ 

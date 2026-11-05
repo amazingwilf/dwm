@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+updates=`checkupdates | wc -l`
+# updates=$({ timeout 20 doas xbps-install -un 2>/dev/null || true; } | wc -l) # void
+# updates=$({ timeout 20 aptitude search '~U' 2>/dev/null || true; } | wc -l)  # apt (ubuntu, debian etc)
+
+case $BLOCK_BUTTON in
+    1) setsid --fork ghostty --x11-instance-name=floaterm -e doas pacman -Syu ;;
+esac
+
+
+if [ "$updates" -eq "0" ]; then
+  echo "^C5^   ^d^ Updated"
+else
+  echo "^C1^   ^d^ $updates"
+fi
+

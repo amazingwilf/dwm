@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+
+col="^c#98C379^"
+
+case "$BLOCK_BUTTON" in
+    1) setsid --fork pavucontrol ;;
+    3) volume --toggle ;;
+    4) volume --inc ;;
+    5) volume --dec ;;
+esac
+current=`pulsemixer --get-volume | cut -d' ' -f1`
+status=`pulsemixer --get-mute`
+
+if [ "$current" -gt 40 ]; then
+    icon=" "
+elif [ "$volume" -gt 15 ]; then
+    icon=" "
+else
+    icon=" "
+fi
+
+
+if [[ "$status" -eq "1" ]]; then
+    echo "^c#555555^󰖁^d^ Muted"
+else
+    echo "$col$icon ^d^ $current%"
+fi

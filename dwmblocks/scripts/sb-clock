@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+col="^c#61afef^"
+icon=""
+
+dayofweek=`date +%A`
+dayofmonth=`date +%e`
+month=`date +%B`
+year=`date +%Y`
+
+case $dayofmonth in
+    " 1" | 21 | 31)
+        suffix="st"
+        ;;
+    " 2" | 22)
+        suffix="nd"
+        ;;
+    " 3" | 23)
+        suffix="rd"
+        ;;
+    *)
+        suffix="th"
+        ;;
+esac
+
+fulldate="$dayofweek $dayofmonth$suffix of $month $year"
+
+case $BLOCK_BUTTON in
+    1) notify-send "$fulldate" ;;
+esac
+
+
+# echo "^c#61afef^  $(date '+%l:%M%p') "
+echo "$col   ^d^$(date '+%l:%M %P') "
